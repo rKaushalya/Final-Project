@@ -2,7 +2,6 @@ package lk.ijse.finalProject.controller;
 
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
@@ -12,11 +11,9 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import lk.ijse.finalProject.model.RoomModel;
-import lk.ijse.finalProject.to.Room;
+import lk.ijse.finalProject.dto.RoomDTO;
 
-import java.sql.SQLException;
 import java.time.LocalDate;
-import java.util.ArrayList;
 
 public class RoomManageFormController {
     public AnchorPane pane;
@@ -49,9 +46,9 @@ public class RoomManageFormController {
             Double price = Double.valueOf(txtPrice.getText());
             String availability = txtAvailability.getText();
 
-        Room room = new Room(id,type,ac,price,availability);
+        RoomDTO roomDTO = new RoomDTO(id,type,ac,price,availability);
         try {
-            boolean isAdded = RoomModel.addRoom(room);
+            boolean isAdded = RoomModel.addRoom(roomDTO);
             if (isAdded){
                 searchAllRoom();
                 setCellValueFactory();
@@ -68,12 +65,12 @@ public class RoomManageFormController {
 
     public void searchOnAction(ActionEvent actionEvent) {
         try {
-            Room room = RoomModel.searchRoom(txtRId.getText());
-            txtRId.setText(room.getId());
-            txtType.setText(room.getType());
-            txtAc.setText(room.getAc());
-            txtPrice.setText(String.valueOf(room.getPrice()));
-            txtAvailability.setText(room.getAvailability());
+            RoomDTO roomDTO = RoomModel.searchRoom(txtRId.getText());
+            txtRId.setText(roomDTO.getId());
+            txtType.setText(roomDTO.getType());
+            txtAc.setText(roomDTO.getAc());
+            txtPrice.setText(String.valueOf(roomDTO.getPrice()));
+            txtAvailability.setText(roomDTO.getAvailability());
 
         } catch (Exception exception) {
             System.out.println(exception);
@@ -87,9 +84,9 @@ public class RoomManageFormController {
         Double price = Double.valueOf(txtPrice.getText());
         String availability = txtAvailability.getText();
 
-        Room room = new Room(id,type,ac,price,availability);
+        RoomDTO roomDTO = new RoomDTO(id,type,ac,price,availability);
         try {
-            boolean isUpdate = RoomModel.updateRoom(room);
+            boolean isUpdate = RoomModel.updateRoom(roomDTO);
             if (isUpdate){
                 new Alert(Alert.AlertType.CONFIRMATION,"Update Success.!").show();
                 searchAllRoom();
@@ -131,8 +128,8 @@ public class RoomManageFormController {
 
     public void searchAllRoom(){
         try {
-            ObservableList<Room> rooms = RoomModel.searchAvailableRoom();
-            tblTable.setItems(rooms);
+            ObservableList<RoomDTO> roomDTOS = RoomModel.searchAvailableRoom();
+            tblTable.setItems(roomDTOS);
         } catch (Exception exception) {
             exception.printStackTrace();
         }

@@ -1,31 +1,28 @@
 package lk.ijse.finalProject.model;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.scene.Parent;
 import lk.ijse.finalProject.db.DBConnection;
-import lk.ijse.finalProject.to.Bike;
-import lk.ijse.finalProject.to.Customer;
-import lk.ijse.finalProject.utill.CrudUtill;
+import lk.ijse.finalProject.dto.BikeDTO;
+import lk.ijse.finalProject.dto.CustomerDTO;
+import lk.ijse.finalProject.utill.CrudUtil;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class BikeModel {
-    public static boolean addBike(Bike bike) throws SQLException, ClassNotFoundException {
+    public static boolean addBike(BikeDTO bikeDTO) throws SQLException, ClassNotFoundException {
         String sql = "INSERT INTO rentbike VALUES (?,?,?,?)";
-        return CrudUtill.execute(sql,bike.getRegNo(),bike.getModel(),bike.getAvailability(),bike.getPricePerDay());
+        return CrudUtil.execute(sql, bikeDTO.getRegNo(), bikeDTO.getModel(), bikeDTO.getAvailability(), bikeDTO.getPricePerDay());
     }
 
     public static boolean deleteBike(String id) throws SQLException, ClassNotFoundException {
         String sql = "DELETE FROM rentbike WHERE regNo=?";
-        return CrudUtill.execute(sql,id);
+        return CrudUtil.execute(sql,id);
     }
 
     public static ArrayList<String> loadBikeId() throws SQLException, ClassNotFoundException {
         String sql = "SELECT regNo FROM rentbike";
-        ResultSet execute = CrudUtill.execute(sql);
+        ResultSet execute = CrudUtil.execute(sql);
         ArrayList<String> addRegNo = new ArrayList<>();
 
         while (execute.next()){
@@ -34,12 +31,12 @@ public class BikeModel {
         return addRegNo;
     }
 
-    public static Bike searchBike(String id) throws SQLException, ClassNotFoundException {
+    public static BikeDTO searchBike(String id) throws SQLException, ClassNotFoundException {
         String sql = "SELECT * FROM rentbike WHERE regNo=?";
-        ResultSet execute = CrudUtill.execute(sql, id);
+        ResultSet execute = CrudUtil.execute(sql, id);
 
         if (execute.next()){
-            return new Bike(
+            return new BikeDTO(
               execute.getString(1),
               execute.getString(2),
               execute.getString(3),
@@ -49,11 +46,11 @@ public class BikeModel {
         return null;
     }
 
-    public static Bike searchBikeTbl(String id) throws SQLException, ClassNotFoundException {
+    public static BikeDTO searchBikeTbl(String id) throws SQLException, ClassNotFoundException {
         String sql = "SELECT * FROM rentbike WHERE regNo=?";
-        ResultSet execute = CrudUtill.execute(sql, id);
+        ResultSet execute = CrudUtil.execute(sql, id);
         if (execute.next()){
-           return new Bike(
+           return new BikeDTO(
                 execute.getString(1),
                 execute.getString(2),
                 execute.getString(3),
@@ -63,14 +60,14 @@ public class BikeModel {
         return null;
     }
 
-    public static boolean updateBike(Bike bike) throws SQLException, ClassNotFoundException {
+    public static boolean updateBike(BikeDTO bikeDTO) throws SQLException, ClassNotFoundException {
         String sql = "UPDATE rentbike SET model=?,availability=?,pricePerDay=? WHERE regNo=?";
-        return CrudUtill.execute(sql,bike.getModel(),bike.getAvailability(),bike.getPricePerDay(),bike.getRegNo());
+        return CrudUtil.execute(sql, bikeDTO.getModel(), bikeDTO.getAvailability(), bikeDTO.getPricePerDay(), bikeDTO.getRegNo());
     }
 
     public static int bikeCount() throws SQLException, ClassNotFoundException {
         String sql = "SELECT COUNT(*) FROM rentbike WHERE availability ='YES' || 'yes'";
-        ResultSet execute = CrudUtill.execute(sql);
+        ResultSet execute = CrudUtil.execute(sql);
         int cusCount = 0;
         if (execute.next()){
             cusCount = execute.getInt(1);
@@ -80,20 +77,20 @@ public class BikeModel {
 
     public static boolean addValueRentBikeDetail(String id,String regNo) throws SQLException, ClassNotFoundException {
         String sql = "INSERT INTO rentbikedetail VALUES (?,?)";
-        return CrudUtill.execute(sql,regNo,id);
+        return CrudUtil.execute(sql,regNo,id);
     }
 
     public static boolean updateBikeAvailability(String regNo) throws SQLException, ClassNotFoundException {
         String sql = "UPDATE rentbike SET availability = 'no' WHERE regNo = ?";
-        return CrudUtill.execute(sql,regNo);
+        return CrudUtil.execute(sql,regNo);
     }
 
-    public static boolean rentBike(Customer customer,String regNo) throws SQLException, ClassNotFoundException {
+    public static boolean rentBike(CustomerDTO customerDTO, String regNo) throws SQLException, ClassNotFoundException {
         try {
             DBConnection.getDbConnection().getConnection().setAutoCommit(false);
-            boolean isAdded = CusromerModel.addCustomer(customer);
+            boolean isAdded = CusromerModel.addCustomer(customerDTO);
             if (isAdded) {
-                boolean isBikeDetailAdded = addBikeDetails(customer.getId(), regNo);
+                boolean isBikeDetailAdded = addBikeDetails(customerDTO.getId(), regNo);
                 if (isBikeDetailAdded) {
                     boolean isAvailabilityChange = updateBikeAvailability(regNo);
                     if (isAvailabilityChange) {
@@ -111,6 +108,6 @@ public class BikeModel {
 
     private static boolean addBikeDetails(String cusId,String regNo) throws SQLException, ClassNotFoundException {
         String sql = "INSERT INTO rentbikedetail VALUES (?,?)";
-        return CrudUtill.execute(sql,regNo,cusId);
+        return CrudUtil.execute(sql,regNo,cusId);
     }
 }

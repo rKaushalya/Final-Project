@@ -1,17 +1,17 @@
-package lk.ijse.finalProject.to;
+package lk.ijse.finalProject.dto;
 
-public class Employee {
+public class EmployeeDTO {
     private String id;
     private String name;
     private String address;
     private String contact;
     private String nic;
 
-    public Employee(){
+    public EmployeeDTO(){
 
     }
 
-    public Employee(String id,String name,String address,String contact,String nic){
+    public EmployeeDTO(String id, String name, String address, String contact, String nic){
         this.id=id;
         this.name=name;
         this.address=address;

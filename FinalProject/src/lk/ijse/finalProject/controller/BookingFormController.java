@@ -13,15 +13,13 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
-import lk.ijse.finalProject.db.DBConnection;
 import lk.ijse.finalProject.model.*;
-import lk.ijse.finalProject.to.*;
+import lk.ijse.finalProject.dto.*;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.view.JasperViewer;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -123,10 +121,10 @@ public class BookingFormController {
                 Double receverdAmount = Double.valueOf(txtCash.getText());
                 Double balance = Double.valueOf(txtBalance.getText());
 
-                Customer customer = new Customer(cusId,name,address,contact,email);
-                OrderDetail orderDetail = new OrderDetail(orderId,date,roomDayCount,rId,total,receverdAmount,balance);
+                CustomerDTO customerDTO = new CustomerDTO(cusId,name,address,contact,email);
+                OrderDetailDTO orderDetailDTO = new OrderDetailDTO(orderId,date,roomDayCount,rId,total,receverdAmount,balance);
 
-                    boolean isRentRoom = BookingModel.rentRoom(customer, orderDetail);
+                    boolean isRentRoom = BookingModel.rentRoom(customerDTO, orderDetailDTO);
                     if (isRentRoom){
                         new Alert(Alert.AlertType.CONFIRMATION,"Room Rent Success").show();
                         printBill();
@@ -156,11 +154,11 @@ public class BookingFormController {
                 Double receverdAmount = Double.valueOf(txtCash.getText());
                 Double balance = Double.valueOf(txtBalance.getText());
 
-                Customer customer = new Customer(cusId, name, address, contact, email);
-                OrderDetail orderDetail = new OrderDetail(orderId, date, roomDayCount, rId, pkgId, regNo, bikeDayCount,
+                CustomerDTO customerDTO = new CustomerDTO(cusId, name, address, contact, email);
+                OrderDetailDTO orderDetailDTO = new OrderDetailDTO(orderId, date, roomDayCount, rId, pkgId, regNo, bikeDayCount,
                         total, receverdAmount, balance);
 
-                boolean isPlaceOrder = BookingModel.placeOrder(customer, orderDetail);
+                boolean isPlaceOrder = BookingModel.placeOrder(customerDTO, orderDetailDTO);
                 if (isPlaceOrder) {
                     clearPane();
                     new Alert(Alert.AlertType.CONFIRMATION, "OrderPlace Success").show();
@@ -218,11 +216,11 @@ public class BookingFormController {
 
     public void roomIdOnAction(ActionEvent actionEvent) {
         String id = String.valueOf(cmbRoomId.getValue());
-        ObservableList<Room> tmlist = FXCollections.observableArrayList();
+        ObservableList<RoomDTO> tmlist = FXCollections.observableArrayList();
         try {
-            Room room = RoomModel.searchRoom(id);
-            price = room.getPrice();
-            tmlist.add(room);
+            RoomDTO roomDTO = RoomModel.searchRoom(id);
+            price = roomDTO.getPrice();
+            tmlist.add(roomDTO);
             tblRoom.setItems(tmlist);
             txtRoomDayCount.requestFocus();
         } catch (Exception exception) {
@@ -247,11 +245,11 @@ public class BookingFormController {
 
     public void loadRegNoOnAction(ActionEvent actionEvent) {
         String regNo = String.valueOf(cmbBikeId.getValue());
-        ObservableList<Bike> load = FXCollections.observableArrayList();
+        ObservableList<BikeDTO> load = FXCollections.observableArrayList();
         try {
-            Bike bike = BikeModel.searchBikeTbl(regNo);
-            price=bike.getPricePerDay();
-            load.add(bike);
+            BikeDTO bikeDTO = BikeModel.searchBikeTbl(regNo);
+            price= bikeDTO.getPricePerDay();
+            load.add(bikeDTO);
             tblBike.setItems(load);
             txtDayCount.requestFocus();
         } catch (Exception exception) {
@@ -261,11 +259,11 @@ public class BookingFormController {
 
     public void loadPkgOnAction(ActionEvent actionEvent) {
         String regNo = String.valueOf(cmbPkgId.getValue());
-        ObservableList<Packages> tmlist = FXCollections.observableArrayList();
+        ObservableList<PackagesDTO> tmlist = FXCollections.observableArrayList();
         try {
-            Packages packages = BookingModel.searchPkg(regNo);
-            price = packages.getPrice();
-            tmlist.add(packages);
+            PackagesDTO packagesDTO = BookingModel.searchPkg(regNo);
+            price = packagesDTO.getPrice();
+            tmlist.add(packagesDTO);
             tblPkg.setItems(tmlist);
         } catch (Exception exception) {
             System.out.println(exception);
@@ -281,8 +279,8 @@ public class BookingFormController {
 
     private void searchMeal(){
         try {
-            ObservableList<Meal> meals = MealModel.searchAllMeal();
-            tblMeal.setItems(meals);
+            ObservableList<MealDTO> mealDTOS = MealModel.searchAllMeal();
+            tblMeal.setItems(mealDTOS);
         } catch (Exception exception) {
             System.out.println(exception);
         }

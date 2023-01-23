@@ -1,19 +1,19 @@
-package lk.ijse.finalProject.to;
+package lk.ijse.finalProject.dto;
 
-public class Packages {
+public class PackagesDTO {
     private String id;
     private String name;
     private Double price;
     private String include;
 
-    public Packages(String id, String name, Double price, String include) {
+    public PackagesDTO(String id, String name, Double price, String include) {
         this.id = id;
         this.name = name;
         this.price = price;
         this.include = include;
     }
 
-    public Packages() {
+    public PackagesDTO() {
     }
 
     public String getId() {

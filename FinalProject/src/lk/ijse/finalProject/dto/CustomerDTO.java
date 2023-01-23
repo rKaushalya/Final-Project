@@ -1,17 +1,17 @@
-package lk.ijse.finalProject.to;
+package lk.ijse.finalProject.dto;
 
-public class Customer {
+public class CustomerDTO {
     private String id;
     private String name;
     private String address;
     private String contact;
     private String email;
 
-    public Customer(){
+    public CustomerDTO(){
 
     }
 
-    public Customer(String id, String name, String address, String contact, String email) {
+    public CustomerDTO(String id, String name, String address, String contact, String email) {
         this.id=id;
         this.name=name;
         this.address=address;

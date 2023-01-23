@@ -1,17 +1,17 @@
-package lk.ijse.finalProject.to;
+package lk.ijse.finalProject.dto;
 
-public class User {
+public class UserDTO {
     private String userId;
     private String userName;
     private String password;
     private String email;
     private String role;
 
-    public User(){
+    public UserDTO(){
 
     }
 
-    public User(String userId,String userName,String password,String email){
+    public UserDTO(String userId, String userName, String password, String email){
         this.userId=userId;
         this.userName=userName;
         this.password=password;

@@ -1,6 +1,6 @@
-package lk.ijse.finalProject.to;
+package lk.ijse.finalProject.dto;
 
-public class OrderDetail {
+public class OrderDetailDTO {
     private String orderId;
     private String date;
     private int roomDayCount;
@@ -12,10 +12,10 @@ public class OrderDetail {
     private Double recevedAmount;
     private Double balance;
 
-    public OrderDetail() {
+    public OrderDetailDTO() {
     }
 
-    public OrderDetail(String orderId, String date, int roomDayCount, String rId, Double total, Double recevedAmount, Double balance) {
+    public OrderDetailDTO(String orderId, String date, int roomDayCount, String rId, Double total, Double recevedAmount, Double balance) {
         this.orderId = orderId;
         this.date = date;
         this.roomDayCount = roomDayCount;
@@ -25,7 +25,7 @@ public class OrderDetail {
         this.balance = balance;
     }
 
-    public OrderDetail(String orderId, String date, int roomDayCount, String rId, String pkgId, String regNo, int bikeDayCount, Double total, Double receverdAmount, Double balance) {
+    public OrderDetailDTO(String orderId, String date, int roomDayCount, String rId, String pkgId, String regNo, int bikeDayCount, Double total, Double receverdAmount, Double balance) {
         this.orderId = orderId;
         this.date = date;
         this.roomDayCount = roomDayCount;

@@ -2,7 +2,6 @@ package lk.ijse.finalProject.controller;
 
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
@@ -11,11 +10,10 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import lk.ijse.finalProject.dto.CustomerDTO;
 import lk.ijse.finalProject.model.CusromerModel;
-import lk.ijse.finalProject.to.Customer;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 
 public class ViewCustomerFormController {
     public AnchorPane pane;
@@ -44,12 +42,12 @@ public class ViewCustomerFormController {
     public void searchOnAction(ActionEvent actionEvent){
         String id = txtId.getText();
         try {
-            Customer customer = CusromerModel.searchCustomer(id);
-                txtId.setText(customer.getId());
-                txtName.setText(customer.getName());
-                txtAddress.setText(customer.getAddress());
-                txtContact.setText(customer.getContact());
-                txtEmail.setText(customer.getEmail());
+            CustomerDTO customerDTO = CusromerModel.searchCustomer(id);
+                txtId.setText(customerDTO.getId());
+                txtName.setText(customerDTO.getName());
+                txtAddress.setText(customerDTO.getAddress());
+                txtContact.setText(customerDTO.getContact());
+                txtEmail.setText(customerDTO.getEmail());
         } catch (Exception exception) {
             System.out.println(exception);
         } 
@@ -62,15 +60,15 @@ public class ViewCustomerFormController {
         String contact = txtContact.getText();
         String email = txtEmail.getText();
 
-        Customer customer = new Customer();
-            customer.setId(id);
-            customer.setAddress(address);
-            customer.setName(name);
-            customer.setContact(contact);
-            customer.setEmail(email);
+        CustomerDTO customerDTO = new CustomerDTO();
+            customerDTO.setId(id);
+            customerDTO.setAddress(address);
+            customerDTO.setName(name);
+            customerDTO.setContact(contact);
+            customerDTO.setEmail(email);
 
         try {
-            boolean isUpdated = CusromerModel.updateCustomer(customer);
+            boolean isUpdated = CusromerModel.updateCustomer(customerDTO);
             if (isUpdated){
                 loadCusData();
                 setCellValueFactory();
@@ -109,8 +107,8 @@ public class ViewCustomerFormController {
 
     public void loadCusData(){
         try {
-            ObservableList<Customer> customers = CusromerModel.searchAllCustomer();
-            tblCusDetail.setItems(customers);
+            ObservableList<CustomerDTO> customerDTOS = CusromerModel.searchAllCustomer();
+            tblCusDetail.setItems(customerDTOS);
         } catch (Exception exception) {
             System.out.println(exception);
         }

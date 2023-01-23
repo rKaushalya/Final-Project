@@ -2,25 +2,25 @@ package lk.ijse.finalProject.model;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import lk.ijse.finalProject.to.Room;
-import lk.ijse.finalProject.utill.CrudUtill;
+import lk.ijse.finalProject.dto.RoomDTO;
+import lk.ijse.finalProject.utill.CrudUtil;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class RoomModel {
-    public static boolean addRoom(Room room) throws SQLException, ClassNotFoundException {
+    public static boolean addRoom(RoomDTO roomDTO) throws SQLException, ClassNotFoundException {
         String sql = "INSERT INTO room VALUES (?,?,?,?,?)";
-        return CrudUtill.execute(sql,room.getId(),room.getType(),room.getAc(),room.getPrice(),room.getAvailability());
+        return CrudUtil.execute(sql, roomDTO.getId(), roomDTO.getType(), roomDTO.getAc(), roomDTO.getPrice(), roomDTO.getAvailability());
     }
 
-    public static Room searchRoom(String id) throws SQLException, ClassNotFoundException {
+    public static RoomDTO searchRoom(String id) throws SQLException, ClassNotFoundException {
         String sql = "SELECT * FROM room WHERE rId=?";
-        ResultSet execute = CrudUtill.execute(sql, id);
+        ResultSet execute = CrudUtil.execute(sql, id);
 
         if (execute.next()){
-            return new Room(
+            return new RoomDTO(
               execute.getString(1),
               execute.getString(2),
               execute.getString(3),
@@ -33,17 +33,17 @@ public class RoomModel {
 
     public static boolean deleteRoom(String id) throws SQLException, ClassNotFoundException {
         String sql = "DELETE FROM room WHERE rId=?";
-        return CrudUtill.execute(sql, id);
+        return CrudUtil.execute(sql, id);
     }
 
-    public static boolean updateRoom(Room room) throws SQLException, ClassNotFoundException {
+    public static boolean updateRoom(RoomDTO roomDTO) throws SQLException, ClassNotFoundException {
         String sql = "UPDATE room SET type=?,acNonAc=?,price=?,availability=? WHERE rId=?";
-        return CrudUtill.execute(sql,room.getType(),room.getAc(),room.getPrice(),room.getAvailability(),room.getId());
+        return CrudUtil.execute(sql, roomDTO.getType(), roomDTO.getAc(), roomDTO.getPrice(), roomDTO.getAvailability(), roomDTO.getId());
     }
 
     public static ArrayList<String> loadRoomId() throws SQLException, ClassNotFoundException {
         String sql = "SELECT rId FROM room WHERE availability='YES' || 'yes'";
-        ResultSet execute = CrudUtill.execute(sql);
+        ResultSet execute = CrudUtil.execute(sql);
         ArrayList<String> addRoom = new ArrayList<>();
 
         while (execute.next()){
@@ -52,20 +52,20 @@ public class RoomModel {
         return addRoom;
     }
 
-    public static ObservableList<Room> searchAvailableRoom() throws SQLException, ClassNotFoundException {
-        ObservableList<Room> tmlist = FXCollections.observableArrayList();
+    public static ObservableList<RoomDTO> searchAvailableRoom() throws SQLException, ClassNotFoundException {
+        ObservableList<RoomDTO> tmlist = FXCollections.observableArrayList();
         String sql = "SELECT * FROM room";
-        ResultSet execute = CrudUtill.execute(sql);
+        ResultSet execute = CrudUtil.execute(sql);
         while (execute.next()){
-            Room room = new Room(execute.getString(1),execute.getString(2),execute.getString(3),execute.getDouble(4),execute.getString(5));
-            tmlist.add(room);
+            RoomDTO roomDTO = new RoomDTO(execute.getString(1),execute.getString(2),execute.getString(3),execute.getDouble(4),execute.getString(5));
+            tmlist.add(roomDTO);
         }
         return tmlist;
     }
 
     public static int loadRoomCount() throws SQLException, ClassNotFoundException {
         String sql = "SELECT COUNT(*) FROM room WHERE availability='YES' || 'yes'";
-        ResultSet execute = CrudUtill.execute(sql);
+        ResultSet execute = CrudUtil.execute(sql);
         int roomCount = 0;
         if (execute.next()){
             roomCount = execute.getInt(1);
@@ -75,7 +75,7 @@ public class RoomModel {
 
     public static int loadNotAvailableRoomCount() throws SQLException, ClassNotFoundException {
         String sql = "SELECT COUNT(*) FROM room WHERE availability='No' || 'no'";
-        ResultSet execute = CrudUtill.execute(sql);
+        ResultSet execute = CrudUtil.execute(sql);
         int roomCount = 0;
         if (execute.next()){
             roomCount = execute.getInt(1);
@@ -85,6 +85,6 @@ public class RoomModel {
 
     public static boolean updateRoomAvailability(String rId) throws SQLException, ClassNotFoundException {
         String sql = "UPDATE room SET availability = 'no' WHERE rId = ?";
-        return CrudUtill.execute(sql,rId);
+        return CrudUtil.execute(sql,rId);
     }
 }

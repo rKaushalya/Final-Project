@@ -1,17 +1,17 @@
-package lk.ijse.finalProject.to;
+package lk.ijse.finalProject.dto;
 
-public class Room {
+public class RoomDTO {
     private String id;
     private String type;
     private String ac;
     private Double price;
     private String availability;
 
-    public Room(){
+    public RoomDTO(){
 
     }
 
-    public Room(String id,String type,String ac,Double price,String availability){
+    public RoomDTO(String id, String type, String ac, Double price, String availability){
         this.id=id;
         this.type=type;
         this.ac=ac;

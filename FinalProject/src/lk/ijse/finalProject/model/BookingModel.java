@@ -1,11 +1,10 @@
 package lk.ijse.finalProject.model;
 
 import lk.ijse.finalProject.db.DBConnection;
-import lk.ijse.finalProject.to.Customer;
-import lk.ijse.finalProject.to.OrderDetail;
-import lk.ijse.finalProject.to.Packages;
-import lk.ijse.finalProject.to.Room;
-import lk.ijse.finalProject.utill.CrudUtill;
+import lk.ijse.finalProject.dto.CustomerDTO;
+import lk.ijse.finalProject.dto.OrderDetailDTO;
+import lk.ijse.finalProject.dto.PackagesDTO;
+import lk.ijse.finalProject.utill.CrudUtil;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -14,7 +13,7 @@ import java.util.ArrayList;
 public class BookingModel {
     public static ArrayList<String> loadRegNo() throws SQLException, ClassNotFoundException {
         String sql = "SELECT regNo FROM rentbike WHERE availability='YES' || 'yes'";
-        ResultSet execute = CrudUtill.execute(sql);
+        ResultSet execute = CrudUtil.execute(sql);
         ArrayList<String> regNo = new ArrayList<>();
 
         while (execute.next()){
@@ -25,7 +24,7 @@ public class BookingModel {
 
     public static ArrayList<String> loadPkgId() throws SQLException, ClassNotFoundException {
         String sql = "SELECT pkgId FROM package";
-        ResultSet execute = CrudUtill.execute(sql);
+        ResultSet execute = CrudUtil.execute(sql);
         ArrayList<String> pkgId = new ArrayList<>();
 
         while (execute.next()){
@@ -34,12 +33,12 @@ public class BookingModel {
         return pkgId;
     }
 
-    public static Packages searchPkg(String id) throws SQLException, ClassNotFoundException {
+    public static PackagesDTO searchPkg(String id) throws SQLException, ClassNotFoundException {
         String sql = "SELECT * FROM package WHERE pkgId=?";
-        ResultSet execute = CrudUtill.execute(sql, id);
+        ResultSet execute = CrudUtil.execute(sql, id);
 
         if (execute.next()){
-           return new Packages(
+           return new PackagesDTO(
              execute.getString(1),
              execute.getString(2),
              execute.getDouble(3),
@@ -51,7 +50,7 @@ public class BookingModel {
 
     public static String generateNextOrderId() throws SQLException, ClassNotFoundException {
         String sql = "SELECT orderId FROM Orders ORDER BY orderId DESC LIMIT 1";
-        ResultSet execute = CrudUtill.execute(sql);
+        ResultSet execute = CrudUtil.execute(sql);
 
         if (execute.next()){
             return ganerateNextOrderId(execute.getString(1));
@@ -74,7 +73,7 @@ public class BookingModel {
 
     public static String generateNextCusId() throws SQLException, ClassNotFoundException {
         String sql = "SELECT cId FROM customer ORDER BY cId DESC LIMIT 1";
-        ResultSet execute = CrudUtill.execute(sql);
+        ResultSet execute = CrudUtil.execute(sql);
 
         if (execute.next()){
             return generateNextCusId(execute.getString(1));
@@ -95,22 +94,22 @@ public class BookingModel {
         return "C001";
     }
 
-    public static boolean placeOrder(Customer customer, OrderDetail orderDetail) throws SQLException, ClassNotFoundException {
+    public static boolean placeOrder(CustomerDTO customerDTO, OrderDetailDTO orderDetailDTO) throws SQLException, ClassNotFoundException {
         try {
             DBConnection.getDbConnection().getConnection().setAutoCommit(false);
-            boolean isAdded = CusromerModel.addCustomer(customer);
+            boolean isAdded = CusromerModel.addCustomer(customerDTO);
             if (isAdded) {
-                boolean isOrderAdded = OrderModel.addOrder(orderDetail);
+                boolean isOrderAdded = OrderModel.addOrder(orderDetailDTO);
                 if (isOrderAdded) {
-                    boolean isPaymentDetailAdded = OrderModel.addPayment(orderDetail);
+                    boolean isPaymentDetailAdded = OrderModel.addPayment(orderDetailDTO);
                     if (isPaymentDetailAdded) {
-                        boolean isBikeDetailAdded = BikeModel.addValueRentBikeDetail(customer.getId(), orderDetail.getRegNo());
+                        boolean isBikeDetailAdded = BikeModel.addValueRentBikeDetail(customerDTO.getId(), orderDetailDTO.getRegNo());
                         if (isBikeDetailAdded) {
-                            boolean isOrderDetailAdded = OrderModel.addOrderDetails(customer.getId(), orderDetail.getOrderId());
+                            boolean isOrderDetailAdded = OrderModel.addOrderDetails(customerDTO.getId(), orderDetailDTO.getOrderId());
                             if (isOrderDetailAdded) {
-                                boolean isRoomUpdate = RoomModel.updateRoomAvailability(orderDetail.getrId());
+                                boolean isRoomUpdate = RoomModel.updateRoomAvailability(orderDetailDTO.getrId());
                                 if (isRoomUpdate) {
-                                    boolean isUpdateBikeAvailability = BikeModel.updateBikeAvailability(orderDetail.getRegNo());
+                                    boolean isUpdateBikeAvailability = BikeModel.updateBikeAvailability(orderDetailDTO.getRegNo());
                                     if (isUpdateBikeAvailability) {
                                         DBConnection.getDbConnection().getConnection().commit();
                                         return true;
@@ -128,14 +127,14 @@ public class BookingModel {
         }
     }
 
-    public static boolean rentRoom(Customer customer,OrderDetail orderDetail) throws SQLException, ClassNotFoundException {
+    public static boolean rentRoom(CustomerDTO customerDTO, OrderDetailDTO orderDetailDTO) throws SQLException, ClassNotFoundException {
         try {
             DBConnection.getDbConnection().getConnection().setAutoCommit(false);
-            boolean isCustomerAdded = CusromerModel.addCustomer(customer);
+            boolean isCustomerAdded = CusromerModel.addCustomer(customerDTO);
             if (isCustomerAdded) {
-                boolean isRoomDetailAdded = OrderModel.addRoomDetails(orderDetail, customer.getId());
+                boolean isRoomDetailAdded = OrderModel.addRoomDetails(orderDetailDTO, customerDTO.getId());
                 if (isRoomDetailAdded) {
-                    boolean isAvailabilityUpdated = RoomModel.updateRoomAvailability(orderDetail.getrId());
+                    boolean isAvailabilityUpdated = RoomModel.updateRoomAvailability(orderDetailDTO.getrId());
                     if (isAvailabilityUpdated) {
                         DBConnection.getDbConnection().getConnection().commit();
                         return true;

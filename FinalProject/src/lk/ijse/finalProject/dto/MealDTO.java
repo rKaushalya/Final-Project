@@ -1,16 +1,16 @@
-package lk.ijse.finalProject.to;
+package lk.ijse.finalProject.dto;
 
-public class Meal {
+public class MealDTO {
     private String id;
     private String name;
     private String availableTime;
     private Double price;
 
-    public Meal(){
+    public MealDTO(){
 
     }
 
-    public Meal(String id,String name,String availableTime,Double price){
+    public MealDTO(String id, String name, String availableTime, Double price){
         this.id=id;
         this.name=name;
         this.availableTime=availableTime;

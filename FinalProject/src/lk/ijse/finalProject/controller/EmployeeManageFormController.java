@@ -5,10 +5,9 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
+import lk.ijse.finalProject.dto.EmployeeDTO;
 import lk.ijse.finalProject.model.EmployeeModel;
-import lk.ijse.finalProject.to.Employee;
 
-import java.sql.SQLException;
 import java.time.LocalDate;
 
 public class EmployeeManageFormController {
@@ -32,10 +31,10 @@ public class EmployeeManageFormController {
         String contact = txtContact.getText();
         String nic = txtNic.getText();
 
-        Employee employee = new Employee(id,name,address,contact,nic);
+        EmployeeDTO employeeDTO = new EmployeeDTO(id,name,address,contact,nic);
 
         try {
-            boolean isAdded = EmployeeModel.addEmployee(employee);
+            boolean isAdded = EmployeeModel.addEmployee(employeeDTO);
             if (isAdded){
                 clearText();
                 new Alert(Alert.AlertType.CONFIRMATION,"Success").show();
@@ -50,11 +49,11 @@ public class EmployeeManageFormController {
     public void searchOnAction(ActionEvent actionEvent) {
         String id = txtId.getText();
         try {
-            Employee employee = EmployeeModel.searchEmployee(id);
-            txtName.setText(employee.getName());
-            txtAddress.setText(employee.getAddress());
-            txtContact.setText(employee.getContact());
-            txtNic.setText(employee.getNic());
+            EmployeeDTO employeeDTO = EmployeeModel.searchEmployee(id);
+            txtName.setText(employeeDTO.getName());
+            txtAddress.setText(employeeDTO.getAddress());
+            txtContact.setText(employeeDTO.getContact());
+            txtNic.setText(employeeDTO.getNic());
 
         } catch (Exception exception) {
             System.out.println(exception);
@@ -68,9 +67,9 @@ public class EmployeeManageFormController {
         String contact = txtContact.getText();
         String nic = txtNic.getText();
 
-        Employee employee = new Employee(id,name,address,contact,nic);
+        EmployeeDTO employeeDTO = new EmployeeDTO(id,name,address,contact,nic);
         try {
-            boolean isUpdate = EmployeeModel.updateEmployee(employee);
+            boolean isUpdate = EmployeeModel.updateEmployee(employeeDTO);
             if (isUpdate){
                 clearText();
                 new Alert(Alert.AlertType.CONFIRMATION,"Update success").show();
@@ -78,7 +77,7 @@ public class EmployeeManageFormController {
                 new Alert(Alert.AlertType.ERROR,"Something Wrong.!").show();
             }
         } catch (Exception exception) {
-            System.out.println(employee);
+            System.out.println(employeeDTO);
         }
     }
 

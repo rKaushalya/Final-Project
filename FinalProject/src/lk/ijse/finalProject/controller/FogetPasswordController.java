@@ -9,12 +9,11 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Paint;
 import lk.ijse.finalProject.model.ForgotPasswordModel;
-import lk.ijse.finalProject.to.User;
+import lk.ijse.finalProject.dto.UserDTO;
 import lk.ijse.finalProject.utill.Navigation;
 import lk.ijse.finalProject.utill.Routes;
 
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -50,9 +49,9 @@ public class FogetPasswordController {
         String cmPw = txtConformPw.getText();
 
         if (password.equals(cmPw)){
-            User user = new User(userId,name,password,email);
+            UserDTO userDTO = new UserDTO(userId,name,password,email);
             try {
-                boolean isUpdate = ForgotPasswordModel.resetPassword(user);
+                boolean isUpdate = ForgotPasswordModel.resetPassword(userDTO);
                 if (isUpdate){
                     Navigation.navigate(Routes.FORGOT,pane);
                     new Alert(Alert.AlertType.CONFIRMATION,"Update success.!").show();
@@ -182,9 +181,9 @@ public class FogetPasswordController {
         String cmPw = txtCmPwShow.getText();
 
         if (password.equals(cmPw)){
-            User user = new User(userId,name,password,email);
+            UserDTO userDTO = new UserDTO(userId,name,password,email);
             try {
-                boolean isUpdate = ForgotPasswordModel.resetPassword(user);
+                boolean isUpdate = ForgotPasswordModel.resetPassword(userDTO);
                 if (isUpdate){
                     Navigation.navigate(Routes.FORGOT,pane);
                     new Alert(Alert.AlertType.CONFIRMATION,"Update success.!").show();

@@ -5,10 +5,9 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
+import lk.ijse.finalProject.dto.MealDTO;
 import lk.ijse.finalProject.model.MealModel;
-import lk.ijse.finalProject.to.Meal;
 
-import java.sql.SQLException;
 import java.time.LocalDate;
 
 public class MeailManageController {
@@ -30,9 +29,9 @@ public class MeailManageController {
         String availableTime = txtTime.getText();
         Double price = Double.valueOf(txtPrice.getText());
 
-        Meal meal = new Meal(id,name,availableTime,price);
+        MealDTO mealDTO = new MealDTO(id,name,availableTime,price);
         try {
-            boolean isAdded = MealModel.addMeal(meal);
+            boolean isAdded = MealModel.addMeal(mealDTO);
             if (isAdded){
                 new Alert(Alert.AlertType.CONFIRMATION,"Added Success").show();
                 clearText();
@@ -46,11 +45,11 @@ public class MeailManageController {
 
     public void searchOnAction(ActionEvent actionEvent) {
         try {
-            Meal meal = MealModel.searchMeal(txtId.getText());
-            txtId.setText(meal.getId());
-            txtName.setText(meal.getName());
-            txtTime.setText(meal.getAvailableTime());
-            txtPrice.setText(String.valueOf(meal.getPrice()));
+            MealDTO mealDTO = MealModel.searchMeal(txtId.getText());
+            txtId.setText(mealDTO.getId());
+            txtName.setText(mealDTO.getName());
+            txtTime.setText(mealDTO.getAvailableTime());
+            txtPrice.setText(String.valueOf(mealDTO.getPrice()));
         } catch (Exception exception) {
             System.out.println(exception);
         }
@@ -62,9 +61,9 @@ public class MeailManageController {
         String availableTime = txtTime.getText();
         Double price = Double.valueOf(txtPrice.getText());
 
-        Meal meal = new Meal(id,name,availableTime,price);
+        MealDTO mealDTO = new MealDTO(id,name,availableTime,price);
         try {
-            boolean isUpdate = MealModel.updateMeal(meal);
+            boolean isUpdate = MealModel.updateMeal(mealDTO);
             if (isUpdate){
                 new Alert(Alert.AlertType.CONFIRMATION,"Update Success").show();
                 clearText();

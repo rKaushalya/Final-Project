@@ -11,13 +11,11 @@ import javafx.scene.control.Alert;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Paint;
 import lk.ijse.finalProject.model.RegisterModel;
-import lk.ijse.finalProject.to.User;
+import lk.ijse.finalProject.dto.UserDTO;
 import lk.ijse.finalProject.utill.Navigation;
 import lk.ijse.finalProject.utill.Routes;
 
 import java.io.IOException;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -48,14 +46,14 @@ public class RegisterFormController {
     }
 
     public void registerOnAction(ActionEvent actionEvent) throws IOException {
-        User user = new User();
-        user.setUserId(txtUserId.getText());
-        user.setUserName(txtName.getText());
-        user.setPassword(txtPassword.getText());
-        user.setEmail(txtEmail.getText());
-        user.setRole(String.valueOf(cmbRole.getValue()));
+        UserDTO userDTO = new UserDTO();
+        userDTO.setUserId(txtUserId.getText());
+        userDTO.setUserName(txtName.getText());
+        userDTO.setPassword(txtPassword.getText());
+        userDTO.setEmail(txtEmail.getText());
+        userDTO.setRole(String.valueOf(cmbRole.getValue()));
         try {
-            boolean isRegister = RegisterModel.register(user);
+            boolean isRegister = RegisterModel.register(userDTO);
             if (isRegister){
                 clearText();
                 new Alert(Alert.AlertType.CONFIRMATION,"added Success.!").show();

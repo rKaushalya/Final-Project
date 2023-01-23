@@ -1,13 +1,13 @@
 package lk.ijse.finalProject.model;
 
-import lk.ijse.finalProject.to.User;
-import lk.ijse.finalProject.utill.CrudUtill;
+import lk.ijse.finalProject.dto.UserDTO;
+import lk.ijse.finalProject.utill.CrudUtil;
 
 import java.sql.SQLException;
 
 public class ForgotPasswordModel {
-    public static boolean resetPassword(User user) throws SQLException, ClassNotFoundException {
+    public static boolean resetPassword(UserDTO userDTO) throws SQLException, ClassNotFoundException {
         String sql = "UPDATE user SET password=? WHERE userId=? && userName=? && email=?";
-        return CrudUtill.execute(sql,user.getPassword(),user.getUserId(),user.getUserName(),user.getEmail());
+        return CrudUtil.execute(sql, userDTO.getPassword(), userDTO.getUserId(), userDTO.getUserName(), userDTO.getEmail());
     }
 }

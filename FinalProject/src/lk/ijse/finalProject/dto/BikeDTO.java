@@ -1,16 +1,16 @@
-package lk.ijse.finalProject.to;
+package lk.ijse.finalProject.dto;
 
-public class Bike {
+public class BikeDTO {
     private String regNo;
     private String model;
     private String availability;
     private Double pricePerDay;
 
-    public Bike(){
+    public BikeDTO(){
 
     }
 
-    public Bike(String regNo,String model,String availability,Double pricePerDay){
+    public BikeDTO(String regNo, String model, String availability, Double pricePerDay){
         this.regNo =regNo;
         this.model=model;
         this.availability=availability;

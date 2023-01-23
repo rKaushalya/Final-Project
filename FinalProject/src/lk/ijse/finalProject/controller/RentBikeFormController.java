@@ -16,12 +16,10 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Paint;
 import lk.ijse.finalProject.model.BikeModel;
 import lk.ijse.finalProject.model.BookingModel;
-import lk.ijse.finalProject.to.Bike;
-import lk.ijse.finalProject.to.Customer;
-import lk.ijse.finalProject.to.OrderDetail;
+import lk.ijse.finalProject.dto.BikeDTO;
+import lk.ijse.finalProject.dto.CustomerDTO;
 
 import java.io.IOException;
-import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
@@ -76,9 +74,9 @@ public class RentBikeFormController {
         String email = txtEmail.getText();
         String regNo = String.valueOf(cmbRegNo.getValue());
 
-        Customer customer = new Customer(cusId,name,address,contact,email);
+        CustomerDTO customerDTO = new CustomerDTO(cusId,name,address,contact,email);
         try {
-            boolean isRentBike = BikeModel.rentBike(customer, regNo);
+            boolean isRentBike = BikeModel.rentBike(customerDTO, regNo);
             if (isRentBike){
                 clearPane();
                 new Alert(Alert.AlertType.CONFIRMATION,"Bike rent Success.").show();
@@ -96,9 +94,9 @@ public class RentBikeFormController {
         String availability = txtAvailability.getText();
         Double pricePerDay = Double.valueOf(txtPrice.getText());
 
-        Bike bike = new Bike(regNo,model,availability,pricePerDay);
+        BikeDTO bikeDTO = new BikeDTO(regNo,model,availability,pricePerDay);
         try {
-            boolean isAdded = BikeModel.addBike(bike);
+            boolean isAdded = BikeModel.addBike(bikeDTO);
             if (isAdded){
                 new Alert(Alert.AlertType.CONFIRMATION,"added Success").show();
                 clearText();
@@ -117,9 +115,9 @@ public class RentBikeFormController {
         String availability = txtAvailability.getText();
         Double pricePerDay = Double.valueOf(txtPrice.getText());
 
-        Bike bike = new Bike(regNo,model,availability,pricePerDay);
+        BikeDTO bikeDTO = new BikeDTO(regNo,model,availability,pricePerDay);
         try {
-            boolean isUpdate = BikeModel.updateBike(bike);
+            boolean isUpdate = BikeModel.updateBike(bikeDTO);
             if (isUpdate){
                 new Alert(Alert.AlertType.CONFIRMATION,"Update Success").show();
                 loadRegNo();
@@ -171,22 +169,22 @@ public class RentBikeFormController {
 
     public void bikeDetailOnAction(ActionEvent actionEvent) {
         String regNo = String.valueOf(cmbRegNo.getValue());
-        ObservableList<Bike> tmlist = FXCollections.observableArrayList();
+        ObservableList<BikeDTO> tmlist = FXCollections.observableArrayList();
         try {
-            Bike bike = BikeModel.searchBike(regNo);
-            fillText(bike);
-            tmlist.add(bike);
+            BikeDTO bikeDTO = BikeModel.searchBike(regNo);
+            fillText(bikeDTO);
+            tmlist.add(bikeDTO);
             tblBike.setItems(tmlist);
         } catch (Exception exception) {
             System.out.println(exception);
         }
     }
 
-    private void fillText(Bike bike){
-        txtRegNo.setText(bike.getRegNo());
-        txtModel.setText(bike.getModel());
-        txtPrice.setText(String.valueOf(bike.getPricePerDay()));
-        txtAvailability.setText(bike.getAvailability());
+    private void fillText(BikeDTO bikeDTO){
+        txtRegNo.setText(bikeDTO.getRegNo());
+        txtModel.setText(bikeDTO.getModel());
+        txtPrice.setText(String.valueOf(bikeDTO.getPricePerDay()));
+        txtAvailability.setText(bikeDTO.getAvailability());
     }
 
     private void setCellValueFactory(){

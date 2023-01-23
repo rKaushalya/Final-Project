@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXCheckBox?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="pane" prefHeight="724.0" prefWidth="1128.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.finalProject.controller.RegisterFormController">
+   <children>
+      <Label layoutX="492.0" layoutY="38.0" opacity="0.67" text="Register" textFill="#1736a5">
+         <font>
+            <Font name="Monospaced Bold" size="30.0" />
+         </font>
+      </Label>
+      <JFXTextField fx:id="txtUserId" labelFloat="true" layoutX="637.0" layoutY="200.0" onAction="#slipToName" prefHeight="25.0" prefWidth="265.0" promptText="User Id">
+         <font>
+            <Font size="14.0" />
+         </font></JFXTextField>
+      <JFXTextField fx:id="txtName" labelFloat="true" layoutX="637.0" layoutY="257.0" onAction="#slipToPw" prefHeight="25.0" prefWidth="265.0" promptText="Name">
+         <font>
+            <Font size="14.0" />
+         </font></JFXTextField>
+      <JFXTextField fx:id="txtPwShow" labelFloat="true" layoutX="637.0" layoutY="325.0" onAction="#duplicatePassword" prefHeight="25.0" prefWidth="265.0" promptText="Password">
+         <font>
+            <Font size="14.0" />
+         </font></JFXTextField>
+      <JFXTextField fx:id="txtEmail" labelFloat="true" layoutX="637.0" layoutY="393.0" onAction="#slipToRole" prefHeight="25.0" prefWidth="265.0" promptText="Email">
+         <font>
+            <Font size="14.0" />
+         </font></JFXTextField>
+      <ImageView fitHeight="451.0" fitWidth="515.0" layoutX="66.0" layoutY="148.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../assets/logo/istockphoto-1281150061-170667a.jpg" />
+         </image>
+      </ImageView>
+      <JFXButton graphicTextGap="6.0" layoutX="826.0" layoutY="570.0" onAction="#registerOnAction" prefHeight="38.0" prefWidth="114.0" style="-fx-background-color: #17c0eb; -fx-background-radius: 8;" text="Register" textAlignment="CENTER">
+         <font>
+            <Font name="Consolas Bold Italic" size="18.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <JFXButton layoutX="14.0" layoutY="26.0" onAction="#loadUserFormOnAction" prefHeight="30.0" prefWidth="66.0" text="&lt; Back">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <font>
+            <Font size="14.0" />
+         </font>
+      </JFXButton>
+      <JFXPasswordField fx:id="txtPassword" labelFloat="true" layoutX="637.0" layoutY="325.0" onAction="#slipToEmail" prefHeight="25.0" prefWidth="265.0" promptText="Password">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </JFXPasswordField>
+      <JFXCheckBox fx:id="cbxShow" layoutX="818.0" layoutY="512.0" onAction="#cbxPasswordOnAction" text="Show Password">
+         <font>
+            <Font name="System Bold Italic" size="12.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXCheckBox>
+      <JFXComboBox fx:id="cmbRole" layoutX="637.0" layoutY="454.0" prefHeight="30.0" prefWidth="112.0" promptText="Role">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXComboBox>
+   </children>
+</AnchorPane>

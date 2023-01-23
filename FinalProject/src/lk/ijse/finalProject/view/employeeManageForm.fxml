@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="pane" prefHeight="724.0" prefWidth="884.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.finalProject.controller.EmployeeManageFormController">
+   <children>
+      <Label layoutX="361.0" layoutY="66.0" opacity="0.67" text="Employees" textFill="#1736a5">
+         <font>
+            <Font name="Monospaced Bold" size="30.0" />
+         </font>
+      </Label>
+      <Label layoutX="718.0" layoutY="49.0" text="Date :">
+         <font>
+            <Font name="Monospaced Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="txtDate" layoutX="778.0" layoutY="49.0">
+         <font>
+            <Font name="Monospaced Bold" size="14.0" />
+         </font>
+      </Label>
+      <JFXTextField fx:id="txtId" labelFloat="true" layoutX="194.0" layoutY="230.0" onAction="#slipToName" prefHeight="25.0" prefWidth="287.0">
+         <font>
+            <Font size="14.0" />
+         </font></JFXTextField>
+      <JFXTextField fx:id="txtName" labelFloat="true" layoutX="194.0" layoutY="309.0" onAction="#slipToAddress" prefHeight="25.0" prefWidth="287.0">
+         <font>
+            <Font size="14.0" />
+         </font></JFXTextField>
+      <JFXTextField fx:id="txtAddress" labelFloat="true" layoutX="195.0" layoutY="392.0" onAction="#slipToContact" prefHeight="25.0" prefWidth="287.0">
+         <font>
+            <Font size="14.0" />
+         </font></JFXTextField>
+      <JFXTextField fx:id="txtNic" labelFloat="true" layoutX="194.0" layoutY="536.0" prefHeight="25.0" prefWidth="287.0">
+         <font>
+            <Font size="14.0" />
+         </font></JFXTextField>
+      <JFXTextField fx:id="txtContact" labelFloat="true" layoutX="194.0" layoutY="462.0" onAction="#slipToNic" prefHeight="25.0" prefWidth="287.0">
+         <font>
+            <Font size="14.0" />
+         </font></JFXTextField>
+      <JFXButton layoutX="582.0" layoutY="259.0" onAction="#addOnAction" prefHeight="31.0" prefWidth="79.0" style="-fx-background-color: #0984e3; -fx-background-radius: 12;" text="Add" textFill="WHITE">
+         <font>
+            <Font name="Georgia Italic" size="15.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <JFXButton layoutX="582.0" layoutY="351.0" onAction="#searchOnAction" prefHeight="31.0" prefWidth="79.0" style="-fx-background-color: #e58e26; -fx-background-radius: 12;" text="Search" textFill="WHITE">
+         <font>
+            <Font name="Georgia Italic" size="15.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <JFXButton layoutX="582.0" layoutY="434.0" onAction="#updateOnAction" prefHeight="31.0" prefWidth="79.0" style="-fx-background-color: grey; -fx-background-radius: 12;" text="Update" textFill="WHITE">
+         <font>
+            <Font name="Georgia Italic" size="15.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <JFXButton layoutX="582.0" layoutY="519.0" onAction="#deleteOnAction" prefHeight="31.0" prefWidth="79.0" style="-fx-background-color: #eb4d4b; -fx-background-radius: 12;" text="Delete" textFill="WHITE">
+         <font>
+            <Font name="Georgia Italic" size="15.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <Label layoutX="75.0" layoutY="237.0" text="Employee ID :">
+         <font>
+            <Font name="Georgia Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="99.0" layoutY="316.0" text="Name :">
+         <font>
+            <Font name="Georgia Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="91.0" layoutY="399.0" text="Address :">
+         <font>
+            <Font name="Georgia Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="93.0" layoutY="469.0" text="Contact :">
+         <font>
+            <Font name="Georgia Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="110.0" layoutY="543.0" text="Nic :">
+         <font>
+            <Font name="Georgia Bold" size="14.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

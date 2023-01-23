@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="pane" prefHeight="724.0" prefWidth="884.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.finalProject.controller.ViewCustomerFormController">
+   <children>
+      <Label layoutX="316.0" layoutY="53.0" text="View Customers" textFill="#1736a5">
+         <font>
+            <Font name="Monospaced Bold" size="30.0" />
+         </font>
+      </Label>
+      <JFXTextField fx:id="txtId" labelFloat="true" layoutX="228.0" layoutY="161.0" onAction="#slipToName" prefHeight="25.0" prefWidth="287.0">
+         <font>
+            <Font size="14.0" />
+         </font></JFXTextField>
+      <JFXTextField fx:id="txtName" labelFloat="true" layoutX="228.0" layoutY="224.0" onAction="#slipToAddress" prefHeight="25.0" prefWidth="287.0">
+         <font>
+            <Font size="14.0" />
+         </font></JFXTextField>
+      <JFXTextField fx:id="txtAddress" labelFloat="true" layoutX="228.0" layoutY="295.0" onAction="#slipToContact" prefHeight="25.0" prefWidth="287.0">
+         <font>
+            <Font size="14.0" />
+         </font></JFXTextField>
+      <JFXTextField fx:id="txtContact" labelFloat="true" layoutX="228.0" layoutY="371.0" onAction="#slipToEmail" prefHeight="25.0" prefWidth="287.0">
+         <font>
+            <Font size="14.0" />
+         </font></JFXTextField>
+      <JFXTextField fx:id="txtEmail" labelFloat="true" layoutX="228.0" layoutY="439.0" onAction="#searchOnEnter" prefHeight="25.0" prefWidth="287.0">
+         <font>
+            <Font size="14.0" />
+         </font></JFXTextField>
+      <JFXButton layoutX="603.0" layoutY="216.0" onAction="#searchOnAction" prefHeight="31.0" prefWidth="79.0" style="-fx-background-color: #e58e26; -fx-background-radius: 12;" text="Search" textFill="WHITE">
+         <font>
+            <Font name="Georgia Italic" size="15.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <JFXButton layoutX="603.0" layoutY="299.0" onAction="#updateOnAction" prefHeight="31.0" prefWidth="79.0" style="-fx-background-color: grey; -fx-background-radius: 12;" text="Update" textFill="WHITE">
+         <font>
+            <Font name="Georgia Italic" size="15.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <JFXButton layoutX="603.0" layoutY="375.0" onAction="#deleteOnAction" prefHeight="31.0" prefWidth="79.0" style="-fx-background-color: #eb4d4b; -fx-background-radius: 12;" text="Delete" textFill="WHITE">
+         <font>
+            <Font name="Georgia Italic" size="15.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <Label layoutX="722.0" layoutY="36.0" text="Date :">
+         <font>
+            <Font name="Monospaced Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="txtDate" layoutX="780.0" layoutY="36.0">
+         <font>
+            <Font name="Monospaced Bold" size="14.0" />
+         </font>
+      </Label>
+      <TableView fx:id="tblCusDetail" layoutX="143.0" layoutY="530.0" prefHeight="109.0" prefWidth="592.0">
+        <columns>
+            <TableColumn fx:id="clmCusId" prefWidth="82.3333740234375" text="Customer Id" />
+          <TableColumn fx:id="tblName" prefWidth="110.0" text="Name" />
+          <TableColumn fx:id="tblAddress" prefWidth="115.0" text="Address" />
+            <TableColumn fx:id="tblContact" prefWidth="123.66668701171875" text="Contact" />
+            <TableColumn fx:id="tblEmail" prefWidth="160.33331298828125" text="Email" />
+        </columns>
+      </TableView>
+      <Label layoutX="90.0" layoutY="168.0" text="Customer ID :">
+         <font>
+            <Font name="Georgia Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="111.0" layoutY="239.0" text="Name   :">
+         <font>
+            <Font name="Georgia Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="105.0" layoutY="307.0" text="Address  :">
+         <font>
+            <Font name="Georgia Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="106.0" layoutY="383.0" text="Contact  :">
+         <font>
+            <Font name="Georgia Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="111.0" layoutY="454.0" text="Email   :">
+         <font>
+            <Font name="Georgia Bold" size="14.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

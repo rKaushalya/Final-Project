@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.20.0.final using JasperReports Library version 6.20.0-2bc7ab61c56f459e8176eb05c7705e145cd400ad  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Blank_A4" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="7b336142-03b2-4ce6-a3bb-55d70979ea9b">
+	<parameter name="name" class="java.lang.String"/>
+	<parameter name="address" class="java.lang.String"/>
+	<parameter name="contact" class="java.lang.String"/>
+	<parameter name="roomNo" class="java.lang.String"/>
+	<parameter name="pkgNo" class="java.lang.String"/>
+	<parameter name="bikeNo" class="java.lang.String"/>
+	<parameter name="total" class="java.lang.Double"/>
+	<parameter name="cash" class="java.lang.Double"/>
+	<parameter name="balance" class="java.lang.Double"/>
+	<parameter name="oId" class="java.lang.String"/>
+	<parameter name="cId" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="110" splitType="Stretch">
+			<staticText>
+				<reportElement x="92" y="0" width="370" height="30" uuid="6f157a30-b7e0-4b75-8824-717b54561b18"/>
+				<textElement textAlignment="Center">
+					<font size="20" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Red octopus Diving & Villa Center]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="190" y="80" width="178" height="20" uuid="db40586d-e90e-46f4-909f-7804ac3cc355"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[0765320187 / 0788730420]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="164" y="35" width="226" height="25" uuid="727afa17-56b0-4026-87a6-e7cd84b8b4fc"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[No 25 / A Galle Road Unavatuna]]></text>
+			</staticText>
+			<textField pattern="HH:mm">
+				<reportElement x="475" y="50" width="100" height="30" uuid="efbdb27c-7552-467d-af38-17823d55a6d6"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="10" y="50" width="100" height="30" uuid="60b23930-606b-4f36-b76e-52682b3b193f"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="206" y="60" width="142" height="18" uuid="ed70bda6-600f-45b9-8e4e-22d62b9f0545"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ravinduk56@gmail.com]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="47" splitType="Stretch">
+			<staticText>
+				<reportElement x="10" y="11" width="82" height="20" uuid="1e0648d5-4946-4096-9c83-01b421b40cb3"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Order Id :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="330" y="9" width="90" height="25" uuid="ca5cd42b-e296-4ff6-ae0a-c12882ed021e"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Customer Id :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="110" y="15" width="100" height="17" uuid="897f0bc1-e85c-4f88-9035-ec4f4d882ac1"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{oId}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="440" y="11" width="100" height="20" uuid="31044cc5-d723-4370-8160-edd7f1a2019a"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{cId}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="117" splitType="Stretch">
+			<staticText>
+				<reportElement x="17" y="16" width="120" height="20" uuid="d96ef480-a1ba-4b06-bf43-41e6f456be3a"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Customer Name :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="33" y="50" width="74" height="20" uuid="5347b82c-324d-499d-9f1e-a1d0c52781f9"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Address :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="33" y="80" width="74" height="20" uuid="0251c492-2144-4551-b3c9-9bf2873e4f16"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Contact :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="317" y="16" width="90" height="20" uuid="22892655-16ed-484e-909c-2164c0e47aa8"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Room No :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="318" y="48" width="90" height="20" uuid="d904e1c9-4368-4beb-b6bb-b5f941e5a114"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Package No :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="318" y="80" width="90" height="20" uuid="5d99df87-8b9b-4b7c-92e8-89fd380d2124"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Bike Reg No:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="150" y="10" width="100" height="26" uuid="4eaa037d-d41e-4d72-bc3a-bbb17b2748f6"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="150" y="48" width="100" height="20" uuid="c8bdea16-7b2f-43eb-9d12-1c86df020c56"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{address}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="150" y="79" width="100" height="22" uuid="7b2bcae3-eb15-4b7c-9739-270f0fbb6fc8"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{contact}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="420" y="17" width="100" height="19" uuid="9b8b5d6b-5d7b-47e4-8586-538bea0f9bda"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{roomNo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="420" y="49" width="100" height="19" uuid="d6f3ec66-822c-4ce6-b1d1-a074a8cf559e"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{pkgNo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="420" y="80" width="100" height="20" uuid="da2fb6e4-ddc7-40b5-94f1-b7d8f577496e"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{bikeNo}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch">
+			<staticText>
+				<reportElement x="191" y="22" width="58" height="20" uuid="011855bb-fc89-4b92-973c-f53ce8f820f9"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="191" y="52" width="51" height="20" uuid="b0ea1d4b-2abc-481b-8293-89af9f325aa9"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cash]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="191" y="82" width="58" height="20" uuid="6bc5316b-c543-47be-89f2-1801286558f2"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Balance]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="270" y="22" width="100" height="18" uuid="7aaccaea-15d2-4b33-8b99-32c82dd8d6e2"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{total}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="270" y="51" width="100" height="22" uuid="32cd3b38-6f23-4c75-82bf-b7c9afaf8455"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{cash}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="270" y="82" width="100" height="21" uuid="419659e8-ad3b-4cdb-bca6-b139623964f2"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{balance}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="42" splitType="Stretch">
+			<staticText>
+				<reportElement x="223" y="10" width="113" height="30" uuid="c5d2c2be-6e34-49a1-95a5-f52d257ea2cb"/>
+				<textElement>
+					<font size="16" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Thank You . !]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>

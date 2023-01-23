@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.chart.AreaChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="pane" prefHeight="724.0" prefWidth="1128.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.finalProject.controller.CustomerFormController">
+   <children>
+      <AnchorPane opacity="0.95" prefHeight="724.0" prefWidth="247.0" style="-fx-background-color: linear-gradient(to right top, #70a1ff,#3742fa,#5352ed);">
+         <children>
+            <JFXButton layoutX="71.0" layoutY="667.0" onAction="#logoutOnAction" prefHeight="25.0" prefWidth="106.0" style="-fx-background-color: #808e9b; -fx-background-radius: 12;" text="   Log out">
+               <graphic>
+                  <ImageView fitHeight="25.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../assets/logo/icons8-log-out-32.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
+            <JFXButton layoutX="71.0" layoutY="179.0" onAction="#loadBookingFormOnAction" prefHeight="45.0" prefWidth="174.0" text="Add Order" textFill="WHITE">
+               <font>
+                  <Font name="Mongolian Baiti" size="16.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
+            <JFXButton layoutX="71.0" layoutY="246.0" onAction="#loadCustomerFormOnAction" prefHeight="45.0" prefWidth="174.0" text="View Customer" textFill="WHITE">
+               <font>
+                  <Font name="Mongolian Baiti" size="16.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
+            <JFXButton layoutX="71.0" layoutY="309.0" onAction="#loadRoomOnAction" prefHeight="45.0" prefWidth="174.0" text="Manage Room" textFill="WHITE">
+               <font>
+                  <Font name="Mongolian Baiti" size="16.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
+            <JFXButton layoutX="71.0" layoutY="376.0" onAction="#loadEmployeeOnAction" prefHeight="45.0" prefWidth="174.0" text="Manage Employee" textFill="WHITE">
+               <font>
+                  <Font name="Mongolian Baiti" size="16.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
+            <JFXButton layoutX="58.0" layoutY="438.0" onAction="#loadMealOnAction" prefHeight="45.0" prefWidth="174.0" text="Manage Meal" textFill="WHITE">
+               <font>
+                  <Font name="Mongolian Baiti" size="16.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
+            <JFXButton layoutX="71.0" layoutY="496.0" onAction="#loadBikeOnAction" prefHeight="45.0" prefWidth="174.0" text="Manage Rental Bike" textFill="WHITE">
+               <font>
+                  <Font name="Mongolian Baiti" size="16.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
+            <ImageView fitHeight="33.0" fitWidth="35.0" layoutX="50.0" layoutY="185.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assets/logo/icons8-booking-100.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="33.0" fitWidth="35.0" layoutX="55.0" layoutY="252.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assets/logo/icons8-customer-64%20(1).png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="33.0" fitWidth="35.0" layoutX="50.0" layoutY="315.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assets/logo/bedroom-icon-1.jpg" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="33.0" fitWidth="35.0" layoutX="50.0" layoutY="382.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assets/logo/icons8-collaborator-male-100.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="33.0" fitWidth="35.0" layoutX="50.0" layoutY="444.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assets/logo/icons8-meal-100.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="33.0" fitWidth="35.0" layoutX="50.0" layoutY="502.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assets/logo/icons8-motorcycle-100.png" />
+               </image>
+            </ImageView>
+            <JFXButton layoutX="50.0" layoutY="559.0" onAction="#loadReportOnAction" prefHeight="45.0" prefWidth="192.0" text="Report" textFill="WHITE">
+               <font>
+                  <Font name="Mongolian Baiti" size="16.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
+            <ImageView fitHeight="33.0" fitWidth="35.0" layoutX="50.0" layoutY="565.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assets/logo/icons8-graph-report-script-100.png" />
+               </image>
+            </ImageView>
+            <JFXButton layoutX="71.0" layoutY="117.0" onAction="#loadDashbordOnAction" prefHeight="45.0" prefWidth="174.0" text="Dashbord" textFill="WHITE">
+               <font>
+                  <Font name="Mongolian Baiti" size="16.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
+            <ImageView fitHeight="33.0" fitWidth="35.0" layoutX="50.0" layoutY="123.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assets/logo/images.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="57.0" layoutY="14.0" text="Time :" textFill="WHITE">
+               <font>
+                  <Font name="Monospaced Bold" size="14.0" />
+               </font>
+            </Label>
+            <Text fx:id="txtTime" fill="WHITE" layoutX="117.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0">
+               <font>
+                  <Font name="Monospaced Bold" size="14.0" />
+               </font>
+            </Text>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="addCustomerPane" layoutX="245.0" prefHeight="724.0" prefWidth="884.0">
+         <children>
+            <AnchorPane layoutX="47.0" layoutY="149.0" opacity="0.65" prefHeight="155.0" prefWidth="781.0" style="-fx-background-radius: 20; -fx-background-color: linear-gradient(to right top, #70a1ff,#3742fa,#3742fa);" />
+            <Label layoutX="710.0" layoutY="21.0" text="Date :">
+               <font>
+                  <Font name="Monospaced Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="txtDate" layoutX="764.0" layoutY="21.0">
+               <font>
+                  <Font name="Monospaced Bold" size="14.0" />
+               </font>
+            </Label>
+            <JFXButton fx:id="btnCusCount" layoutX="81.0" layoutY="173.0" opacity="0.75" prefHeight="102.0" prefWidth="121.0" style="-fx-background-color: white; -fx-background-radius: 12;" text="Button" textFill="#191817">
+               <font>
+                  <Font name="Sitka Small Bold" size="30.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="NONE" />
+               </cursor>
+            </JFXButton>
+            <Label layoutX="37.0" layoutY="110.0" text="Available Bike Count">
+               <font>
+                  <Font name="Sitka Small Bold Italic" size="20.0" />
+               </font>
+            </Label>
+            <JFXButton fx:id="btnRoomCount" layoutX="677.0" layoutY="173.0" opacity="0.75" prefHeight="102.0" prefWidth="121.0" style="-fx-background-color: white; -fx-background-radius: 12;" text="Button" textFill="#141413">
+               <font>
+                  <Font name="Sitka Small Bold" size="30.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="NONE" />
+               </cursor>
+            </JFXButton>
+            <Label layoutX="622.0" layoutY="110.0" text="Available Room Count">
+               <font>
+                  <Font name="Sitka Small Bold Italic" size="20.0" />
+               </font>
+            </Label>
+            <JFXButton fx:id="btnEmployeeCount" layoutX="377.0" layoutY="173.0" opacity="0.76" prefHeight="102.0" prefWidth="121.0" style="-fx-background-color: white; -fx-background-radius: 12;" text="Button">
+               <font>
+                  <Font name="Sitka Small Bold" size="30.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="NONE" />
+               </cursor>
+            </JFXButton>
+            <Label layoutX="352.0" layoutY="110.0" text="Employee Count">
+               <font>
+                  <Font name="Sitka Small Bold Italic" size="20.0" />
+               </font>
+            </Label>
+            <PieChart fx:id="piechart" layoutX="79.0" layoutY="336.0" prefHeight="320.0" prefWidth="352.0" />
+            <AreaChart layoutX="498.0" layoutY="346.0" prefHeight="320.0" prefWidth="341.0">
+              <xAxis>
+                <CategoryAxis side="BOTTOM" />
+              </xAxis>
+              <yAxis>
+                <NumberAxis side="LEFT" />
+              </yAxis>
+            </AreaChart>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

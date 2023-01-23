@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="pane" prefHeight="724.0" prefWidth="884.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.finalProject.controller.RoomManageFormController">
+   <children>
+      <Label layoutX="397.0" layoutY="50.0" text="Rooms" textFill="#1736a5">
+         <font>
+            <Font name="Monospaced Bold" size="30.0" />
+         </font>
+      </Label>
+      <Label layoutX="727.0" layoutY="41.0" text="Date :">
+         <font>
+            <Font name="Monospaced Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="txtDate" layoutX="778.0" layoutY="41.0">
+         <font>
+            <Font name="Monospaced Bold" size="14.0" />
+         </font>
+      </Label>
+      <JFXTextField fx:id="txtType" labelFloat="true" layoutX="189.0" layoutY="219.0" onAction="#slipToAc" prefHeight="25.0" prefWidth="287.0">
+         <font>
+            <Font size="14.0" />
+         </font></JFXTextField>
+      <JFXTextField fx:id="txtAc" labelFloat="true" layoutX="189.0" layoutY="295.0" onAction="#slipToPrice" prefHeight="25.0" prefWidth="287.0">
+         <font>
+            <Font size="14.0" />
+         </font></JFXTextField>
+      <JFXTextField fx:id="txtPrice" labelFloat="true" layoutX="189.0" layoutY="373.0" onAction="#slipToAvailability" prefHeight="25.0" prefWidth="287.0">
+         <font>
+            <Font size="14.0" />
+         </font></JFXTextField>
+      <JFXButton layoutX="617.0" layoutY="180.0" onAction="#addOnAction" prefHeight="31.0" prefWidth="79.0" style="-fx-background-color: #0984e3; -fx-background-radius: 12;" text="Add" textFill="WHITE">
+         <font>
+            <Font name="Georgia Italic" size="15.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <JFXButton layoutX="617.0" layoutY="260.0" onAction="#searchOnAction" prefHeight="31.0" prefWidth="79.0" style="-fx-background-color: #e58e26; -fx-background-radius: 12;" text="Search" textFill="WHITE">
+         <font>
+            <Font name="Georgia Italic" size="15.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <JFXButton layoutX="617.0" layoutY="336.0" onAction="#updateOnAction" prefHeight="31.0" prefWidth="79.0" style="-fx-background-color: grey; -fx-background-radius: 12;" text="Update" textFill="WHITE">
+         <font>
+            <Font name="Georgia Italic" size="15.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <JFXButton layoutX="617.0" layoutY="413.0" onAction="#deleteOnAction" prefHeight="31.0" prefWidth="79.0" style="-fx-background-color: #eb4d4b; -fx-background-radius: 12;" text="Delete" textFill="WHITE">
+         <font>
+            <Font name="Georgia Italic" size="15.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <TableView fx:id="tblTable" layoutX="133.0" layoutY="544.0" prefHeight="113.0" prefWidth="620.0">
+        <columns>
+            <TableColumn fx:id="clmRoomId" prefWidth="107.0" text="Room Id" />
+          <TableColumn fx:id="clmType" prefWidth="111.0" text="Type" />
+          <TableColumn fx:id="clmAc" prefWidth="122.0" text="AC/NON AC" />
+            <TableColumn fx:id="clmPrice" prefWidth="151.0" text="Price Per Day" />
+            <TableColumn fx:id="clmAvailability" prefWidth="128.66668701171875" text="Availability" />
+        </columns>
+      </TableView>
+      <JFXTextField fx:id="txtRId" labelFloat="true" layoutX="189.0" layoutY="153.0" onAction="#slipToType" prefHeight="25.0" prefWidth="287.0">
+         <font>
+            <Font size="14.0" />
+         </font></JFXTextField>
+      <JFXTextField fx:id="txtAvailability" labelFloat="true" layoutX="194.0" layoutY="444.0" prefHeight="25.0" prefWidth="287.0">
+         <font>
+            <Font size="14.0" />
+         </font></JFXTextField>
+      <Label layoutX="76.0" layoutY="160.0" text="Room Id :">
+         <font>
+            <Font name="Georgia Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="59.0" layoutY="302.0" text="AC/ NON A/C :">
+         <font>
+            <Font name="Georgia Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="90.0" layoutY="234.0" text="Type :">
+         <font>
+            <Font name="Georgia Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="88.0" layoutY="380.0" text="Price :">
+         <font>
+            <Font name="Georgia Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="67.0" layoutY="459.0" text="Availability :">
+         <font>
+            <Font name="Georgia Bold" size="14.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="pane" prefHeight="724.0" prefWidth="884.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.finalProject.controller.ReportFormController">
+   <children>
+      <Label layoutX="388.0" layoutY="54.0" text="Report" textFill="#1736a5">
+         <font>
+            <Font name="Monospaced Bold" size="30.0" />
+         </font>
+      </Label>
+      <JFXButton layoutX="185.0" layoutY="244.0" onAction="#getReport" prefHeight="67.0" prefWidth="184.0" style="-fx-background-color: grey; -fx-background-radius: 15;" text="Customer Report" textFill="WHITE">
+         <font>
+            <Font name="HoloLens MDL2 Assets" size="16.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></JFXButton>
+      <JFXButton layoutX="532.0" layoutY="244.0" onAction="#loadEmployeeDetails" prefHeight="67.0" prefWidth="184.0" style="-fx-background-color: grey; -fx-background-radius: 15;" text="Employee Report" textFill="WHITE">
+         <font>
+            <Font name="HoloLens MDL2 Assets" size="16.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></JFXButton>
+   </children>
+</AnchorPane>

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="pane" prefHeight="724.0" prefWidth="884.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.finalProject.controller.MeailManageController">
+   <children>
+      <Label layoutX="407.0" layoutY="96.0" opacity="0.67" text="Meal" textFill="#1736a5">
+         <font>
+            <Font name="Monospaced Bold" size="29.0" />
+         </font>
+      </Label>
+      <Label layoutX="699.0" layoutY="43.0" text="Date :">
+         <font>
+            <Font name="Monospaced Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="txtDate" layoutX="756.0" layoutY="43.0">
+         <font>
+            <Font name="Monospaced Bold" size="14.0" />
+         </font>
+      </Label>
+      <JFXTextField fx:id="txtId" labelFloat="true" layoutX="242.0" layoutY="266.0" onAction="#slipToName" prefHeight="25.0" prefWidth="287.0" />
+      <JFXTextField fx:id="txtName" labelFloat="true" layoutX="242.0" layoutY="349.0" onAction="#slipToTime" prefHeight="25.0" prefWidth="287.0" />
+      <JFXTextField fx:id="txtTime" labelFloat="true" layoutX="242.0" layoutY="429.0" onAction="#slipToPrice" prefHeight="25.0" prefWidth="287.0" />
+      <JFXTextField fx:id="txtPrice" labelFloat="true" layoutX="242.0" layoutY="511.0" prefHeight="25.0" prefWidth="287.0" />
+      <JFXButton layoutX="636.0" layoutY="276.0" onAction="#addOnAction" prefHeight="31.0" prefWidth="79.0" style="-fx-background-color: #0984e3; -fx-background-radius: 12;" text="Add" textFill="WHITE">
+         <font>
+            <Font name="Georgia Italic" size="15.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <JFXButton layoutX="636.0" layoutY="359.0" onAction="#searchOnAction" prefHeight="31.0" prefWidth="79.0" style="-fx-background-color: #e58e26; -fx-background-radius: 12;" text="Search" textFill="WHITE">
+         <font>
+            <Font name="Georgia Italic" size="15.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <JFXButton layoutX="636.0" layoutY="439.0" onAction="#updateOnAction" prefHeight="31.0" prefWidth="79.0" style="-fx-background-color: grey; -fx-background-radius: 12;" text="Update" textFill="WHITE">
+         <font>
+            <Font name="Georgia Italic" size="15.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <JFXButton layoutX="636.0" layoutY="521.0" onAction="#deleteOnAction" prefHeight="31.0" prefWidth="79.0" style="-fx-background-color: #eb4d4b; -fx-background-radius: 12;" text="Delete" textFill="WHITE">
+         <font>
+            <Font name="Georgia Italic" size="15.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <Label layoutX="125.0" layoutY="271.0" text="Meal Id :">
+         <font>
+            <Font name="Georgia Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="125.0" layoutY="351.0" text="Name :">
+         <font>
+            <Font name="Georgia Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="99.0" layoutY="434.0" text="Available Time :">
+         <font>
+            <Font name="Georgia Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="128.0" layoutY="516.0" text="Price :">
+         <font>
+            <Font name="Georgia Bold" size="14.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

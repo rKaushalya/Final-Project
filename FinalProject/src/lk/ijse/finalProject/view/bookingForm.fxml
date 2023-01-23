@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="bookingPane" prefHeight="724.0" prefWidth="884.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.finalProject.controller.BookingFormController">
+   <children>
+      <Label layoutX="39.0" layoutY="93.0" text="Order Id :">
+         <font>
+            <Font name="Monospaced Bold" size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="508.0" layoutY="131.0" text="Customer Id :">
+         <font>
+            <Font name="Monospaced Bold" size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="96.0" layoutY="156.0" text="Enter Customer Details.." textFill="#1b52d4">
+         <font>
+            <Font name="Monospaced Bold" size="15.0" />
+         </font>
+      </Label>
+      <JFXTextField fx:id="txtCusName" labelFloat="true" layoutX="117.0" layoutY="195.0" onAction="#slipToContact" prefHeight="25.0" prefWidth="247.0" promptText="Name">
+         <font>
+            <Font size="14.0" />
+         </font></JFXTextField>
+      <JFXTextField fx:id="txtAddress" labelFloat="true" layoutX="117.0" layoutY="255.0" onAction="#slipToEmail" prefHeight="25.0" prefWidth="247.0" promptText="Address">
+         <font>
+            <Font size="14.0" />
+         </font></JFXTextField>
+      <JFXTextField fx:id="txtCusContact" labelFloat="true" layoutX="493.0" layoutY="195.0" onAction="#slipToAddress" prefHeight="25.0" prefWidth="247.0" promptText="Contact">
+         <font>
+            <Font size="13.0" />
+         </font></JFXTextField>
+      <JFXTextField fx:id="txtEmail" labelFloat="true" layoutX="493.0" layoutY="255.0" onAction="#slipToCmbId" prefHeight="25.0" prefWidth="247.0" promptText="Email">
+         <font>
+            <Font size="14.0" />
+         </font></JFXTextField>
+      <Label layoutX="702.0" layoutY="43.0" text="Date :">
+         <font>
+            <Font name="Monospaced Bold" size="14.0" />
+         </font>
+      </Label>
+      <TableView fx:id="tblRoom" layoutX="36.0" layoutY="416.0" prefHeight="84.0" prefWidth="337.0">
+         <columns>
+            <TableColumn fx:id="clmType" prefWidth="100.0" text="Room Type" />
+            <TableColumn fx:id="clmAc" prefWidth="125.0" text="AC or Non AC" />
+            <TableColumn fx:id="clmPrice" prefWidth="123.66668701171875" text="Price per Day" />
+         </columns>
+      </TableView>
+      <Label layoutX="68.0" layoutY="329.0" text="Room Id :">
+         <font>
+            <Font name="Monospaced Bold" size="15.0" />
+         </font>
+      </Label>
+      <JFXComboBox fx:id="cmbRoomId" layoutX="200.0" layoutY="317.0" onAction="#roomIdOnAction" prefHeight="25.0" prefWidth="82.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></JFXComboBox>
+      <JFXButton fx:id="btnPlaceOrder" layoutX="740.0" layoutY="679.0" onAction="#orderPlaceOnAction" style="-fx-background-color: #0984e3; -fx-background-radius: 8;" text="Place Order" textFill="WHITE">
+         <font>
+            <Font name="Monospaced Regular" size="16.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <Label layoutX="493.0" layoutY="351.0" text="Package Id :">
+         <font>
+            <Font name="Monospaced Bold" size="15.0" />
+         </font>
+      </Label>
+      <JFXComboBox fx:id="cmbPkgId" layoutX="640.0" layoutY="348.0" onAction="#loadPkgOnAction" prefHeight="25.0" prefWidth="82.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></JFXComboBox>
+      <TableView fx:id="tblPkg" layoutX="447.0" layoutY="416.0" prefHeight="84.0" prefWidth="407.0">
+         <columns>
+            <TableColumn fx:id="clmPkgName" prefWidth="73.66668701171875" text="Name" />
+            <TableColumn fx:id="clmPkgPrice" prefWidth="92.33331298828125" text="price" />
+            <TableColumn fx:id="clmInclude" prefWidth="239.0" text="Includes" />
+         </columns>
+      </TableView>
+      <Label layoutX="346.0" layoutY="36.0" text="New Booking" textFill="#1736a5">
+         <font>
+            <Font name="Monospaced Bold" size="25.0" />
+         </font>
+      </Label>
+      <Label layoutX="59.0" layoutY="531.0" text="Reg No :">
+         <font>
+            <Font name="Monospaced Bold" size="15.0" />
+         </font>
+      </Label>
+      <JFXComboBox fx:id="cmbBikeId" layoutX="145.0" layoutY="524.0" onAction="#loadRegNoOnAction" prefHeight="25.0" prefWidth="100.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></JFXComboBox>
+      <TableView fx:id="tblBike" layoutX="48.0" layoutY="619.0" prefHeight="84.0" prefWidth="200.0">
+         <columns>
+            <TableColumn fx:id="clmModel" prefWidth="97.66668701171875" text="Model" />
+            <TableColumn fx:id="clmBikePrice" prefWidth="101.33331298828125" text="Price per Day" />
+         </columns>
+      </TableView>
+      <Label layoutX="429.0" layoutY="559.0" text="Meal Details">
+         <font>
+            <Font name="Monospaced Bold" size="15.0" />
+         </font>
+      </Label>
+      <TableView fx:id="tblMeal" layoutX="311.0" layoutY="602.0" prefHeight="113.0" prefWidth="321.0">
+         <columns>
+            <TableColumn fx:id="clmMealName" prefWidth="106.33331298828125" text="Name" />
+            <TableColumn fx:id="clmMealPrice" prefWidth="100.66668701171875" text="Price" />
+            <TableColumn fx:id="clmMealTime" prefWidth="113.3333740234375" text="Available Time" />
+         </columns>
+      </TableView>
+      <Label layoutX="690.0" layoutY="566.0" text="Total :">
+         <font>
+            <Font name="Monospaced Bold" size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="59.0" layoutY="580.0" text="Day Count :">
+         <font>
+            <Font name="Monospaced Bold" size="15.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtDayCount" layoutX="167.0" layoutY="577.0" onAction="#slipToCash" prefHeight="25.0" prefWidth="60.0" />
+      <Label layoutX="59.0" layoutY="373.0" text="Day Count :">
+         <font>
+            <Font name="Monospaced Bold" size="15.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtRoomDayCount" layoutX="174.0" layoutY="370.0" onAction="#slipToCmbPkg" prefHeight="25.0" prefWidth="60.0" />
+      <Label layoutX="690.0" layoutY="602.0" text="Cash :">
+         <font>
+            <Font name="Monospaced Bold" size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="677.0" layoutY="635.0" text="Balance :">
+         <font>
+            <Font name="Monospaced Bold" size="15.0" />
+         </font>
+      </Label>
+      <Label fx:id="txtDate" layoutX="759.0" layoutY="43.0">
+         <font>
+            <Font name="Monospaced Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="txtTotal" layoutX="765.0" layoutY="566.0">
+         <font>
+            <Font name="Monospaced Bold" size="15.0" />
+         </font>
+      </Label>
+      <Label fx:id="txtBalance" layoutX="781.0" layoutY="635.0">
+         <font>
+            <Font name="Monospaced Bold" size="15.0" />
+         </font>
+      </Label>
+      <JFXTextField fx:id="txtCash" layoutX="772.0" layoutY="597.0" onAction="#calBalance" prefHeight="29.0" prefWidth="82.0">
+         <font>
+            <Font name="Monospaced Bold" size="15.0" />
+         </font>
+      </JFXTextField>
+      <Text fx:id="txtCusId" layoutX="629.0" layoutY="145.0" strokeType="OUTSIDE" strokeWidth="0.0">
+         <font>
+            <Font name="Monospaced Bold" size="15.0" />
+         </font>
+      </Text>
+      <Label fx:id="txtOrderId" layoutX="145.0" layoutY="93.0">
+         <font>
+            <Font name="Monospaced Bold" size="15.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

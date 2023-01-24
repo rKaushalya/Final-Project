@@ -84,7 +84,7 @@
             </ImageView>
             <ImageView fitHeight="33.0" fitWidth="35.0" layoutX="55.0" layoutY="252.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../assets/logo/icons8-customerDTO-64%20(1).png" />
+                  <Image url="@../assets/logo/icons8-customer-64%20(1).png" />
                </image>
             </ImageView>
             <ImageView fitHeight="33.0" fitWidth="35.0" layoutX="50.0" layoutY="315.0" pickOnBounds="true" preserveRatio="true">
@@ -99,7 +99,7 @@
             </ImageView>
             <ImageView fitHeight="33.0" fitWidth="35.0" layoutX="50.0" layoutY="444.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../assets/logo/icons8-mealDTO-100.png" />
+                  <Image url="@../assets/logo/icons8-meal-100.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="33.0" fitWidth="35.0" layoutX="50.0" layoutY="502.0" pickOnBounds="true" preserveRatio="true">

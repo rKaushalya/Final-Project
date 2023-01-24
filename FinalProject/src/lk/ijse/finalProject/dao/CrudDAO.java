@@ -1,4 +1,4 @@
 package lk.ijse.finalProject.dao;
 
-public class BikeDAOImpl {
+public interface CrudDAO {
 }

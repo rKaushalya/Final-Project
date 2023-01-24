@@ -1,4 +1,6 @@
 package lk.ijse.finalProject.dao.custom;
 
-public interface PackageDAO {
+import lk.ijse.finalProject.dao.SuperDAO;
+
+public interface PackageDAO extends SuperDAO {
 }

@@ -1,4 +1,6 @@
 package lk.ijse.finalProject.dao.custom.impl;
 
-public class OrdersDAOImpl {
+import lk.ijse.finalProject.dao.custom.OrdersDAO;
+
+public class OrdersDAOImpl implements OrdersDAO {
 }

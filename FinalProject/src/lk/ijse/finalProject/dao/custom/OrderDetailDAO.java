@@ -1,4 +1,6 @@
 package lk.ijse.finalProject.dao.custom;
 
-public interface OrderDetailDAO {
+import lk.ijse.finalProject.dao.SuperDAO;
+
+public interface OrderDetailDAO extends SuperDAO {
 }

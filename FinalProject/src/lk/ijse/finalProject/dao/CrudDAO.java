@@ -1,6 +1,14 @@
 package lk.ijse.finalProject.dao;
 
-public interface CrudDAO<T,ID> {
+import java.sql.SQLException;
 
-    boolean add();
+public interface CrudDAO<T,ID> extends SuperDAO{
+
+    boolean add(T entity) throws SQLException, ClassNotFoundException;
+
+    boolean update(T entity) throws SQLException, ClassNotFoundException;
+
+    boolean delete(ID id) throws SQLException, ClassNotFoundException;
+
+    T search(ID id) throws SQLException, ClassNotFoundException;
 }

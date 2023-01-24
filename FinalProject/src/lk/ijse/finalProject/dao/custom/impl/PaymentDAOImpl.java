@@ -1,4 +1,6 @@
 package lk.ijse.finalProject.dao.custom.impl;
 
-public class PaymentDAOImpl {
+import lk.ijse.finalProject.dao.custom.PaymentDAO;
+
+public class PaymentDAOImpl implements PaymentDAO {
 }

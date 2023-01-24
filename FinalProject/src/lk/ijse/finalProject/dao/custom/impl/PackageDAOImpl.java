@@ -1,4 +1,6 @@
 package lk.ijse.finalProject.dao.custom.impl;
 
-public class PackageDAOImpl {
+import lk.ijse.finalProject.dao.custom.PackageDAO;
+
+public class PackageDAOImpl implements PackageDAO {
 }

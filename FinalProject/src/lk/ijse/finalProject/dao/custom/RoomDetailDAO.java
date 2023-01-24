@@ -1,4 +1,6 @@
 package lk.ijse.finalProject.dao.custom;
 
-public interface RoomDetailDAO {
+import lk.ijse.finalProject.dao.SuperDAO;
+
+public interface RoomDetailDAO extends SuperDAO {
 }

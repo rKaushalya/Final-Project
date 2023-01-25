@@ -10,6 +10,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import lk.ijse.finalProject.bo.BOFactory;
+import lk.ijse.finalProject.bo.custom.RoomBo;
 import lk.ijse.finalProject.bo.custom.impl.RoomBOImpl;
 import lk.ijse.finalProject.dto.RoomDTO;
 
@@ -31,6 +33,8 @@ public class RoomManageFormController {
     public TableColumn clmAvailability;
     public TableColumn clmRoomId;
 
+    private final RoomBo roomBo = (RoomBo) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.ROOM);
+
     public void initialize(){
         LocalDate date = LocalDate.now();
         txtDate.setText(String.valueOf(date));
@@ -40,15 +44,10 @@ public class RoomManageFormController {
     }
 
     public void addOnAction(ActionEvent actionEvent) {
-            String id = txtRId.getText();
-            String type = txtType.getText();
-            String ac = txtAc.getText();
-            Double price = Double.valueOf(txtPrice.getText());
-            String availability = txtAvailability.getText();
-
-        RoomDTO roomDTO = new RoomDTO(id,type,ac,price,availability);
         try {
-            boolean isAdded = RoomBOImpl.addRoom(roomDTO);
+            //Refactor
+            boolean isAdded = roomBo.addRoom(new RoomDTO(txtRId.getText(), txtType.getText(), txtAc.getText(),
+                    Double.valueOf(txtPrice.getText()), txtAvailability.getText()));
             if (isAdded){
                 searchAllRoom();
                 setCellValueFactory();
@@ -65,7 +64,8 @@ public class RoomManageFormController {
 
     public void searchOnAction(ActionEvent actionEvent) {
         try {
-            RoomDTO roomDTO = RoomBOImpl.searchRoom(txtRId.getText());
+            //Refactor
+            RoomDTO roomDTO = roomBo.searchRoom(txtRId.getText());
             txtRId.setText(roomDTO.getId());
             txtType.setText(roomDTO.getType());
             txtAc.setText(roomDTO.getAc());
@@ -78,15 +78,10 @@ public class RoomManageFormController {
     }
 
     public void updateOnAction(ActionEvent actionEvent) {
-        String id = txtRId.getText();
-        String type = txtType.getText();
-        String ac = txtAc.getText();
-        Double price = Double.valueOf(txtPrice.getText());
-        String availability = txtAvailability.getText();
-
-        RoomDTO roomDTO = new RoomDTO(id,type,ac,price,availability);
         try {
-            boolean isUpdate = RoomBOImpl.updateRoom(roomDTO);
+            //Refactor
+            boolean isUpdate = roomBo.updateRoom(new RoomDTO(txtRId.getText(), txtType.getText(), txtAc.getText(),
+                    Double.valueOf(txtPrice.getText()), txtAvailability.getText()));
             if (isUpdate){
                 new Alert(Alert.AlertType.CONFIRMATION,"Update Success.!").show();
                 searchAllRoom();
@@ -103,7 +98,8 @@ public class RoomManageFormController {
 
     public void deleteOnAction(ActionEvent actionEvent) {
         try {
-            boolean isDelete = RoomBOImpl.deleteRoom(txtRId.getText());
+            //Refactor
+            boolean isDelete = roomBo.deleteRoom(txtRId.getText());
             if (isDelete){
                 new Alert(Alert.AlertType.CONFIRMATION,"Delete Success").show();
                 searchAllRoom();
@@ -128,8 +124,9 @@ public class RoomManageFormController {
 
     public void searchAllRoom(){
         try {
-            ObservableList<RoomDTO> roomDTOS = RoomBOImpl.searchAvailableRoom();
-            tblTable.setItems(roomDTOS);
+            //Refactor
+            ObservableList<RoomDTO> allRooms = roomBo.getAllRooms();
+            tblTable.setItems(allRooms);
         } catch (Exception exception) {
             exception.printStackTrace();
         }

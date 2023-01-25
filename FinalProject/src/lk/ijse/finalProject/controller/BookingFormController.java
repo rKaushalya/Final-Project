@@ -13,6 +13,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
+import lk.ijse.finalProject.bo.BOFactory;
+import lk.ijse.finalProject.bo.SuperBO;
+import lk.ijse.finalProject.bo.custom.RoomBo;
 import lk.ijse.finalProject.bo.custom.impl.BookingBOImpl;
 import lk.ijse.finalProject.bo.custom.impl.MealBOImpl;
 import lk.ijse.finalProject.bo.custom.impl.RentBikeBOImpl;
@@ -63,6 +66,7 @@ public class BookingFormController {
     public Text txtCusId;
     public Label txtOrderId;
 
+    private final RoomBo roomBO = (RoomBo) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.ROOM);
 
     private Matcher userNameMatcher;
     private Matcher emailMatcher;
@@ -221,7 +225,8 @@ public class BookingFormController {
         String id = String.valueOf(cmbRoomId.getValue());
         ObservableList<RoomDTO> tmlist = FXCollections.observableArrayList();
         try {
-            RoomDTO roomDTO = RoomBOImpl.searchRoom(id);
+            //Refactor
+            RoomDTO roomDTO = roomBO.searchRoom(String.valueOf(cmbRoomId.getValue()));
             price = roomDTO.getPrice();
             tmlist.add(roomDTO);
             tblRoom.setItems(tmlist);

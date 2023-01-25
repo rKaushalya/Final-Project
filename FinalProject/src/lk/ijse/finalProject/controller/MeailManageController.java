@@ -5,6 +5,9 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
+import lk.ijse.finalProject.bo.BOFactory;
+import lk.ijse.finalProject.bo.SuperBO;
+import lk.ijse.finalProject.bo.custom.MealBO;
 import lk.ijse.finalProject.bo.custom.impl.MealBOImpl;
 import lk.ijse.finalProject.dto.MealDTO;
 
@@ -18,6 +21,8 @@ public class MeailManageController {
     public JFXTextField txtTime;
     public JFXTextField txtPrice;
 
+    private final MealBO mealBO = (MealBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.MEAL);
+
     public void initialize(){
         LocalDate date = LocalDate.now();
         txtDate.setText(String.valueOf(date));
@@ -30,9 +35,8 @@ public class MeailManageController {
         Double price = Double.valueOf(txtPrice.getText());
 
         try {
-//            boolean isAdded = MealBOImpl.addMeal(mealDTO);
-            MealBOImpl mealBOImpl = new MealBOImpl();
-            boolean isAdded = mealBOImpl.addMeal(new MealDTO(id, name, availableTime, price));
+            //Refactor
+            boolean isAdded = mealBO.addMeal(new MealDTO(id, name, availableTime, price));
             if (isAdded){
                 new Alert(Alert.AlertType.CONFIRMATION,"Added Success").show();
                 clearText();
@@ -46,7 +50,8 @@ public class MeailManageController {
 
     public void searchOnAction(ActionEvent actionEvent) {
         try {
-            MealDTO mealDTO = MealBOImpl.searchMeal(txtId.getText());
+            //Refactor
+            MealDTO mealDTO = mealBO.searchMeal(txtId.getText());
             txtId.setText(mealDTO.getId());
             txtName.setText(mealDTO.getName());
             txtTime.setText(mealDTO.getAvailableTime());
@@ -62,9 +67,9 @@ public class MeailManageController {
         String availableTime = txtTime.getText();
         Double price = Double.valueOf(txtPrice.getText());
 
-        MealDTO mealDTO = new MealDTO(id,name,availableTime,price);
         try {
-            boolean isUpdate = MealBOImpl.updateMeal(mealDTO);
+            //Refactor
+            boolean isUpdate = mealBO.updateMeal(new MealDTO(id, name, availableTime, price));
             if (isUpdate){
                 new Alert(Alert.AlertType.CONFIRMATION,"Update Success").show();
                 clearText();
@@ -78,7 +83,8 @@ public class MeailManageController {
 
     public void deleteOnAction(ActionEvent actionEvent) {
         try {
-            boolean isDelete = MealBOImpl.deleteMeal(txtId.getText());
+            //Refactor
+            boolean isDelete = mealBO.deleteMeal(txtId.getText());
             if (isDelete){
                 new Alert(Alert.AlertType.CONFIRMATION,"Delete Success").show();
                 clearText();

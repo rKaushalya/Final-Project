@@ -21,29 +21,17 @@ public class MealBOImpl implements MealBO {
         return mealDAO.add(new MealEntity(mealDTO.getId(),mealDTO.getName(),mealDTO.getAvailableTime(),mealDTO.getPrice()));
     }
 
-    public static MealDTO searchMeal(String id) throws SQLException, ClassNotFoundException {
-        String sql = "SELECT * FROM meal WHERE mId=?";
-        ResultSet execute = CrudUtil.execute(sql, id);
-
-        if (execute.next()){
-            return new MealDTO(
-                execute.getString(1),
-                execute.getString(2),
-                execute.getString(3),
-                execute.getDouble(4)
-            );
-        }
-        return null;
+    public MealDTO searchMeal(String id) throws SQLException, ClassNotFoundException {
+        MealEntity mealEntity = mealDAO.search(id);
+        return new MealDTO(mealEntity.getmId(),mealEntity.getName(),mealEntity.getAvailableTime(),mealEntity.getPrice());
     }
 
-    public static boolean updateMeal(MealDTO mealDTO) throws SQLException, ClassNotFoundException {
-        String sql = "UPDATE meal SET name=?, availableTime=?,price=? WHERE mId=?";
-        return CrudUtil.execute(sql, mealDTO.getName(), mealDTO.getAvailableTime(), mealDTO.getPrice(), mealDTO.getId());
+    public boolean updateMeal(MealDTO mealDTO) throws SQLException, ClassNotFoundException {
+       return mealDAO.update(new MealEntity(mealDTO.getId(),mealDTO.getName(), mealDTO.getAvailableTime(), mealDTO.getPrice()));
     }
 
-    public static boolean deleteMeal(String id) throws SQLException, ClassNotFoundException {
-        String sql = "DELETE FROM meal WHERE mId=?";
-        return CrudUtil.execute(sql,id);
+    public boolean deleteMeal(String id) throws SQLException, ClassNotFoundException {
+        return mealDAO.delete(id);
     }
 
     public static ObservableList<MealDTO> searchAllMeal() throws SQLException, ClassNotFoundException {

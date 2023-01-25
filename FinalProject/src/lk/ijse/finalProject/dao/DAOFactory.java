@@ -1,5 +1,6 @@
 package lk.ijse.finalProject.dao;
 
+import lk.ijse.finalProject.dao.custom.RentBikeDetailDAO;
 import lk.ijse.finalProject.dao.custom.impl.*;
 
 public class DAOFactory {
@@ -18,15 +19,13 @@ public class DAOFactory {
     }
 
     public enum DAOTypes {
-        BIKE,CUSTOMER,EMPLOYEE,MEAL,ORDERDETAIL,ORDERS,PACKAGE,PAYMENT,RENTBIKE,RENTBIKEDETAIL,ROOM,ROOMDETAIL,USER
+        CUSTOMER,EMPLOYEE,MEAL,ORDERDETAIL,ORDERS,PACKAGE,PAYMENT,RENTBIKE,RENTBIKEDETAIL,ROOM,ROOMDETAIL,USER,QUERY
     }
 
-   /* public void getDAO(DAOTypes types){
+    public SuperDAO getDAO(DAOTypes types){
         switch (types){
             case CUSTOMER:
                 return new CustomerDAOImpl();
-            case BIKE:
-                return new BikeDAOImpl();
             case MEAL:
                 return new MealDAOImpl();
             case ROOM:
@@ -48,9 +47,11 @@ public class DAOFactory {
             case ORDERDETAIL:
                 return new OrderDetailDAOImpl();
             case RENTBIKEDETAIL:
-                return new RentBikeDAOImpl();
+                return new RentBikeDetailDAOImpl();
+            case QUERY:
+                return new QueryDAOImpl();
             default:
                 return null;
         }
-    }*/
+    }
 }

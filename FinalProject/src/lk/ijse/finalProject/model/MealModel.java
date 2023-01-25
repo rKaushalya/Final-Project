@@ -2,16 +2,23 @@ package lk.ijse.finalProject.model;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import lk.ijse.finalProject.dao.DAOFactory;
+import lk.ijse.finalProject.dao.SuperDAO;
+import lk.ijse.finalProject.dao.custom.MealDAO;
 import lk.ijse.finalProject.dto.MealDTO;
+import lk.ijse.finalProject.entity.MealEntity;
 import lk.ijse.finalProject.utill.CrudUtil;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class MealModel {
-    public static boolean addMeal(MealDTO mealDTO) throws SQLException, ClassNotFoundException {
-        String sql = "INSERT INTO meal VALUES (?,?,?,?)";
-        return CrudUtil.execute(sql, mealDTO.getId(), mealDTO.getName(), mealDTO.getAvailableTime(), mealDTO.getPrice());
+    //apply DI and Loos Coupling
+    //Factory Design Pattern
+    MealDAO mealDAO = (MealDAO) DAOFactory.getDAOFactory().getDAO(DAOFactory.DAOTypes.MEAL);
+
+    public boolean addMeal(MealDTO mealDTO) throws SQLException, ClassNotFoundException {
+        return mealDAO.add(new MealEntity(mealDTO.getId(),mealDTO.getName(),mealDTO.getAvailableTime(),mealDTO.getPrice()));
     }
 
     public static MealDTO searchMeal(String id) throws SQLException, ClassNotFoundException {

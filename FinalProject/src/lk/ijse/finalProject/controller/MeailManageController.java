@@ -29,9 +29,10 @@ public class MeailManageController {
         String availableTime = txtTime.getText();
         Double price = Double.valueOf(txtPrice.getText());
 
-        MealDTO mealDTO = new MealDTO(id,name,availableTime,price);
         try {
-            boolean isAdded = MealModel.addMeal(mealDTO);
+//            boolean isAdded = MealModel.addMeal(mealDTO);
+            MealModel mealModel = new MealModel();
+            boolean isAdded = mealModel.addMeal(new MealDTO(id, name, availableTime, price));
             if (isAdded){
                 new Alert(Alert.AlertType.CONFIRMATION,"Added Success").show();
                 clearText();

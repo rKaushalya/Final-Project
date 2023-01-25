@@ -5,6 +5,9 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
+import lk.ijse.finalProject.bo.BOFactory;
+import lk.ijse.finalProject.bo.SuperBO;
+import lk.ijse.finalProject.bo.custom.EmployeeBO;
 import lk.ijse.finalProject.dto.EmployeeDTO;
 import lk.ijse.finalProject.bo.custom.impl.EmployeeBOImpl;
 
@@ -19,27 +22,23 @@ public class EmployeeManageFormController {
     public JFXTextField txtNic;
     public JFXTextField txtContact;
 
-    public void initialize(){
+    private final EmployeeBO empBO = (EmployeeBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.EMPLOYEE);
+
+    public void initialize() {
         LocalDate date = LocalDate.now();
         txtDate.setText(String.valueOf(date));
     }
 
     public void addOnAction(ActionEvent actionEvent) {
-        String id = txtId.getText();
-        String name = txtName.getText();
-        String address = txtAddress.getText();
-        String contact = txtContact.getText();
-        String nic = txtNic.getText();
-
-        EmployeeDTO employeeDTO = new EmployeeDTO(id,name,address,contact,nic);
-
         try {
-            boolean isAdded = EmployeeBOImpl.addEmployee(employeeDTO);
-            if (isAdded){
+           //Refactor
+            boolean isAdded = empBO.addEmployee(new EmployeeDTO(txtId.getText(), txtName.getText(), txtAddress.getText(),
+                    txtContact.getText(), txtNic.getText()));
+            if (isAdded) {
                 clearText();
-                new Alert(Alert.AlertType.CONFIRMATION,"Success").show();
-            }else{
-                new Alert(Alert.AlertType.ERROR,"Something Wrong").show();
+                new Alert(Alert.AlertType.CONFIRMATION, "Success").show();
+            } else {
+                new Alert(Alert.AlertType.ERROR, "Something Wrong").show();
             }
         } catch (Exception exception) {
             System.out.println(exception);
@@ -47,9 +46,9 @@ public class EmployeeManageFormController {
     }
 
     public void searchOnAction(ActionEvent actionEvent) {
-        String id = txtId.getText();
         try {
-            EmployeeDTO employeeDTO = EmployeeBOImpl.searchEmployee(id);
+            //Refactor
+            EmployeeDTO employeeDTO = empBO.searchEmployee(txtId.getText());
             txtName.setText(employeeDTO.getName());
             txtAddress.setText(employeeDTO.getAddress());
             txtContact.setText(employeeDTO.getContact());
@@ -61,41 +60,37 @@ public class EmployeeManageFormController {
     }
 
     public void updateOnAction(ActionEvent actionEvent) {
-        String id = txtId.getText();
-        String name = txtName.getText();
-        String address = txtAddress.getText();
-        String contact = txtContact.getText();
-        String nic = txtNic.getText();
-
-        EmployeeDTO employeeDTO = new EmployeeDTO(id,name,address,contact,nic);
         try {
-            boolean isUpdate = EmployeeBOImpl.updateEmployee(employeeDTO);
-            if (isUpdate){
+            //Refactor
+            boolean isUpdate = empBO.updateEmployee(new EmployeeDTO(txtId.getText(), txtName.getText(),
+                    txtAddress.getText(), txtContact.getText(), txtNic.getText()));
+            if (isUpdate) {
                 clearText();
-                new Alert(Alert.AlertType.CONFIRMATION,"Update success").show();
-            }else{
-                new Alert(Alert.AlertType.ERROR,"Something Wrong.!").show();
-            }
-        } catch (Exception exception) {
-            System.out.println(employeeDTO);
-        }
-    }
-
-    public void deleteOnAction(ActionEvent actionEvent) {
-        try {
-            boolean isDelete = EmployeeBOImpl.deleteEmployee(txtId.getText());
-            if(isDelete){
-                clearText();
-                new Alert(Alert.AlertType.CONFIRMATION,"Delete success").show();
-            }else{
-                new Alert(Alert.AlertType.ERROR,"Something Wrong.!").show();
+                new Alert(Alert.AlertType.CONFIRMATION, "Update success").show();
+            } else {
+                new Alert(Alert.AlertType.ERROR, "Something Wrong.!").show();
             }
         } catch (Exception exception) {
             System.out.println(exception);
         }
     }
 
-    private void clearText(){
+    public void deleteOnAction(ActionEvent actionEvent) {
+        try {
+            //Refactor
+            boolean isDelete = empBO.deleteEmployee(txtId.getText());
+            if (isDelete) {
+                clearText();
+                new Alert(Alert.AlertType.CONFIRMATION, "Delete success").show();
+            } else {
+                new Alert(Alert.AlertType.ERROR, "Something Wrong.!").show();
+            }
+        } catch (Exception exception) {
+            System.out.println(exception);
+        }
+    }
+
+    private void clearText() {
         txtId.clear();
         txtName.clear();
         txtAddress.clear();

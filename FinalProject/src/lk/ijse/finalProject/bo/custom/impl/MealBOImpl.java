@@ -34,6 +34,7 @@ public class MealBOImpl implements MealBO {
         return mealDAO.delete(id);
     }
 
+    //remove soon
     public static ObservableList<MealDTO> searchAllMeal() throws SQLException, ClassNotFoundException {
         ObservableList<MealDTO> tmlist = FXCollections.observableArrayList();
         String sql = "SELECT * FROM meal";

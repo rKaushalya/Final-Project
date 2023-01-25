@@ -2,6 +2,7 @@ package lk.ijse.finalProject.bo.custom.impl;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import lk.ijse.finalProject.bo.custom.MealBO;
 import lk.ijse.finalProject.dao.DAOFactory;
 import lk.ijse.finalProject.dao.custom.MealDAO;
 import lk.ijse.finalProject.dto.MealDTO;
@@ -11,7 +12,7 @@ import lk.ijse.finalProject.utill.CrudUtil;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class MealBOImpl {
+public class MealBOImpl implements MealBO {
     //apply DI and Loos Coupling
     //Factory Design Pattern
     MealDAO mealDAO = (MealDAO) DAOFactory.getDAOFactory().getDAO(DAOFactory.DAOTypes.MEAL);

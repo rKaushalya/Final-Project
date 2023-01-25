@@ -1,4 +1,6 @@
 package lk.ijse.finalProject.bo.custom;
 
-public interface RentBikeBO {
+import lk.ijse.finalProject.bo.SuperBO;
+
+public interface RentBikeBO extends SuperBO {
 }

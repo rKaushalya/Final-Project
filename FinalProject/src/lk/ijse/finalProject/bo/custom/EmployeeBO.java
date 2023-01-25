@@ -1,4 +1,6 @@
 package lk.ijse.finalProject.bo.custom;
 
-public interface EmployeeBO {
+import lk.ijse.finalProject.bo.SuperBO;
+
+public interface EmployeeBO extends SuperBO {
 }

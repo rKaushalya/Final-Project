@@ -1,4 +1,6 @@
 package lk.ijse.finalProject.bo.custom;
 
-public interface BookingBO {
+import lk.ijse.finalProject.bo.SuperBO;
+
+public interface BookingBO extends SuperBO {
 }

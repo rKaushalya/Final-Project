@@ -1,4 +1,6 @@
 package lk.ijse.finalProject.bo.custom;
 
-public interface ForgetPasswordBO {
+import lk.ijse.finalProject.bo.SuperBO;
+
+public interface ForgetPasswordBO extends SuperBO {
 }

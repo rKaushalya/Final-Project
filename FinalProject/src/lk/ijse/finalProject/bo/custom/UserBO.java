@@ -2,5 +2,5 @@ package lk.ijse.finalProject.bo.custom;
 
 import lk.ijse.finalProject.bo.SuperBO;
 
-public interface RegisterBO extends SuperBO {
+public interface UserBO extends SuperBO {
 }

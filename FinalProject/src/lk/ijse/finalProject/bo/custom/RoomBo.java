@@ -1,4 +1,6 @@
 package lk.ijse.finalProject.bo.custom;
 
-public interface RoomBo {
+import lk.ijse.finalProject.bo.SuperBO;
+
+public interface RoomBo extends SuperBO {
 }

@@ -1,12 +1,13 @@
 package lk.ijse.finalProject.bo.custom.impl;
 
+import lk.ijse.finalProject.bo.custom.EmployeeBO;
 import lk.ijse.finalProject.dto.EmployeeDTO;
 import lk.ijse.finalProject.utill.CrudUtil;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class EmployeeBOImpl {
+public class EmployeeBOImpl implements EmployeeBO {
     public static boolean addEmployee(EmployeeDTO employeeDTO) throws SQLException, ClassNotFoundException {
         String sql = "INSERT INTO employee VALUES (?,?,?,?,?)";
         return CrudUtil.execute(sql, employeeDTO.getId(), employeeDTO.getName(), employeeDTO.getAddress(), employeeDTO.getContact(), employeeDTO.getNic());

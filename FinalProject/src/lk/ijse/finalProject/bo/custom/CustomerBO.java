@@ -1,4 +1,6 @@
 package lk.ijse.finalProject.bo.custom;
 
-public interface CustomerBO {
+import lk.ijse.finalProject.bo.SuperBO;
+
+public interface CustomerBO extends SuperBO {
 }

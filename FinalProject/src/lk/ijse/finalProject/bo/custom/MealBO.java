@@ -1,4 +1,6 @@
 package lk.ijse.finalProject.bo.custom;
 
-public interface MealBO {
+import lk.ijse.finalProject.bo.SuperBO;
+
+public interface MealBO extends SuperBO {
 }

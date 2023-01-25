@@ -1,5 +1,6 @@
 package lk.ijse.finalProject.bo.custom.impl;
 
+import lk.ijse.finalProject.bo.custom.BookingBO;
 import lk.ijse.finalProject.db.DBConnection;
 import lk.ijse.finalProject.dto.CustomerDTO;
 import lk.ijse.finalProject.dto.OrderDetailDTO;
@@ -10,7 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class BookingBOImpl {
+public class BookingBOImpl implements BookingBO {
     public static ArrayList<String> loadRegNo() throws SQLException, ClassNotFoundException {
         String sql = "SELECT regNo FROM rentbike WHERE availability='YES' || 'yes'";
         ResultSet execute = CrudUtil.execute(sql);

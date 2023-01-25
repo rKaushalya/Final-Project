@@ -1,5 +1,6 @@
 package lk.ijse.finalProject.bo.custom.impl;
 
+import lk.ijse.finalProject.bo.custom.RentBikeBO;
 import lk.ijse.finalProject.db.DBConnection;
 import lk.ijse.finalProject.dto.BikeDTO;
 import lk.ijse.finalProject.dto.CustomerDTO;
@@ -9,7 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class RentBikeBOImpl {
+public class RentBikeBOImpl implements RentBikeBO {
     public static boolean addBike(BikeDTO bikeDTO) throws SQLException, ClassNotFoundException {
         String sql = "INSERT INTO rentbike VALUES (?,?,?,?)";
         return CrudUtil.execute(sql, bikeDTO.getRegNo(), bikeDTO.getModel(), bikeDTO.getAvailability(), bikeDTO.getPricePerDay());

@@ -2,13 +2,14 @@ package lk.ijse.finalProject.bo.custom.impl;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import lk.ijse.finalProject.bo.custom.CustomerBO;
 import lk.ijse.finalProject.dto.CustomerDTO;
 import lk.ijse.finalProject.utill.CrudUtil;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class CustomerBOImpl {
+public class CustomerBOImpl implements CustomerBO {
     public static CustomerDTO searchCustomer(String id) throws SQLException, ClassNotFoundException {
         String sql = "SELECT * FROM customer WHERE cId=?";
         ResultSet execute = CrudUtil.execute(sql, id);

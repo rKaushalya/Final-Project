@@ -2,6 +2,7 @@ package lk.ijse.finalProject.bo.custom.impl;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import lk.ijse.finalProject.bo.custom.RoomBo;
 import lk.ijse.finalProject.dto.RoomDTO;
 import lk.ijse.finalProject.utill.CrudUtil;
 
@@ -9,7 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class RoomBOImpl {
+public class RoomBOImpl implements RoomBo {
     public static boolean addRoom(RoomDTO roomDTO) throws SQLException, ClassNotFoundException {
         String sql = "INSERT INTO room VALUES (?,?,?,?,?)";
         return CrudUtil.execute(sql, roomDTO.getId(), roomDTO.getType(), roomDTO.getAc(), roomDTO.getPrice(), roomDTO.getAvailability());

@@ -11,7 +11,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import lk.ijse.finalProject.dto.CustomerDTO;
-import lk.ijse.finalProject.model.CusromerModel;
+import lk.ijse.finalProject.bo.custom.impl.CustomerBOImpl;
 
 import java.time.LocalDate;
 
@@ -42,7 +42,7 @@ public class ViewCustomerFormController {
     public void searchOnAction(ActionEvent actionEvent){
         String id = txtId.getText();
         try {
-            CustomerDTO customerDTO = CusromerModel.searchCustomer(id);
+            CustomerDTO customerDTO = CustomerBOImpl.searchCustomer(id);
                 txtId.setText(customerDTO.getId());
                 txtName.setText(customerDTO.getName());
                 txtAddress.setText(customerDTO.getAddress());
@@ -68,7 +68,7 @@ public class ViewCustomerFormController {
             customerDTO.setEmail(email);
 
         try {
-            boolean isUpdated = CusromerModel.updateCustomer(customerDTO);
+            boolean isUpdated = CustomerBOImpl.updateCustomer(customerDTO);
             if (isUpdated){
                 loadCusData();
                 setCellValueFactory();
@@ -84,7 +84,7 @@ public class ViewCustomerFormController {
     public void deleteOnAction(ActionEvent actionEvent) {
         String id = txtId.getText();
         try {
-            boolean isDelete = CusromerModel.deleteCustomer(id);
+            boolean isDelete = CustomerBOImpl.deleteCustomer(id);
             if (isDelete){
                 new Alert(Alert.AlertType.CONFIRMATION,"Deleted.!").show();
                 loadCusData();
@@ -107,7 +107,7 @@ public class ViewCustomerFormController {
 
     public void loadCusData(){
         try {
-            ObservableList<CustomerDTO> customerDTOS = CusromerModel.searchAllCustomer();
+            ObservableList<CustomerDTO> customerDTOS = CustomerBOImpl.searchAllCustomer();
             tblCusDetail.setItems(customerDTOS);
         } catch (Exception exception) {
             System.out.println(exception);

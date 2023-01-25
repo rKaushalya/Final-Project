@@ -52,7 +52,7 @@ public class RentBikeEntity {
     public String toString() {
         return "RentBikeEntity{" +
                 "regNo='" + regNo + '\'' +
-                ", model='" + model + '\'' +
+                ", bo='" + model + '\'' +
                 ", availability='" + availability + '\'' +
                 ", pricePerDay=" + pricePerDay +
                 '}';

@@ -6,13 +6,12 @@ import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
 import javafx.scene.layout.AnchorPane;
-import lk.ijse.finalProject.model.UserModel;
+import lk.ijse.finalProject.bo.custom.impl.UserBOImpl;
 import lk.ijse.finalProject.utill.Navigation;
 import lk.ijse.finalProject.utill.Routes;
 
 import java.io.IOException;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 
 public class UserFormController {
     public AnchorPane pane;
@@ -31,7 +30,7 @@ public class UserFormController {
 
        // Navigation.navigate(Routes.CUSTOMER, pane);
         try {
-            ResultSet resultSet = UserModel.checkUser(userName, password);
+            ResultSet resultSet = UserBOImpl.checkUser(userName, password);
             if(resultSet.next()){
                 if (resultSet.getString(5).equals("Admin")) {
                     Navigation.navigate(Routes.CUSTOMER, pane);

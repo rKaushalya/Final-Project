@@ -10,7 +10,7 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Paint;
-import lk.ijse.finalProject.model.RegisterModel;
+import lk.ijse.finalProject.bo.custom.impl.RegisterBOImpl;
 import lk.ijse.finalProject.dto.UserDTO;
 import lk.ijse.finalProject.utill.Navigation;
 import lk.ijse.finalProject.utill.Routes;
@@ -53,7 +53,7 @@ public class RegisterFormController {
         userDTO.setEmail(txtEmail.getText());
         userDTO.setRole(String.valueOf(cmbRole.getValue()));
         try {
-            boolean isRegister = RegisterModel.register(userDTO);
+            boolean isRegister = RegisterBOImpl.register(userDTO);
             if (isRegister){
                 clearText();
                 new Alert(Alert.AlertType.CONFIRMATION,"added Success.!").show();

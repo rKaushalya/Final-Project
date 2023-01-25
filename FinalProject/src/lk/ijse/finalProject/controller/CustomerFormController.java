@@ -9,15 +9,13 @@ import javafx.scene.chart.PieChart;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
-import lk.ijse.finalProject.model.BikeModel;
-import lk.ijse.finalProject.model.CusromerModel;
-import lk.ijse.finalProject.model.EmployeeModel;
-import lk.ijse.finalProject.model.RoomModel;
+import lk.ijse.finalProject.bo.custom.impl.RentBikeBOImpl;
+import lk.ijse.finalProject.bo.custom.impl.EmployeeBOImpl;
+import lk.ijse.finalProject.bo.custom.impl.RoomBOImpl;
 import lk.ijse.finalProject.utill.Navigation;
 import lk.ijse.finalProject.utill.Routes;
 
 import java.io.IOException;
-import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -58,7 +56,7 @@ public class CustomerFormController {
 
     private void loadRoomCount(){
         try {
-            int count = BikeModel.bikeCount();
+            int count = RentBikeBOImpl.bikeCount();
             btnCusCount.setText(String.valueOf(count));
         } catch (Exception exception) {
             System.out.println(exception);
@@ -67,7 +65,7 @@ public class CustomerFormController {
 
     private void loadAllRoom(){
         try {
-            roomCount = RoomModel.loadRoomCount();
+            roomCount = RoomBOImpl.loadRoomCount();
             btnRoomCount.setText(String.valueOf(roomCount));
         } catch (Exception exception) {
             System.out.println(exception);
@@ -76,7 +74,7 @@ public class CustomerFormController {
 
     private void notAvailableRoom(){
         try {
-            notAvailableRoomCount = RoomModel.loadNotAvailableRoomCount();
+            notAvailableRoomCount = RoomBOImpl.loadNotAvailableRoomCount();
         } catch (Exception exception) {
             System.out.println(exception);
         }
@@ -84,7 +82,7 @@ public class CustomerFormController {
 
     private void loadEmployeeCount(){
         try {
-            int empCount = EmployeeModel.loadAllEmployee();
+            int empCount = EmployeeBOImpl.loadAllEmployee();
             btnEmployeeCount.setText(String.valueOf(empCount));
         } catch (Exception exception) {
             System.out.println(exception);

@@ -10,7 +10,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
-import lk.ijse.finalProject.model.RoomModel;
+import lk.ijse.finalProject.bo.custom.impl.RoomBOImpl;
 import lk.ijse.finalProject.dto.RoomDTO;
 
 import java.time.LocalDate;
@@ -48,7 +48,7 @@ public class RoomManageFormController {
 
         RoomDTO roomDTO = new RoomDTO(id,type,ac,price,availability);
         try {
-            boolean isAdded = RoomModel.addRoom(roomDTO);
+            boolean isAdded = RoomBOImpl.addRoom(roomDTO);
             if (isAdded){
                 searchAllRoom();
                 setCellValueFactory();
@@ -65,7 +65,7 @@ public class RoomManageFormController {
 
     public void searchOnAction(ActionEvent actionEvent) {
         try {
-            RoomDTO roomDTO = RoomModel.searchRoom(txtRId.getText());
+            RoomDTO roomDTO = RoomBOImpl.searchRoom(txtRId.getText());
             txtRId.setText(roomDTO.getId());
             txtType.setText(roomDTO.getType());
             txtAc.setText(roomDTO.getAc());
@@ -86,7 +86,7 @@ public class RoomManageFormController {
 
         RoomDTO roomDTO = new RoomDTO(id,type,ac,price,availability);
         try {
-            boolean isUpdate = RoomModel.updateRoom(roomDTO);
+            boolean isUpdate = RoomBOImpl.updateRoom(roomDTO);
             if (isUpdate){
                 new Alert(Alert.AlertType.CONFIRMATION,"Update Success.!").show();
                 searchAllRoom();
@@ -103,7 +103,7 @@ public class RoomManageFormController {
 
     public void deleteOnAction(ActionEvent actionEvent) {
         try {
-            boolean isDelete = RoomModel.deleteRoom(txtRId.getText());
+            boolean isDelete = RoomBOImpl.deleteRoom(txtRId.getText());
             if (isDelete){
                 new Alert(Alert.AlertType.CONFIRMATION,"Delete Success").show();
                 searchAllRoom();
@@ -128,7 +128,7 @@ public class RoomManageFormController {
 
     public void searchAllRoom(){
         try {
-            ObservableList<RoomDTO> roomDTOS = RoomModel.searchAvailableRoom();
+            ObservableList<RoomDTO> roomDTOS = RoomBOImpl.searchAvailableRoom();
             tblTable.setItems(roomDTOS);
         } catch (Exception exception) {
             exception.printStackTrace();

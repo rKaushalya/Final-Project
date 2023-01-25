@@ -13,7 +13,10 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
-import lk.ijse.finalProject.model.*;
+import lk.ijse.finalProject.bo.custom.impl.BookingBOImpl;
+import lk.ijse.finalProject.bo.custom.impl.MealBOImpl;
+import lk.ijse.finalProject.bo.custom.impl.RentBikeBOImpl;
+import lk.ijse.finalProject.bo.custom.impl.RoomBOImpl;
 import lk.ijse.finalProject.dto.*;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.view.JasperViewer;
@@ -88,7 +91,7 @@ public class BookingFormController {
 
     private void loadOrderId(){
         try {
-            String orderId = BookingModel.generateNextOrderId();
+            String orderId = BookingBOImpl.generateNextOrderId();
             txtOrderId.setText(orderId);
         } catch (Exception exception) {
             System.out.println(exception);
@@ -97,7 +100,7 @@ public class BookingFormController {
 
     private void loadNextCusId(){
         try {
-            String customerId = BookingModel.generateNextCusId();
+            String customerId = BookingBOImpl.generateNextCusId();
             txtCusId.setText(customerId);
         } catch (Exception exception) {
             System.out.println(exception);
@@ -124,7 +127,7 @@ public class BookingFormController {
                 CustomerDTO customerDTO = new CustomerDTO(cusId,name,address,contact,email);
                 OrderDetailDTO orderDetailDTO = new OrderDetailDTO(orderId,date,roomDayCount,rId,total,receverdAmount,balance);
 
-                    boolean isRentRoom = BookingModel.rentRoom(customerDTO, orderDetailDTO);
+                    boolean isRentRoom = BookingBOImpl.rentRoom(customerDTO, orderDetailDTO);
                     if (isRentRoom){
                         new Alert(Alert.AlertType.CONFIRMATION,"Room Rent Success").show();
                         printBill();
@@ -158,7 +161,7 @@ public class BookingFormController {
                 OrderDetailDTO orderDetailDTO = new OrderDetailDTO(orderId, date, roomDayCount, rId, pkgId, regNo, bikeDayCount,
                         total, receverdAmount, balance);
 
-                boolean isPlaceOrder = BookingModel.placeOrder(customerDTO, orderDetailDTO);
+                boolean isPlaceOrder = BookingBOImpl.placeOrder(customerDTO, orderDetailDTO);
                 if (isPlaceOrder) {
                     clearPane();
                     new Alert(Alert.AlertType.CONFIRMATION, "OrderPlace Success").show();
@@ -175,7 +178,7 @@ public class BookingFormController {
     private void loadRegNo(){
         try {
             ObservableList<String> observableList = FXCollections.observableArrayList();
-            ArrayList<String> arrayList = BookingModel.loadRegNo();
+            ArrayList<String> arrayList = BookingBOImpl.loadRegNo();
 
             for (String regNo : arrayList){
                 observableList.add(regNo);
@@ -189,7 +192,7 @@ public class BookingFormController {
     private void loadRoomId(){
         ObservableList<String> observableList = FXCollections.observableArrayList();
         try {
-            ArrayList<String> arrayList = RoomModel.loadRoomId();
+            ArrayList<String> arrayList = RoomBOImpl.loadRoomId();
 
             for (String id : arrayList){
                 observableList.add(id);
@@ -203,7 +206,7 @@ public class BookingFormController {
     private void loadPkgId(){
         ObservableList<String> observableList = FXCollections.observableArrayList();
         try {
-            ArrayList<String> arrayList = BookingModel.loadPkgId();
+            ArrayList<String> arrayList = BookingBOImpl.loadPkgId();
 
             for (String id : arrayList){
                 observableList.add(id);
@@ -218,7 +221,7 @@ public class BookingFormController {
         String id = String.valueOf(cmbRoomId.getValue());
         ObservableList<RoomDTO> tmlist = FXCollections.observableArrayList();
         try {
-            RoomDTO roomDTO = RoomModel.searchRoom(id);
+            RoomDTO roomDTO = RoomBOImpl.searchRoom(id);
             price = roomDTO.getPrice();
             tmlist.add(roomDTO);
             tblRoom.setItems(tmlist);
@@ -233,7 +236,7 @@ public class BookingFormController {
         clmType.setCellValueFactory(new PropertyValueFactory("type"));
         clmAc.setCellValueFactory(new PropertyValueFactory("ac"));
         clmPrice.setCellValueFactory(new PropertyValueFactory("price"));
-        clmModel.setCellValueFactory(new PropertyValueFactory("model"));
+        clmModel.setCellValueFactory(new PropertyValueFactory("bo"));
         clmBikePrice.setCellValueFactory(new PropertyValueFactory("pricePerDay"));
         clmPkgName.setCellValueFactory(new PropertyValueFactory("name"));
         clmPkgPrice.setCellValueFactory(new PropertyValueFactory("price"));
@@ -247,7 +250,7 @@ public class BookingFormController {
         String regNo = String.valueOf(cmbBikeId.getValue());
         ObservableList<BikeDTO> load = FXCollections.observableArrayList();
         try {
-            BikeDTO bikeDTO = BikeModel.searchBikeTbl(regNo);
+            BikeDTO bikeDTO = RentBikeBOImpl.searchBikeTbl(regNo);
             price= bikeDTO.getPricePerDay();
             load.add(bikeDTO);
             tblBike.setItems(load);
@@ -261,7 +264,7 @@ public class BookingFormController {
         String regNo = String.valueOf(cmbPkgId.getValue());
         ObservableList<PackagesDTO> tmlist = FXCollections.observableArrayList();
         try {
-            PackagesDTO packagesDTO = BookingModel.searchPkg(regNo);
+            PackagesDTO packagesDTO = BookingBOImpl.searchPkg(regNo);
             price = packagesDTO.getPrice();
             tmlist.add(packagesDTO);
             tblPkg.setItems(tmlist);
@@ -279,7 +282,7 @@ public class BookingFormController {
 
     private void searchMeal(){
         try {
-            ObservableList<MealDTO> mealDTOS = MealModel.searchAllMeal();
+            ObservableList<MealDTO> mealDTOS = MealBOImpl.searchAllMeal();
             tblMeal.setItems(mealDTOS);
         } catch (Exception exception) {
             System.out.println(exception);

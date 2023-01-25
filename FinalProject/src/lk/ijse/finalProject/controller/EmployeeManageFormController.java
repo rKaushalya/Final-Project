@@ -6,7 +6,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import lk.ijse.finalProject.dto.EmployeeDTO;
-import lk.ijse.finalProject.model.EmployeeModel;
+import lk.ijse.finalProject.bo.custom.impl.EmployeeBOImpl;
 
 import java.time.LocalDate;
 
@@ -34,7 +34,7 @@ public class EmployeeManageFormController {
         EmployeeDTO employeeDTO = new EmployeeDTO(id,name,address,contact,nic);
 
         try {
-            boolean isAdded = EmployeeModel.addEmployee(employeeDTO);
+            boolean isAdded = EmployeeBOImpl.addEmployee(employeeDTO);
             if (isAdded){
                 clearText();
                 new Alert(Alert.AlertType.CONFIRMATION,"Success").show();
@@ -49,7 +49,7 @@ public class EmployeeManageFormController {
     public void searchOnAction(ActionEvent actionEvent) {
         String id = txtId.getText();
         try {
-            EmployeeDTO employeeDTO = EmployeeModel.searchEmployee(id);
+            EmployeeDTO employeeDTO = EmployeeBOImpl.searchEmployee(id);
             txtName.setText(employeeDTO.getName());
             txtAddress.setText(employeeDTO.getAddress());
             txtContact.setText(employeeDTO.getContact());
@@ -69,7 +69,7 @@ public class EmployeeManageFormController {
 
         EmployeeDTO employeeDTO = new EmployeeDTO(id,name,address,contact,nic);
         try {
-            boolean isUpdate = EmployeeModel.updateEmployee(employeeDTO);
+            boolean isUpdate = EmployeeBOImpl.updateEmployee(employeeDTO);
             if (isUpdate){
                 clearText();
                 new Alert(Alert.AlertType.CONFIRMATION,"Update success").show();
@@ -83,7 +83,7 @@ public class EmployeeManageFormController {
 
     public void deleteOnAction(ActionEvent actionEvent) {
         try {
-            boolean isDelete = EmployeeModel.deleteEmployee(txtId.getText());
+            boolean isDelete = EmployeeBOImpl.deleteEmployee(txtId.getText());
             if(isDelete){
                 clearText();
                 new Alert(Alert.AlertType.CONFIRMATION,"Delete success").show();

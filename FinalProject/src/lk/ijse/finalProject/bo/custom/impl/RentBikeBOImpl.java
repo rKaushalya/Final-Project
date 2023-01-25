@@ -1,4 +1,4 @@
-package lk.ijse.finalProject.model;
+package lk.ijse.finalProject.bo.custom.impl;
 
 import lk.ijse.finalProject.db.DBConnection;
 import lk.ijse.finalProject.dto.BikeDTO;
@@ -9,7 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class BikeModel {
+public class RentBikeBOImpl {
     public static boolean addBike(BikeDTO bikeDTO) throws SQLException, ClassNotFoundException {
         String sql = "INSERT INTO rentbike VALUES (?,?,?,?)";
         return CrudUtil.execute(sql, bikeDTO.getRegNo(), bikeDTO.getModel(), bikeDTO.getAvailability(), bikeDTO.getPricePerDay());
@@ -61,7 +61,7 @@ public class BikeModel {
     }
 
     public static boolean updateBike(BikeDTO bikeDTO) throws SQLException, ClassNotFoundException {
-        String sql = "UPDATE rentbike SET model=?,availability=?,pricePerDay=? WHERE regNo=?";
+        String sql = "UPDATE rentbike SET bo=?,availability=?,pricePerDay=? WHERE regNo=?";
         return CrudUtil.execute(sql, bikeDTO.getModel(), bikeDTO.getAvailability(), bikeDTO.getPricePerDay(), bikeDTO.getRegNo());
     }
 
@@ -88,7 +88,7 @@ public class BikeModel {
     public static boolean rentBike(CustomerDTO customerDTO, String regNo) throws SQLException, ClassNotFoundException {
         try {
             DBConnection.getDbConnection().getConnection().setAutoCommit(false);
-            boolean isAdded = CusromerModel.addCustomer(customerDTO);
+            boolean isAdded = CustomerBOImpl.addCustomer(customerDTO);
             if (isAdded) {
                 boolean isBikeDetailAdded = addBikeDetails(customerDTO.getId(), regNo);
                 if (isBikeDetailAdded) {

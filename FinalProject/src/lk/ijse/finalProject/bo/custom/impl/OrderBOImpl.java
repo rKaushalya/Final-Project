@@ -1,11 +1,11 @@
-package lk.ijse.finalProject.model;
+package lk.ijse.finalProject.bo.custom.impl;
 
 import lk.ijse.finalProject.dto.OrderDetailDTO;
 import lk.ijse.finalProject.utill.CrudUtil;
 
 import java.sql.SQLException;
 
-public class OrderModel {
+public class OrderBOImpl {
     public static boolean addOrder(OrderDetailDTO orderDetailDTO) throws SQLException, ClassNotFoundException {
         String sql = "INSERT INTO orders VALUES (?,?,?,?,?,?,?)";
         return CrudUtil.execute(sql, orderDetailDTO.getOrderId(), orderDetailDTO.getDate(), orderDetailDTO.getRoomDayCount(),

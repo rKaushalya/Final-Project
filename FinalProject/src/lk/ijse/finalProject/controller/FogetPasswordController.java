@@ -8,7 +8,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Paint;
-import lk.ijse.finalProject.model.ForgotPasswordModel;
+import lk.ijse.finalProject.bo.custom.impl.ForgotPasswordBOImpl;
 import lk.ijse.finalProject.dto.UserDTO;
 import lk.ijse.finalProject.utill.Navigation;
 import lk.ijse.finalProject.utill.Routes;
@@ -51,7 +51,7 @@ public class FogetPasswordController {
         if (password.equals(cmPw)){
             UserDTO userDTO = new UserDTO(userId,name,password,email);
             try {
-                boolean isUpdate = ForgotPasswordModel.resetPassword(userDTO);
+                boolean isUpdate = ForgotPasswordBOImpl.resetPassword(userDTO);
                 if (isUpdate){
                     Navigation.navigate(Routes.FORGOT,pane);
                     new Alert(Alert.AlertType.CONFIRMATION,"Update success.!").show();
@@ -183,7 +183,7 @@ public class FogetPasswordController {
         if (password.equals(cmPw)){
             UserDTO userDTO = new UserDTO(userId,name,password,email);
             try {
-                boolean isUpdate = ForgotPasswordModel.resetPassword(userDTO);
+                boolean isUpdate = ForgotPasswordBOImpl.resetPassword(userDTO);
                 if (isUpdate){
                     Navigation.navigate(Routes.FORGOT,pane);
                     new Alert(Alert.AlertType.CONFIRMATION,"Update success.!").show();

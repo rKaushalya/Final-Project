@@ -5,8 +5,8 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
+import lk.ijse.finalProject.bo.custom.impl.MealBOImpl;
 import lk.ijse.finalProject.dto.MealDTO;
-import lk.ijse.finalProject.model.MealModel;
 
 import java.time.LocalDate;
 
@@ -30,9 +30,9 @@ public class MeailManageController {
         Double price = Double.valueOf(txtPrice.getText());
 
         try {
-//            boolean isAdded = MealModel.addMeal(mealDTO);
-            MealModel mealModel = new MealModel();
-            boolean isAdded = mealModel.addMeal(new MealDTO(id, name, availableTime, price));
+//            boolean isAdded = MealBOImpl.addMeal(mealDTO);
+            MealBOImpl mealBOImpl = new MealBOImpl();
+            boolean isAdded = mealBOImpl.addMeal(new MealDTO(id, name, availableTime, price));
             if (isAdded){
                 new Alert(Alert.AlertType.CONFIRMATION,"Added Success").show();
                 clearText();
@@ -46,7 +46,7 @@ public class MeailManageController {
 
     public void searchOnAction(ActionEvent actionEvent) {
         try {
-            MealDTO mealDTO = MealModel.searchMeal(txtId.getText());
+            MealDTO mealDTO = MealBOImpl.searchMeal(txtId.getText());
             txtId.setText(mealDTO.getId());
             txtName.setText(mealDTO.getName());
             txtTime.setText(mealDTO.getAvailableTime());
@@ -64,7 +64,7 @@ public class MeailManageController {
 
         MealDTO mealDTO = new MealDTO(id,name,availableTime,price);
         try {
-            boolean isUpdate = MealModel.updateMeal(mealDTO);
+            boolean isUpdate = MealBOImpl.updateMeal(mealDTO);
             if (isUpdate){
                 new Alert(Alert.AlertType.CONFIRMATION,"Update Success").show();
                 clearText();
@@ -78,7 +78,7 @@ public class MeailManageController {
 
     public void deleteOnAction(ActionEvent actionEvent) {
         try {
-            boolean isDelete = MealModel.deleteMeal(txtId.getText());
+            boolean isDelete = MealBOImpl.deleteMeal(txtId.getText());
             if (isDelete){
                 new Alert(Alert.AlertType.CONFIRMATION,"Delete Success").show();
                 clearText();

@@ -38,6 +38,7 @@ public class DashBordFormController {
 
     private void loadRoomCount(){
         try {
+            //
             int count = RentBikeBOImpl.bikeCount();
             btnCusCount.setText(String.valueOf(count));
         } catch (Exception exception) {
@@ -47,6 +48,7 @@ public class DashBordFormController {
 
     private void loadAllRoom(){
         try {
+            //
             int roomCount = RoomBOImpl.loadRoomCount();
             btnRoomCount.setText(String.valueOf(roomCount));
         } catch (Exception exception) {
@@ -56,6 +58,7 @@ public class DashBordFormController {
 
     private void loadEmployeeCount(){
         try {
+            //
             int empCount = EmployeeBOImpl.loadAllEmployee();
             btnEmployeeCount.setText(String.valueOf(empCount));
         } catch (Exception exception) {

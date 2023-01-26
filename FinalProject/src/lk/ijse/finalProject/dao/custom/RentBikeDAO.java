@@ -15,4 +15,6 @@ public interface RentBikeDAO extends CrudDAO<RentBikeEntity,String> {
     boolean updateAvailability(String regNo) throws SQLException, ClassNotFoundException;
 
     ArrayList<String> loadBikeId() throws SQLException, ClassNotFoundException;
+
+    ArrayList<String> loadRegNo() throws SQLException, ClassNotFoundException;
 }

@@ -18,7 +18,6 @@ import lk.ijse.finalProject.bo.custom.BookingBO;
 import lk.ijse.finalProject.bo.custom.RoomBo;
 import lk.ijse.finalProject.bo.custom.impl.BookingBOImpl;
 import lk.ijse.finalProject.bo.custom.impl.MealBOImpl;
-import lk.ijse.finalProject.bo.custom.impl.RentBikeBOImpl;
 import lk.ijse.finalProject.bo.custom.impl.RoomBOImpl;
 import lk.ijse.finalProject.dto.*;
 import net.sf.jasperreports.engine.*;
@@ -164,8 +163,8 @@ public class BookingFormController {
     private void loadRegNo(){
         try {
             ObservableList<String> observableList = FXCollections.observableArrayList();
-            ArrayList<String> arrayList = BookingBOImpl.loadRegNo();
-
+            //Refactor
+            ArrayList<String> arrayList = bookingBO.loadAllRegNo();
             for (String regNo : arrayList){
                 observableList.add(regNo);
             }
@@ -192,8 +191,8 @@ public class BookingFormController {
     private void loadPkgId(){
         ObservableList<String> observableList = FXCollections.observableArrayList();
         try {
-            ArrayList<String> arrayList = BookingBOImpl.loadPkgId();
-
+            //Refactor
+            ArrayList<String> arrayList = bookingBO.loadAllPackagesIDS();
             for (String id : arrayList){
                 observableList.add(id);
             }
@@ -248,10 +247,10 @@ public class BookingFormController {
     }
 
     public void loadPkgOnAction(ActionEvent actionEvent) {
-        String regNo = String.valueOf(cmbPkgId.getValue());
         ObservableList<PackagesDTO> tmlist = FXCollections.observableArrayList();
         try {
-            PackagesDTO packagesDTO = BookingBOImpl.searchPkg(regNo);
+            //Refactor
+            PackagesDTO packagesDTO = bookingBO.searchAllPackages(String.valueOf(cmbPkgId.getValue()));
             price = packagesDTO.getPrice();
             tmlist.add(packagesDTO);
             tblPkg.setItems(tmlist);

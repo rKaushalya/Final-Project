@@ -66,4 +66,15 @@ public class RentBikeDAOImpl implements RentBikeDAO {
         }
         return addRegNo;
     }
+
+    @Override
+    public ArrayList<String> loadRegNo() throws SQLException, ClassNotFoundException {
+        ResultSet execute = CrudUtil.execute("SELECT regNo FROM rentbike WHERE availability='YES' || 'yes'");
+        ArrayList<String> regNo = new ArrayList<>();
+
+        while (execute.next()) {
+            regNo.add(execute.getString(1));
+        }
+        return regNo;
+    }
 }

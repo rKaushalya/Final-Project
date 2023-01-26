@@ -25,42 +25,19 @@ public class BookingBOImpl implements BookingBO {
     private final RentBikeDetailDAO rentBikeDetailDAO = (RentBikeDetailDAO) DAOFactory.getDAOFactory().getDAO(DAOFactory.DAOTypes.RENTBIKEDETAIL);
     private final RentBikeDAO rentBikeDAO = (RentBikeDAO) DAOFactory.getDAOFactory().getDAO(DAOFactory.DAOTypes.RENTBIKE);
     private final RoomDetailDAO roomDetailDAO = (RoomDetailDAO) DAOFactory.getDAOFactory().getDAO(DAOFactory.DAOTypes.ROOMDETAIL);
+    private final PackageDAO packageDAO = (PackageDAO) DAOFactory.getDAOFactory().getDAO(DAOFactory.DAOTypes.PACKAGE);
 
-    public static ArrayList<String> loadRegNo() throws SQLException, ClassNotFoundException {
-        String sql = "SELECT regNo FROM rentbike WHERE availability='YES' || 'yes'";
-        ResultSet execute = CrudUtil.execute(sql);
-        ArrayList<String> regNo = new ArrayList<>();
-
-        while (execute.next()) {
-            regNo.add(execute.getString(1));
-        }
-        return regNo;
+    public ArrayList<String> loadAllRegNo() throws SQLException, ClassNotFoundException {
+        return rentBikeDAO.loadRegNo();
     }
 
-    public static ArrayList<String> loadPkgId() throws SQLException, ClassNotFoundException {
-        String sql = "SELECT pkgId FROM package";
-        ResultSet execute = CrudUtil.execute(sql);
-        ArrayList<String> pkgId = new ArrayList<>();
-
-        while (execute.next()) {
-            pkgId.add(execute.getString(1));
-        }
-        return pkgId;
+    public ArrayList<String> loadAllPackagesIDS() throws SQLException, ClassNotFoundException {
+        return packageDAO.loadPkgId();
     }
 
-    public static PackagesDTO searchPkg(String id) throws SQLException, ClassNotFoundException {
-        String sql = "SELECT * FROM package WHERE pkgId=?";
-        ResultSet execute = CrudUtil.execute(sql, id);
-
-        if (execute.next()) {
-            return new PackagesDTO(
-                    execute.getString(1),
-                    execute.getString(2),
-                    execute.getDouble(3),
-                    execute.getString(4)
-            );
-        }
-        return null;
+    public PackagesDTO searchAllPackages(String id) throws SQLException, ClassNotFoundException {
+        PackageEntity packageEntity = packageDAO.searchPkg(id);
+        return new PackagesDTO(packageEntity.getPkgId(),packageEntity.getPkgName(),packageEntity.getPrice(),packageEntity.getInclude());
     }
 
     public String generateNextOrderId() throws SQLException, ClassNotFoundException {
@@ -111,8 +88,8 @@ public class BookingBOImpl implements BookingBO {
         try {
             DBConnection.getDbConnection().getConnection().setAutoCommit(false);
             //Refactor
-            boolean isAdded = cusDAO.add(new CustomerEntity(customerDTO.getId(),customerDTO.getName(),
-                    customerDTO.getAddress(),customerDTO.getContact(),customerDTO.getEmail()));
+            boolean isAdded = cusDAO.add(new CustomerEntity(customerDTO.getId(), customerDTO.getName(),
+                    customerDTO.getAddress(), customerDTO.getContact(), customerDTO.getEmail()));
             if (isAdded) {
                 //Refactor
                 boolean isOrderAdded = orderDAO.addOrder(new OrdersEntity(orderDetailDTO.getOrderId(),
@@ -121,7 +98,7 @@ public class BookingBOImpl implements BookingBO {
                 if (isOrderAdded) {
 //                    boolean isPaymentDetailAdded = OrderBOImpl.addPayment(orderDetailDTO);
                     boolean isPaymentDetailAdded = paymentDAO.addPayment(new PaymentDetailEntity(orderDetailDTO.getOrderId(),
-                            orderDetailDTO.getDate(),orderDetailDTO.getReceverdAmount(),orderDetailDTO.getBalance(),orderDetailDTO.getTotal()));
+                            orderDetailDTO.getDate(), orderDetailDTO.getReceverdAmount(), orderDetailDTO.getBalance(), orderDetailDTO.getTotal()));
                     if (isPaymentDetailAdded) {
                         //Refactor
                         boolean isBikeDetailAdded = rentBikeDetailDAO.add(customerDTO.getId(), orderDetailDTO.getRegNo());
@@ -154,8 +131,8 @@ public class BookingBOImpl implements BookingBO {
         try {
             DBConnection.getDbConnection().getConnection().setAutoCommit(false);
             //Refactor
-            boolean isCustomerAdded = cusDAO.add(new CustomerEntity(customerDTO.getId(),customerDTO.getName(),
-                    customerDTO.getAddress(),customerDTO.getContact(),customerDTO.getEmail()));
+            boolean isCustomerAdded = cusDAO.add(new CustomerEntity(customerDTO.getId(), customerDTO.getName(),
+                    customerDTO.getAddress(), customerDTO.getContact(), customerDTO.getEmail()));
             if (isCustomerAdded) {
                 //Refactor
                 boolean isRoomDetailAdded = roomDetailDAO.addRoomDetails(new RoomDetailEntity(customerDTO.getId(), orderDetailDTO.getrId(),
@@ -178,6 +155,6 @@ public class BookingBOImpl implements BookingBO {
     @Override
     public BikeDTO searchAllBikes(String regNo) throws SQLException, ClassNotFoundException {
         RentBikeEntity search = rentBikeDAO.search(regNo);
-        return new BikeDTO(search.getRegNo(),search.getModel(),search.getAvailability(),search.getPricePerDay());
+        return new BikeDTO(search.getRegNo(), search.getModel(), search.getAvailability(), search.getPricePerDay());
     }
 }

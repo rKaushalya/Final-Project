@@ -8,6 +8,10 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Paint;
+import lk.ijse.finalProject.bo.BOFactory;
+import lk.ijse.finalProject.bo.SuperBO;
+import lk.ijse.finalProject.bo.custom.ForgetPasswordBO;
+import lk.ijse.finalProject.bo.custom.UserBO;
 import lk.ijse.finalProject.bo.custom.impl.ForgotPasswordBOImpl;
 import lk.ijse.finalProject.dto.UserDTO;
 import lk.ijse.finalProject.utill.Navigation;
@@ -34,6 +38,8 @@ public class FogetPasswordController {
     private Matcher pwMatcher;
     private Matcher userIdMatcher;
 
+    private final ForgetPasswordBO fBO = (ForgetPasswordBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.FORGETPASSWORD);
+
     public void initialize(){
         txtPwShow.setVisible(false);
         txtCmPwShow.setVisible(false);
@@ -42,16 +48,11 @@ public class FogetPasswordController {
     }
 
     public void resetOnAction(ActionEvent actionEvent) throws IOException {
-        String userId = txtUserId.getText();
-        String name = txtName.getText();
-        String password = txtNewPw.getText();
-        String email = txtEmail.getText();
-        String cmPw = txtConformPw.getText();
-
-        if (password.equals(cmPw)){
-            UserDTO userDTO = new UserDTO(userId,name,password,email);
+        if (txtNewPw.getText().equals(txtConformPw.getText())){
             try {
-                boolean isUpdate = ForgotPasswordBOImpl.resetPassword(userDTO);
+                //Refactor
+                boolean isUpdate = fBO.resetPassword(new UserDTO(txtUserId.getText(), txtName.getText(),
+                        txtNewPw.getText(), txtEmail.getText()));
                 if (isUpdate){
                     Navigation.navigate(Routes.FORGOT,pane);
                     new Alert(Alert.AlertType.CONFIRMATION,"Update success.!").show();
@@ -174,16 +175,11 @@ public class FogetPasswordController {
     }
 
     public void duplicateOnAction(ActionEvent actionEvent) {
-        String userId = txtUserId.getText();
-        String name = txtName.getText();
-        String password = txtPwShow.getText();
-        String email = txtEmail.getText();
-        String cmPw = txtCmPwShow.getText();
-
-        if (password.equals(cmPw)){
-            UserDTO userDTO = new UserDTO(userId,name,password,email);
+        if (txtNewPw.getText().equals(txtConformPw.getText())){
             try {
-                boolean isUpdate = ForgotPasswordBOImpl.resetPassword(userDTO);
+                //Refactor
+                boolean isUpdate = fBO.resetPassword(new UserDTO(txtUserId.getText(), txtName.getText(),
+                        txtNewPw.getText(), txtEmail.getText()));
                 if (isUpdate){
                     Navigation.navigate(Routes.FORGOT,pane);
                     new Alert(Alert.AlertType.CONFIRMATION,"Update success.!").show();
@@ -196,7 +192,7 @@ public class FogetPasswordController {
             }
         }else {
             lblShowError.setText("Password didnt match");
-            txtCmPwShow.setFocusColor(Paint.valueOf("Red"));
+            txtConformPw.setFocusColor(Paint.valueOf("Red"));
             new Alert(Alert.AlertType.ERROR,"Password didnt match").show();
         }
     }

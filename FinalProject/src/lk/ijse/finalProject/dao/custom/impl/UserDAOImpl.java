@@ -15,7 +15,8 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public boolean update(UserEntity entity) throws SQLException, ClassNotFoundException {
-        return false;
+        return CrudUtil.execute("UPDATE user SET password=? WHERE userId=? && userName=? && email=?",
+                entity.getPassword(), entity.getUserId(), entity.getUserName(), entity.getEmail());
     }
 
     @Override

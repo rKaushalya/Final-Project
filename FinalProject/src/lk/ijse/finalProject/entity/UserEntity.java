@@ -18,6 +18,13 @@ public class UserEntity {
         this.role = role;
     }
 
+    public UserEntity(String password, String userId, String userName, String email) {
+        this.userId = userId;
+        this.userName = userName;
+        this.password = password;
+        this.email = email;
+    }
+
     public String getUserId() {
         return userId;
     }

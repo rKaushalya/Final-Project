@@ -6,6 +6,9 @@ import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
 import javafx.scene.layout.AnchorPane;
+import lk.ijse.finalProject.bo.BOFactory;
+import lk.ijse.finalProject.bo.SuperBO;
+import lk.ijse.finalProject.bo.custom.UserBO;
 import lk.ijse.finalProject.bo.custom.impl.UserBOImpl;
 import lk.ijse.finalProject.utill.Navigation;
 import lk.ijse.finalProject.utill.Routes;
@@ -20,17 +23,18 @@ public class UserFormController {
     public JFXCheckBox cbxShow;
     public JFXTextField txtPwShow;
 
+    private final UserBO userBO = (UserBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.USER);
+
     public void initialize(){
         txtPwShow.setVisible(false);
     }
 
     public void loadCustomerForm(ActionEvent actionEvent) throws IOException {
-        String userName = txtUserName.getText();
-        String password = txtPassword.getText();
 
        // Navigation.navigate(Routes.CUSTOMER, pane);
         try {
-            ResultSet resultSet = UserBOImpl.checkUser(userName, password);
+            //Refactor
+            ResultSet resultSet = userBO.checkUser(txtUserName.getText(), txtPassword.getText());
             if(resultSet.next()){
                 if (resultSet.getString(5).equals("Admin")) {
                     Navigation.navigate(Routes.CUSTOMER, pane);

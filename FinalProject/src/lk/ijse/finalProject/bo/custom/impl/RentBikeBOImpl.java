@@ -4,6 +4,7 @@ import lk.ijse.finalProject.bo.custom.RentBikeBO;
 import lk.ijse.finalProject.dao.DAOFactory;
 import lk.ijse.finalProject.dao.SuperDAO;
 import lk.ijse.finalProject.dao.custom.CustomerDAO;
+import lk.ijse.finalProject.dao.custom.OrdersDAO;
 import lk.ijse.finalProject.dao.custom.RentBikeDAO;
 import lk.ijse.finalProject.dao.custom.RentBikeDetailDAO;
 import lk.ijse.finalProject.db.DBConnection;
@@ -22,6 +23,7 @@ public class RentBikeBOImpl implements RentBikeBO {
     private final RentBikeDAO bikeDAO = (RentBikeDAO) DAOFactory.getDAOFactory().getDAO(DAOFactory.DAOTypes.RENTBIKE);
     private final RentBikeDetailDAO bikeDetailDAO = (RentBikeDetailDAO) DAOFactory.getDAOFactory().getDAO(DAOFactory.DAOTypes.RENTBIKEDETAIL);
     private final CustomerDAO cusDAO = (CustomerDAO) DAOFactory.getDAOFactory().getDAO(DAOFactory.DAOTypes.CUSTOMER);
+    private final OrdersDAO orderDAO = (OrdersDAO) DAOFactory.getDAOFactory().getDAO(DAOFactory.DAOTypes.ORDERS);
 
     public boolean addBike(BikeDTO bikeDTO) throws SQLException, ClassNotFoundException {
         return bikeDAO.add(new RentBikeEntity(bikeDTO.getRegNo(), bikeDTO.getModel(), bikeDTO.getAvailability(),
@@ -69,5 +71,27 @@ public class RentBikeBOImpl implements RentBikeBO {
         }finally {
             DBConnection.getDbConnection().getConnection().setAutoCommit(true);
         }
+    }
+
+    public String generateNextCusID() throws SQLException, ClassNotFoundException {
+        //Refactor
+        ResultSet resultSet = orderDAO.generateNextCusID();
+        if (resultSet.next()){
+            return nextCusID(resultSet.getString(1));
+        }
+        return nextCusID(resultSet.getString(null));
+    }
+
+    public String nextCusID(String currentCusId) {
+        if (currentCusId != null){
+            String[] split = currentCusId.split("C0");
+            int id = Integer.parseInt(split[1]);
+            id += 1;
+            if (id >= 10){
+                return "C0" + id;
+            }
+            return "C00" + id;
+        }
+        return "C001";
     }
 }

@@ -20,4 +20,8 @@ public interface RentBikeBO extends SuperBO {
     boolean rentBike(CustomerDTO customerDTO, String regNo) throws SQLException, ClassNotFoundException;
 
     ArrayList<String> loadBikeId() throws SQLException, ClassNotFoundException;
+
+    String generateNextCusID() throws SQLException, ClassNotFoundException;
+
+    String nextCusID(String currentCusId);
 }

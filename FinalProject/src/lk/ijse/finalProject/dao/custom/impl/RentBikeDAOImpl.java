@@ -18,7 +18,7 @@ public class RentBikeDAOImpl implements RentBikeDAO {
 
     @Override
     public boolean update(RentBikeEntity entity) throws SQLException, ClassNotFoundException {
-        return CrudUtil.execute("UPDATE rentbike SET bo=?,availability=?,pricePerDay=? WHERE regNo=?",
+        return CrudUtil.execute("UPDATE rentbike SET model=?,availability=?,pricePerDay=? WHERE regNo=?",
                 entity.getModel(), entity.getAvailability(), entity.getPricePerDay(), entity.getRegNo());
     }
 

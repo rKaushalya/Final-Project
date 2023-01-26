@@ -15,9 +15,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Paint;
 import lk.ijse.finalProject.bo.BOFactory;
-import lk.ijse.finalProject.bo.SuperBO;
 import lk.ijse.finalProject.bo.custom.RentBikeBO;
-import lk.ijse.finalProject.bo.custom.impl.RentBikeBOImpl;
 import lk.ijse.finalProject.bo.custom.impl.BookingBOImpl;
 import lk.ijse.finalProject.dto.BikeDTO;
 import lk.ijse.finalProject.dto.CustomerDTO;
@@ -64,7 +62,8 @@ public class RentBikeFormController {
 
     private void loadNextCusId(){
         try {
-            String customerId = BookingBOImpl.generateNextCusId();
+            //Refactor
+            String customerId = bikeBO.generateNextCusID();
             txtCusId.setText(customerId);
         } catch (Exception exception) {
             System.out.println(exception);
@@ -178,7 +177,7 @@ public class RentBikeFormController {
     }
 
     private void setCellValueFactory(){
-        clmModel.setCellValueFactory(new PropertyValueFactory("bo"));
+        clmModel.setCellValueFactory(new PropertyValueFactory("model"));
         clmPrice.setCellValueFactory(new PropertyValueFactory("pricePerDay"));
         clmAvailability.setCellValueFactory(new PropertyValueFactory("availability"));
     }

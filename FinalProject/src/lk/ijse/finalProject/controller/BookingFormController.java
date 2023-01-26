@@ -14,7 +14,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
 import lk.ijse.finalProject.bo.BOFactory;
-import lk.ijse.finalProject.bo.SuperBO;
+import lk.ijse.finalProject.bo.custom.BookingBO;
 import lk.ijse.finalProject.bo.custom.RoomBo;
 import lk.ijse.finalProject.bo.custom.impl.BookingBOImpl;
 import lk.ijse.finalProject.bo.custom.impl.MealBOImpl;
@@ -73,6 +73,8 @@ public class BookingFormController {
     private Matcher telMatcher;
     private Matcher address;
 
+    private final BookingBO bookingBO = (BookingBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.BOOKING);
+
     private double showTotal = 0;
     private double getCash = 0;
     private double balance = 0;
@@ -95,7 +97,8 @@ public class BookingFormController {
 
     private void loadOrderId(){
         try {
-            String orderId = BookingBOImpl.generateNextOrderId();
+            //Refactor
+            String orderId = bookingBO.generateNextOrderId();
             txtOrderId.setText(orderId);
         } catch (Exception exception) {
             System.out.println(exception);
@@ -104,7 +107,8 @@ public class BookingFormController {
 
     private void loadNextCusId(){
         try {
-            String customerId = BookingBOImpl.generateNextCusId();
+            //Refactor
+            String customerId = bookingBO.generateNextCusID();
             txtCusId.setText(customerId);
         } catch (Exception exception) {
             System.out.println(exception);
@@ -115,24 +119,14 @@ public class BookingFormController {
     public void orderPlaceOnAction(ActionEvent actionEvent) {
         if (btnPlaceOrder.getText().equals("Rent A Room")) {
             try {
-                String cusId = txtCusId.getText();
-                String name = txtCusName.getText();
-                String address = txtAddress.getText();
-                String contact = txtCusContact.getText();
-                String email = txtEmail.getText();
-                String orderId = txtOrderId.getText();
-                String date = txtDate.getText();
-                int roomDayCount = Integer.parseInt(txtRoomDayCount.getText());
-                String rId = String.valueOf(cmbRoomId.getValue());
-                Double total = Double.valueOf(txtTotal.getText());
-                Double receverdAmount = Double.valueOf(txtCash.getText());
-                Double balance = Double.valueOf(txtBalance.getText());
+                CustomerDTO customerDTO = new CustomerDTO(txtCusId.getText(),txtCusName.getText(),txtAddress.getText(),
+                        txtCusContact.getText(),txtEmail.getText());
 
-                CustomerDTO customerDTO = new CustomerDTO(cusId,name,address,contact,email);
-                OrderDetailDTO orderDetailDTO = new OrderDetailDTO(orderId,date,roomDayCount,rId,total,receverdAmount,balance);
-
-                    boolean isRentRoom = BookingBOImpl.rentRoom(customerDTO, orderDetailDTO);
-                    if (isRentRoom){
+                OrderDetailDTO orderDetailDTO = new OrderDetailDTO(txtOrderId.getText(),txtDate.getText(),
+                        Integer.parseInt(txtRoomDayCount.getText()),String.valueOf(cmbRoomId.getValue()),
+                        Double.valueOf(txtTotal.getText()),Double.valueOf(txtCash.getText()),Double.valueOf(txtBalance.getText()));
+                //Refactor
+                if (bookingBO.rentRoom(customerDTO, orderDetailDTO)){
                         new Alert(Alert.AlertType.CONFIRMATION,"Room Rent Success").show();
                         printBill();
                         clearPane();
@@ -145,28 +139,16 @@ public class BookingFormController {
 
         }else {
             try {
-                String cusId = txtCusId.getText();
-                String name = txtCusName.getText();
-                String address = txtAddress.getText();
-                String contact = txtCusContact.getText();
-                String email = txtEmail.getText();
-                String orderId = txtOrderId.getText();
-                String date = txtDate.getText();
-                int roomDayCount = Integer.parseInt(txtRoomDayCount.getText());
-                String rId = String.valueOf(cmbRoomId.getValue());
-                String pkgId = String.valueOf(cmbPkgId.getValue());
-                String regNo = String.valueOf(cmbBikeId.getValue());
-                int bikeDayCount = Integer.parseInt(txtDayCount.getText());
-                Double total = Double.valueOf(txtTotal.getText());
-                Double receverdAmount = Double.valueOf(txtCash.getText());
-                Double balance = Double.valueOf(txtBalance.getText());
+                CustomerDTO customerDTO = new CustomerDTO(txtCusId.getText(),txtCusName.getText(),txtAddress.getText(),
+                        txtCusContact.getText(),txtEmail.getText());
 
-                CustomerDTO customerDTO = new CustomerDTO(cusId, name, address, contact, email);
-                OrderDetailDTO orderDetailDTO = new OrderDetailDTO(orderId, date, roomDayCount, rId, pkgId, regNo, bikeDayCount,
-                        total, receverdAmount, balance);
+                OrderDetailDTO orderDetailDTO = new OrderDetailDTO(txtOrderId.getText(), txtDate.getText(),
+                        Integer.parseInt(txtRoomDayCount.getText()), String.valueOf(cmbRoomId.getValue()),
+                        String.valueOf(cmbPkgId.getValue()), String.valueOf(cmbBikeId.getValue()), Integer.parseInt(txtDayCount.getText()),
+                        Double.valueOf(txtTotal.getText()), Double.valueOf(txtCash.getText()), Double.valueOf(txtBalance.getText()));
 
-                boolean isPlaceOrder = BookingBOImpl.placeOrder(customerDTO, orderDetailDTO);
-                if (isPlaceOrder) {
+                //Refactor
+                if (bookingBO.placeOrder(customerDTO, orderDetailDTO)) {
                     clearPane();
                     new Alert(Alert.AlertType.CONFIRMATION, "OrderPlace Success").show();
                     printFullBill();
@@ -241,7 +223,7 @@ public class BookingFormController {
         clmType.setCellValueFactory(new PropertyValueFactory("type"));
         clmAc.setCellValueFactory(new PropertyValueFactory("ac"));
         clmPrice.setCellValueFactory(new PropertyValueFactory("price"));
-        clmModel.setCellValueFactory(new PropertyValueFactory("bo"));
+        clmModel.setCellValueFactory(new PropertyValueFactory("model"));
         clmBikePrice.setCellValueFactory(new PropertyValueFactory("pricePerDay"));
         clmPkgName.setCellValueFactory(new PropertyValueFactory("name"));
         clmPkgPrice.setCellValueFactory(new PropertyValueFactory("price"));
@@ -252,10 +234,10 @@ public class BookingFormController {
     }
 
     public void loadRegNoOnAction(ActionEvent actionEvent) {
-        String regNo = String.valueOf(cmbBikeId.getValue());
         ObservableList<BikeDTO> load = FXCollections.observableArrayList();
         try {
-            BikeDTO bikeDTO = RentBikeBOImpl.searchBikeTbl(regNo);
+            //Refactor
+            BikeDTO bikeDTO = bookingBO.searchAllBikes(String.valueOf(cmbBikeId.getValue()));
             price= bikeDTO.getPricePerDay();
             load.add(bikeDTO);
             tblBike.setItems(load);

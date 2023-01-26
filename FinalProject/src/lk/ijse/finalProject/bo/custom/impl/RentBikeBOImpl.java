@@ -1,9 +1,16 @@
 package lk.ijse.finalProject.bo.custom.impl;
 
 import lk.ijse.finalProject.bo.custom.RentBikeBO;
+import lk.ijse.finalProject.dao.DAOFactory;
+import lk.ijse.finalProject.dao.SuperDAO;
+import lk.ijse.finalProject.dao.custom.CustomerDAO;
+import lk.ijse.finalProject.dao.custom.RentBikeDAO;
+import lk.ijse.finalProject.dao.custom.RentBikeDetailDAO;
 import lk.ijse.finalProject.db.DBConnection;
 import lk.ijse.finalProject.dto.BikeDTO;
 import lk.ijse.finalProject.dto.CustomerDTO;
+import lk.ijse.finalProject.entity.CustomerEntity;
+import lk.ijse.finalProject.entity.RentBikeEntity;
 import lk.ijse.finalProject.utill.CrudUtil;
 
 import java.sql.ResultSet;
@@ -11,80 +18,46 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class RentBikeBOImpl implements RentBikeBO {
-    public static boolean addBike(BikeDTO bikeDTO) throws SQLException, ClassNotFoundException {
-        String sql = "INSERT INTO rentbike VALUES (?,?,?,?)";
-        return CrudUtil.execute(sql, bikeDTO.getRegNo(), bikeDTO.getModel(), bikeDTO.getAvailability(), bikeDTO.getPricePerDay());
+
+    private final RentBikeDAO bikeDAO = (RentBikeDAO) DAOFactory.getDAOFactory().getDAO(DAOFactory.DAOTypes.RENTBIKE);
+    private final RentBikeDetailDAO bikeDetailDAO = (RentBikeDetailDAO) DAOFactory.getDAOFactory().getDAO(DAOFactory.DAOTypes.RENTBIKEDETAIL);
+    private final CustomerDAO cusDAO = (CustomerDAO) DAOFactory.getDAOFactory().getDAO(DAOFactory.DAOTypes.CUSTOMER);
+
+    public boolean addBike(BikeDTO bikeDTO) throws SQLException, ClassNotFoundException {
+        return bikeDAO.add(new RentBikeEntity(bikeDTO.getRegNo(), bikeDTO.getModel(), bikeDTO.getAvailability(),
+                bikeDTO.getPricePerDay()));
     }
 
-    public static boolean deleteBike(String id) throws SQLException, ClassNotFoundException {
-        String sql = "DELETE FROM rentbike WHERE regNo=?";
-        return CrudUtil.execute(sql,id);
+    public boolean deleteBike(String id) throws SQLException, ClassNotFoundException {
+        return bikeDAO.delete(id);
     }
 
-    public static ArrayList<String> loadBikeId() throws SQLException, ClassNotFoundException {
-        String sql = "SELECT regNo FROM rentbike";
-        ResultSet execute = CrudUtil.execute(sql);
-        ArrayList<String> addRegNo = new ArrayList<>();
-
-        while (execute.next()){
-            addRegNo.add(execute.getString(1));
-        }
-        return addRegNo;
+    public ArrayList<String> loadBikeId() throws SQLException, ClassNotFoundException {
+        return bikeDAO.loadBikeId();
     }
 
-    public static BikeDTO searchBike(String id) throws SQLException, ClassNotFoundException {
-        String sql = "SELECT * FROM rentbike WHERE regNo=?";
-        ResultSet execute = CrudUtil.execute(sql, id);
-
-        if (execute.next()){
-            return new BikeDTO(
-              execute.getString(1),
-              execute.getString(2),
-              execute.getString(3),
-              execute.getDouble(4)
-            );
-        }
-        return null;
+    public BikeDTO searchBike(String id) throws SQLException, ClassNotFoundException {
+        RentBikeEntity search = bikeDAO.search(id);
+        return new BikeDTO(search.getRegNo(),search.getModel(),search.getAvailability(),search.getPricePerDay());
     }
 
-    public static BikeDTO searchBikeTbl(String id) throws SQLException, ClassNotFoundException {
-        String sql = "SELECT * FROM rentbike WHERE regNo=?";
-        ResultSet execute = CrudUtil.execute(sql, id);
-        if (execute.next()){
-           return new BikeDTO(
-                execute.getString(1),
-                execute.getString(2),
-                execute.getString(3),
-                execute.getDouble(4)
-           );
-        }
-        return null;
+    public boolean updateBike(BikeDTO bikeDTO) throws SQLException, ClassNotFoundException {
+        return bikeDAO.update(new RentBikeEntity(bikeDTO.getRegNo(), bikeDTO.getModel(), bikeDTO.getAvailability(),
+                bikeDTO.getPricePerDay()));
     }
 
-    public static boolean updateBike(BikeDTO bikeDTO) throws SQLException, ClassNotFoundException {
-        String sql = "UPDATE rentbike SET bo=?,availability=?,pricePerDay=? WHERE regNo=?";
-        return CrudUtil.execute(sql, bikeDTO.getModel(), bikeDTO.getAvailability(), bikeDTO.getPricePerDay(), bikeDTO.getRegNo());
-    }
-
-
-    public static boolean addValueRentBikeDetail(String id,String regNo) throws SQLException, ClassNotFoundException {
-        String sql = "INSERT INTO rentbikedetail VALUES (?,?)";
-        return CrudUtil.execute(sql,regNo,id);
-    }
-
-    public static boolean updateBikeAvailability(String regNo) throws SQLException, ClassNotFoundException {
-        String sql = "UPDATE rentbike SET availability = 'no' WHERE regNo = ?";
-        return CrudUtil.execute(sql,regNo);
-    }
-
-    public static boolean rentBike(CustomerDTO customerDTO, String regNo) throws SQLException, ClassNotFoundException {
+    public boolean rentBike(CustomerDTO customerDTO, String regNo) throws SQLException, ClassNotFoundException {
         try {
             DBConnection.getDbConnection().getConnection().setAutoCommit(false);
-            boolean isAdded = CustomerBOImpl.addCustomer(customerDTO);
+            //Refactor
+            boolean isAdded = cusDAO.add(new CustomerEntity(customerDTO.getId(),customerDTO.getName(),
+                    customerDTO.getAddress(),customerDTO.getContact(),customerDTO.getEmail()));
             if (isAdded) {
-                boolean isBikeDetailAdded = addBikeDetails(customerDTO.getId(), regNo);
+                //Refactor
+                boolean isBikeDetailAdded = bikeDetailDAO.add(customerDTO.getId(), regNo);
                 if (isBikeDetailAdded) {
-                    boolean isAvailabilityChange = updateBikeAvailability(regNo);
+                    //Refactor
+                    boolean isAvailabilityChange = bikeDAO.updateAvailability(regNo);
                     if (isAvailabilityChange) {
                         DBConnection.getDbConnection().getConnection().commit();
                         return true;
@@ -96,10 +69,5 @@ public class RentBikeBOImpl implements RentBikeBO {
         }finally {
             DBConnection.getDbConnection().getConnection().setAutoCommit(true);
         }
-    }
-
-    private static boolean addBikeDetails(String cusId,String regNo) throws SQLException, ClassNotFoundException {
-        String sql = "INSERT INTO rentbikedetail VALUES (?,?)";
-        return CrudUtil.execute(sql,regNo,cusId);
     }
 }

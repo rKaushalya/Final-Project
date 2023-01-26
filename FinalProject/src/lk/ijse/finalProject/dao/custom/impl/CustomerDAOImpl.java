@@ -13,7 +13,8 @@ import java.sql.SQLException;
 public class CustomerDAOImpl implements CustomerDAO {
     @Override
     public boolean add(CustomerEntity entity) throws SQLException, ClassNotFoundException {
-        return false;
+        return CrudUtil.execute("INSERT INTO customer VALUES (?,?,?,?,?)", entity.getId(), entity.getName(),
+                entity.getAddress(), entity.getContact(), entity.getEmail());
     }
 
     @Override

@@ -14,6 +14,9 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Paint;
+import lk.ijse.finalProject.bo.BOFactory;
+import lk.ijse.finalProject.bo.SuperBO;
+import lk.ijse.finalProject.bo.custom.RentBikeBO;
 import lk.ijse.finalProject.bo.custom.impl.RentBikeBOImpl;
 import lk.ijse.finalProject.bo.custom.impl.BookingBOImpl;
 import lk.ijse.finalProject.dto.BikeDTO;
@@ -48,6 +51,8 @@ public class RentBikeFormController {
     private Matcher telMatcher;
     private Matcher address;
 
+    private final RentBikeBO bikeBO = (RentBikeBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.RENTBIKE);
+
     public void initialize(){
         LocalDate date = LocalDate.now();
         txtDate.setText(String.valueOf(date));
@@ -67,16 +72,10 @@ public class RentBikeFormController {
     }
 
     public void rentOnAction(ActionEvent actionEvent) {
-        String cusId = txtCusId.getText();
-        String name = txtCusName.getText();
-        String address = txtAddress.getText();
-        String contact = txtContact.getText();
-        String email = txtEmail.getText();
-        String regNo = String.valueOf(cmbRegNo.getValue());
-
-        CustomerDTO customerDTO = new CustomerDTO(cusId,name,address,contact,email);
         try {
-            boolean isRentBike = RentBikeBOImpl.rentBike(customerDTO, regNo);
+            //Refactor
+            boolean isRentBike = bikeBO.rentBike(new CustomerDTO(txtCusId.getText(), txtCusName.getText(),
+                    txtAddress.getText(), txtContact.getText(), txtEmail.getText()), String.valueOf(cmbRegNo.getValue()));
             if (isRentBike){
                 clearPane();
                 new Alert(Alert.AlertType.CONFIRMATION,"Bike rent Success.").show();
@@ -89,14 +88,10 @@ public class RentBikeFormController {
     }
 
     public void addOnAction(ActionEvent actionEvent) {
-        String regNo = txtRegNo.getText();
-        String model = txtModel.getText();
-        String availability = txtAvailability.getText();
-        Double pricePerDay = Double.valueOf(txtPrice.getText());
-
-        BikeDTO bikeDTO = new BikeDTO(regNo,model,availability,pricePerDay);
         try {
-            boolean isAdded = RentBikeBOImpl.addBike(bikeDTO);
+            //Refactor
+            boolean isAdded = bikeBO.addBike(new BikeDTO(txtRegNo.getText(),txtModel.getText(),txtAvailability.getText(),
+                    Double.valueOf(txtPrice.getText())));
             if (isAdded){
                 new Alert(Alert.AlertType.CONFIRMATION,"added Success").show();
                 clearText();
@@ -110,14 +105,10 @@ public class RentBikeFormController {
     }
 
     public void updateOnAction(ActionEvent actionEvent) {
-        String regNo = txtRegNo.getText();
-        String model = txtModel.getText();
-        String availability = txtAvailability.getText();
-        Double pricePerDay = Double.valueOf(txtPrice.getText());
-
-        BikeDTO bikeDTO = new BikeDTO(regNo,model,availability,pricePerDay);
         try {
-            boolean isUpdate = RentBikeBOImpl.updateBike(bikeDTO);
+            //Refactor
+            boolean isUpdate = bikeBO.updateBike(new BikeDTO(txtRegNo.getText(), txtModel.getText(), txtAvailability.getText(),
+                    Double.valueOf(txtPrice.getText())));
             if (isUpdate){
                 new Alert(Alert.AlertType.CONFIRMATION,"Update Success").show();
                 loadRegNo();
@@ -131,10 +122,9 @@ public class RentBikeFormController {
     }
 
     public void deleteOnAction(ActionEvent actionEvent) {
-        String regNo = txtRegNo.getText();
         try {
-            boolean isDelete = RentBikeBOImpl.deleteBike(regNo);
-            if (isDelete){
+            //Refactor
+            if (bikeBO.deleteBike(txtRegNo.getText())){
                 new Alert(Alert.AlertType.CONFIRMATION,"Delete Success").show();
                 clearText();
                 loadRegNo();
@@ -149,8 +139,8 @@ public class RentBikeFormController {
     private void loadRegNo(){
         ObservableList<String> observableList = FXCollections.observableArrayList();
         try {
-            ArrayList<String> arrayList = RentBikeBOImpl.loadBikeId();
-
+            //Refactor
+            ArrayList<String> arrayList = bikeBO.loadBikeId();
             for (String regNo : arrayList){
                 observableList.add(regNo);
             }
@@ -168,10 +158,10 @@ public class RentBikeFormController {
     }
 
     public void bikeDetailOnAction(ActionEvent actionEvent) {
-        String regNo = String.valueOf(cmbRegNo.getValue());
         ObservableList<BikeDTO> tmlist = FXCollections.observableArrayList();
         try {
-            BikeDTO bikeDTO = RentBikeBOImpl.searchBike(regNo);
+            //Refactor
+            BikeDTO bikeDTO = bikeBO.searchBike(String.valueOf(cmbRegNo.getValue()));
             fillText(bikeDTO);
             tmlist.add(bikeDTO);
             tblBike.setItems(tmlist);

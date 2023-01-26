@@ -1,30 +1,43 @@
 package lk.ijse.finalProject.dao.custom.impl;
 
 import lk.ijse.finalProject.dao.custom.RentBikeDAO;
+import lk.ijse.finalProject.dto.BikeDTO;
 import lk.ijse.finalProject.entity.RentBikeEntity;
 import lk.ijse.finalProject.utill.CrudUtil;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class RentBikeDAOImpl implements RentBikeDAO {
     @Override
     public boolean add(RentBikeEntity entity) throws SQLException, ClassNotFoundException {
-        return false;
+        return CrudUtil.execute("INSERT INTO rentbike VALUES (?,?,?,?)", entity.getRegNo(), entity.getModel(),
+                entity.getAvailability(), entity.getPricePerDay());
     }
 
     @Override
     public boolean update(RentBikeEntity entity) throws SQLException, ClassNotFoundException {
-        return false;
+        return CrudUtil.execute("UPDATE rentbike SET bo=?,availability=?,pricePerDay=? WHERE regNo=?",
+                entity.getModel(), entity.getAvailability(), entity.getPricePerDay(), entity.getRegNo());
     }
 
     @Override
-    public boolean delete(String s) throws SQLException, ClassNotFoundException {
-        return false;
+    public boolean delete(String id) throws SQLException, ClassNotFoundException {
+        return CrudUtil.execute("DELETE FROM rentbike WHERE regNo=?",id);
     }
 
     @Override
-    public RentBikeEntity search(String s) throws SQLException, ClassNotFoundException {
+    public RentBikeEntity search(String id) throws SQLException, ClassNotFoundException {
+        ResultSet execute = CrudUtil.execute("SELECT * FROM rentbike WHERE regNo=?", id);
+        if (execute.next()){
+            return new RentBikeEntity(
+                    execute.getString(1),
+                    execute.getString(2),
+                    execute.getString(3),
+                    execute.getDouble(4)
+            );
+        }
         return null;
     }
 
@@ -37,5 +50,20 @@ public class RentBikeDAOImpl implements RentBikeDAO {
                 cusCount = execute.getInt(1);
             }
             return cusCount;
+    }
+
+    @Override
+    public boolean updateAvailability(String regNo) throws SQLException, ClassNotFoundException {
+        return CrudUtil.execute("UPDATE rentbike SET availability = 'no' WHERE regNo = ?",regNo);
+    }
+
+    @Override
+    public ArrayList<String> loadBikeId() throws SQLException, ClassNotFoundException {
+        ResultSet execute = CrudUtil.execute("SELECT regNo FROM rentbike");
+        ArrayList<String> addRegNo = new ArrayList<>();
+        while (execute.next()){
+            addRegNo.add(execute.getString(1));
+        }
+        return addRegNo;
     }
 }

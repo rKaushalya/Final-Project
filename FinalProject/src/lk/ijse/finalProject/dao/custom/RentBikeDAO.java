@@ -6,8 +6,13 @@ import lk.ijse.finalProject.utill.CrudUtil;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public interface RentBikeDAO extends CrudDAO<RentBikeEntity,String> {
 
     int bikeCount() throws SQLException, ClassNotFoundException ;
+
+    boolean updateAvailability(String regNo) throws SQLException, ClassNotFoundException;
+
+    ArrayList<String> loadBikeId() throws SQLException, ClassNotFoundException;
 }

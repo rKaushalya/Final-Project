@@ -40,9 +40,4 @@ public class CustomerBOImpl implements CustomerBO {
         }
         return list;
     }
-
-    public static boolean addCustomer(CustomerDTO customerDTO) throws SQLException, ClassNotFoundException {
-        String sql = "INSERT INTO customer VALUES (?,?,?,?,?)";
-        return CrudUtil.execute(sql, customerDTO.getId(), customerDTO.getName(), customerDTO.getAddress(), customerDTO.getContact(), customerDTO.getEmail());
-    }
 }

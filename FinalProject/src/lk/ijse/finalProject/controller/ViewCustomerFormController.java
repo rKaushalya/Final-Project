@@ -10,6 +10,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import lk.ijse.finalProject.bo.BOFactory;
+import lk.ijse.finalProject.bo.custom.CustomerBO;
 import lk.ijse.finalProject.dto.CustomerDTO;
 import lk.ijse.finalProject.bo.custom.impl.CustomerBOImpl;
 
@@ -31,7 +33,9 @@ public class ViewCustomerFormController {
     public TableColumn tblEmail;
     public TableColumn clmCusId;
 
-    public void initialize(){
+    private final CustomerBO cusBO = (CustomerBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.CUSTOMER);
+
+    public void initialize() {
         LocalDate date = LocalDate.now();
         txtDate.setText(String.valueOf(date));
 
@@ -39,41 +43,30 @@ public class ViewCustomerFormController {
         loadCusData();
     }
 
-    public void searchOnAction(ActionEvent actionEvent){
-        String id = txtId.getText();
+    public void searchOnAction(ActionEvent actionEvent) {
         try {
-            CustomerDTO customerDTO = CustomerBOImpl.searchCustomer(id);
-                txtId.setText(customerDTO.getId());
-                txtName.setText(customerDTO.getName());
-                txtAddress.setText(customerDTO.getAddress());
-                txtContact.setText(customerDTO.getContact());
-                txtEmail.setText(customerDTO.getEmail());
+            //Refactor
+            CustomerDTO customerDTO = cusBO.searchCustomer(txtId.getText());
+            txtId.setText(customerDTO.getId());
+            txtName.setText(customerDTO.getName());
+            txtAddress.setText(customerDTO.getAddress());
+            txtContact.setText(customerDTO.getContact());
+            txtEmail.setText(customerDTO.getEmail());
         } catch (Exception exception) {
             System.out.println(exception);
-        } 
+        }
     }
 
     public void updateOnAction(ActionEvent actionEvent) {
-        String id = txtId.getText();
-        String name = txtName.getText();
-        String address = txtAddress.getText();
-        String contact = txtContact.getText();
-        String email = txtEmail.getText();
-
-        CustomerDTO customerDTO = new CustomerDTO();
-            customerDTO.setId(id);
-            customerDTO.setAddress(address);
-            customerDTO.setName(name);
-            customerDTO.setContact(contact);
-            customerDTO.setEmail(email);
-
         try {
-            boolean isUpdated = CustomerBOImpl.updateCustomer(customerDTO);
-            if (isUpdated){
+            //Refactor
+            boolean isUpdated = cusBO.updateCustomer(new CustomerDTO(txtId.getText(), txtName.getText(),
+                    txtAddress.getText(), txtContact.getText(), txtEmail.getText()));
+            if (isUpdated) {
                 loadCusData();
                 setCellValueFactory();
                 clearText();
-                new Alert(Alert.AlertType.CONFIRMATION,"Update Success.!").show();
+                new Alert(Alert.AlertType.CONFIRMATION, "Update Success.!").show();
                 tblCusDetail.refresh();
             }
         } catch (Exception exception) {
@@ -82,11 +75,10 @@ public class ViewCustomerFormController {
     }
 
     public void deleteOnAction(ActionEvent actionEvent) {
-        String id = txtId.getText();
         try {
-            boolean isDelete = CustomerBOImpl.deleteCustomer(id);
-            if (isDelete){
-                new Alert(Alert.AlertType.CONFIRMATION,"Deleted.!").show();
+            //Refactor
+            if (cusBO.deleteCustomer(txtId.getText())) {
+                new Alert(Alert.AlertType.CONFIRMATION, "Deleted.!").show();
                 loadCusData();
                 setCellValueFactory();
                 clearText();
@@ -97,7 +89,7 @@ public class ViewCustomerFormController {
         }
     }
 
-    private void clearText(){
+    private void clearText() {
         txtId.clear();
         txtName.clear();
         txtAddress.clear();
@@ -105,21 +97,22 @@ public class ViewCustomerFormController {
         txtEmail.clear();
     }
 
-    public void loadCusData(){
+    public void loadCusData() {
         try {
-            ObservableList<CustomerDTO> customerDTOS = CustomerBOImpl.searchAllCustomer();
-            tblCusDetail.setItems(customerDTOS);
+            //Refactor
+            ObservableList<CustomerDTO> allCustomers = cusBO.getAllCustomers();
+            tblCusDetail.setItems(allCustomers);
         } catch (Exception exception) {
             System.out.println(exception);
         }
     }
 
     private void setCellValueFactory() {
-       tblName.setCellValueFactory(new PropertyValueFactory("name"));
-       tblAddress.setCellValueFactory(new PropertyValueFactory("address"));
-       tblContact.setCellValueFactory(new PropertyValueFactory("contact"));
-       tblEmail.setCellValueFactory(new PropertyValueFactory("email"));
-       clmCusId.setCellValueFactory(new PropertyValueFactory("id"));
+        tblName.setCellValueFactory(new PropertyValueFactory("name"));
+        tblAddress.setCellValueFactory(new PropertyValueFactory("address"));
+        tblContact.setCellValueFactory(new PropertyValueFactory("contact"));
+        tblEmail.setCellValueFactory(new PropertyValueFactory("email"));
+        clmCusId.setCellValueFactory(new PropertyValueFactory("id"));
     }
 
     public void slipToName(ActionEvent actionEvent) {

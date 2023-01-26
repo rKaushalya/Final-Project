@@ -3,46 +3,40 @@ package lk.ijse.finalProject.bo.custom.impl;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import lk.ijse.finalProject.bo.custom.CustomerBO;
+import lk.ijse.finalProject.dao.DAOFactory;
+import lk.ijse.finalProject.dao.SuperDAO;
+import lk.ijse.finalProject.dao.custom.CustomerDAO;
 import lk.ijse.finalProject.dto.CustomerDTO;
+import lk.ijse.finalProject.entity.CustomerEntity;
 import lk.ijse.finalProject.utill.CrudUtil;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class CustomerBOImpl implements CustomerBO {
-    public static CustomerDTO searchCustomer(String id) throws SQLException, ClassNotFoundException {
-        String sql = "SELECT * FROM customer WHERE cId=?";
-        ResultSet execute = CrudUtil.execute(sql, id);
 
-        if (execute.next()){
-            return new CustomerDTO(
-              execute.getString(1),
-              execute.getString(2),
-              execute.getString(3),
-              execute.getString(4),
-              execute.getString(5)
-            );
-        }
-        return null;
+    private final CustomerDAO cusDAO = (CustomerDAO) DAOFactory.getDAOFactory().getDAO(DAOFactory.DAOTypes.CUSTOMER);
+
+    public CustomerDTO searchCustomer(String id) throws SQLException, ClassNotFoundException {
+        CustomerEntity search = cusDAO.search(id);
+        return new CustomerDTO(search.getId(),search.getName(),search.getAddress(),search.getContact(),search.getEmail());
     }
 
-    public static boolean updateCustomer(CustomerDTO customerDTO) throws SQLException, ClassNotFoundException {
-        String sql = "UPDATE customer SET  name=?,address=?, contact=?,email=? WHERE cId=?";
-        return CrudUtil.execute(sql, customerDTO.getName(), customerDTO.getAddress(), customerDTO.getContact(), customerDTO.getEmail(), customerDTO.getId());
+    public boolean updateCustomer(CustomerDTO customerDTO) throws SQLException, ClassNotFoundException {
+        return cusDAO.update(new CustomerEntity(customerDTO.getId(), customerDTO.getName(), customerDTO.getAddress(),
+                customerDTO.getContact(), customerDTO.getEmail()));
     }
 
-    public static boolean deleteCustomer(String id) throws SQLException, ClassNotFoundException {
-        String sql = "DELETE FROM customer WHERE cId=?";
-        return CrudUtil.execute(sql,id);
+    public boolean deleteCustomer(String id) throws SQLException, ClassNotFoundException {
+        return cusDAO.delete(id);
     }
 
-    public static ObservableList<CustomerDTO> searchAllCustomer() throws SQLException, ClassNotFoundException {
+    public ObservableList<CustomerDTO> getAllCustomers() throws SQLException, ClassNotFoundException {
         ObservableList<CustomerDTO> list = FXCollections.observableArrayList();
-        String sql = "SELECT * FROM customer";
-        ResultSet execute = CrudUtil.execute(sql);
-        while (execute.next()){
-            CustomerDTO customerDTO = new CustomerDTO(execute.getString(1),execute.getString(2),execute.getString(3),execute.getString(4),execute.getString(5));
-            list.add(customerDTO);
+        ObservableList<CustomerEntity> customerEntities = cusDAO.searchAllCustomer();
+        for (CustomerEntity customerEntity : customerEntities) {
+            list.add(new CustomerDTO(customerEntity.getId(),customerEntity.getName(),customerEntity.getAddress(),
+                    customerEntity.getContact(),customerEntity.getEmail()));
         }
         return list;
     }

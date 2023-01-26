@@ -10,6 +10,9 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Paint;
+import lk.ijse.finalProject.bo.BOFactory;
+import lk.ijse.finalProject.bo.SuperBO;
+import lk.ijse.finalProject.bo.custom.RegisterBO;
 import lk.ijse.finalProject.bo.custom.impl.RegisterBOImpl;
 import lk.ijse.finalProject.dto.UserDTO;
 import lk.ijse.finalProject.utill.Navigation;
@@ -34,6 +37,8 @@ public class RegisterFormController {
     private Matcher pwMatcher;
     private Matcher userIdMatcher;
 
+    private final RegisterBO rBO = (RegisterBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.REGISTER);
+
     public void initialize(){
         txtPwShow.setVisible(false);
         loadRole();
@@ -46,14 +51,10 @@ public class RegisterFormController {
     }
 
     public void registerOnAction(ActionEvent actionEvent) throws IOException {
-        UserDTO userDTO = new UserDTO();
-        userDTO.setUserId(txtUserId.getText());
-        userDTO.setUserName(txtName.getText());
-        userDTO.setPassword(txtPassword.getText());
-        userDTO.setEmail(txtEmail.getText());
-        userDTO.setRole(String.valueOf(cmbRole.getValue()));
         try {
-            boolean isRegister = RegisterBOImpl.register(userDTO);
+            //Refactor
+            boolean isRegister = rBO.registerUser(new UserDTO(txtUserId.getText(), txtName.getText(), txtPassword.getText(),
+                    txtEmail.getText(), String.valueOf(cmbRole.getValue())));
             if (isRegister){
                 clearText();
                 new Alert(Alert.AlertType.CONFIRMATION,"added Success.!").show();
@@ -74,6 +75,7 @@ public class RegisterFormController {
         txtName.clear();
         txtPassword.clear();
         txtEmail.clear();
+        txtPwShow.clear();
     }
 
     public void cbxPasswordOnAction(ActionEvent actionEvent) {

@@ -10,7 +10,8 @@ import java.sql.SQLException;
 public class UserDAOImpl implements UserDAO {
     @Override
     public boolean add(UserEntity entity) throws SQLException, ClassNotFoundException {
-        return false;
+        return CrudUtil.execute("INSERT INTO user VALUES (?,?,?,?,?)", entity.getUserId(), entity.getUserName(),
+                entity.getPassword(), entity.getEmail(), entity.getRole());
     }
 
     @Override

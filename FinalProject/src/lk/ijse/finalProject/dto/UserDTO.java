@@ -18,6 +18,14 @@ public class UserDTO {
         this.email=email;
     }
 
+    public UserDTO(String userId, String userName, String password, String email, String role) {
+        this.userId = userId;
+        this.userName = userName;
+        this.password = password;
+        this.email = email;
+        this.role = role;
+    }
+
     public String getUserId() {
         return userId;
     }

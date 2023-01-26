@@ -39,4 +39,14 @@ public class EmployeeDAOImpl implements EmployeeDAO {
         }
         return null;
     }
+
+    @Override
+    public int loadAllEmployee() throws SQLException, ClassNotFoundException {
+            ResultSet execute = CrudUtil.execute("SELECT COUNT(*) FROM employee");
+            int empCount = 0;
+            if (execute.next()){
+                empCount = execute.getInt(1);
+            }
+            return empCount;
+    }
 }

@@ -4,7 +4,7 @@ import lk.ijse.finalProject.bo.SuperBO;
 
 import java.sql.SQLException;
 
-public interface DashBordBO extends SuperBO {
+public interface AdminDashBordBO extends SuperBO {
 
     int LoadBikeCount() throws SQLException, ClassNotFoundException;
 

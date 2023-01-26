@@ -58,26 +58,6 @@ public class RoomBOImpl implements RoomBo {
         return addRoom;
     }
 
-    public static int loadRoomCount() throws SQLException, ClassNotFoundException {
-        String sql = "SELECT COUNT(*) FROM room WHERE availability='YES' || 'yes'";
-        ResultSet execute = CrudUtil.execute(sql);
-        int roomCount = 0;
-        if (execute.next()) {
-            roomCount = execute.getInt(1);
-        }
-        return roomCount;
-    }
-
-    public static int loadNotAvailableRoomCount() throws SQLException, ClassNotFoundException {
-        String sql = "SELECT COUNT(*) FROM room WHERE availability='No' || 'no'";
-        ResultSet execute = CrudUtil.execute(sql);
-        int roomCount = 0;
-        if (execute.next()) {
-            roomCount = execute.getInt(1);
-        }
-        return roomCount;
-    }
-
     public static boolean updateRoomAvailability(String rId) throws SQLException, ClassNotFoundException {
         String sql = "UPDATE room SET availability = 'no' WHERE rId = ?";
         return CrudUtil.execute(sql, rId);

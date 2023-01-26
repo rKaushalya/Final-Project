@@ -16,7 +16,7 @@ public class BOFactory {
     }
 
     public enum BOTypes{
-        BOOKING,CUSTOMER,EMPLOYEE,FORGETPASSWORD,MEAL,REGISTER,RENTBIKE,ROOM,USER
+        BOOKING,CUSTOMER,EMPLOYEE,FORGETPASSWORD,MEAL,REGISTER,RENTBIKE,ROOM,USER,DASHBORD,ADMINDASHBORD
     }
 
     public SuperBO getBO(BOTypes types){
@@ -39,6 +39,10 @@ public class BOFactory {
                 return new RegisterBOImpl();
             case FORGETPASSWORD:
                 return new ForgotPasswordBOImpl();
+            case DASHBORD:
+                return new DashBordBOImpl();
+            case ADMINDASHBORD:
+                return new AdminDashBordImpl();
             default:
                 return null;
         }

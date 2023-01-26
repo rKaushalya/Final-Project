@@ -55,4 +55,24 @@ public class RoomDAOImpl implements RoomDAO {
         }
         return tmlist;
     }
+
+    @Override
+    public int loadRoomCount() throws SQLException, ClassNotFoundException {
+            ResultSet execute = CrudUtil.execute("SELECT COUNT(*) FROM room WHERE availability='YES' || 'yes'");
+            int roomCount = 0;
+            if (execute.next()) {
+                roomCount = execute.getInt(1);
+            }
+            return roomCount;
+    }
+
+    @Override
+    public int loadNotAvailableRoomCount() throws SQLException, ClassNotFoundException {
+            ResultSet execute = CrudUtil.execute("SELECT COUNT(*) FROM room WHERE availability='No' || 'no'");
+            int roomCount = 0;
+            if (execute.next()) {
+                roomCount = execute.getInt(1);
+            }
+            return roomCount;
+    }
 }

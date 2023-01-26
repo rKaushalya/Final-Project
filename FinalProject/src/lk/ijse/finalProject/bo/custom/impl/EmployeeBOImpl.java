@@ -33,15 +33,4 @@ public class EmployeeBOImpl implements EmployeeBO {
     public boolean deleteEmployee(String id) throws SQLException, ClassNotFoundException {
         return empDAO.delete(id);
     }
-
-    //remove soon
-    public static int loadAllEmployee() throws SQLException, ClassNotFoundException {
-        String sql = "SELECT COUNT(*) FROM employee";
-        ResultSet execute = CrudUtil.execute(sql);
-        int empCount = 0;
-        if (execute.next()){
-            empCount = execute.getInt(1);
-        }
-        return empCount;
-    }
 }

@@ -1,6 +1,6 @@
 package lk.ijse.finalProject.bo.custom.impl;
 
-import lk.ijse.finalProject.bo.custom.DashBordBO;
+import lk.ijse.finalProject.bo.custom.AdminDashBordBO;
 import lk.ijse.finalProject.dao.DAOFactory;
 import lk.ijse.finalProject.dao.SuperDAO;
 import lk.ijse.finalProject.dao.custom.EmployeeDAO;
@@ -9,7 +9,7 @@ import lk.ijse.finalProject.dao.custom.RoomDAO;
 
 import java.sql.SQLException;
 
-public class DashBordBOImpl implements DashBordBO {
+public class AdminDashBordImpl implements AdminDashBordBO {
 
     private final RentBikeDAO bikeDAO = (RentBikeDAO) DAOFactory.getDAOFactory().getDAO(DAOFactory.DAOTypes.RENTBIKE);
     private final RoomDAO roomDAO = (RoomDAO) DAOFactory.getDAOFactory().getDAO(DAOFactory.DAOTypes.ROOM);
@@ -27,7 +27,7 @@ public class DashBordBOImpl implements DashBordBO {
 
     @Override
     public int getNotAvailableRoomCount() throws SQLException, ClassNotFoundException {
-        return 0;
+        return roomDAO.loadNotAvailableRoomCount();
     }
 
     @Override

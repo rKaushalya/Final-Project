@@ -7,6 +7,9 @@ import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
+import lk.ijse.finalProject.bo.BOFactory;
+import lk.ijse.finalProject.bo.SuperBO;
+import lk.ijse.finalProject.bo.custom.DashBordBO;
 import lk.ijse.finalProject.bo.custom.impl.RentBikeBOImpl;
 import lk.ijse.finalProject.bo.custom.impl.EmployeeBOImpl;
 import lk.ijse.finalProject.bo.custom.impl.RoomBOImpl;
@@ -28,18 +31,20 @@ public class DashBordFormController {
     public JFXButton btnRoomCount;
     public JFXButton btnEmployeeCount;
 
+    private final DashBordBO dashBordBO = (DashBordBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.DASHBORD);
+
     public void initialize(){
         setDate();
         setTime();
         loadAllRoom();
-        loadRoomCount();
+        LoadBikeCount();
         loadEmployeeCount();
     }
 
-    private void loadRoomCount(){
+    private void LoadBikeCount(){
         try {
-            //
-            int count = RentBikeBOImpl.bikeCount();
+            //Refactor
+            int count = dashBordBO.LoadBikeCount();
             btnCusCount.setText(String.valueOf(count));
         } catch (Exception exception) {
             System.out.println(exception);
@@ -48,8 +53,8 @@ public class DashBordFormController {
 
     private void loadAllRoom(){
         try {
-            //
-            int roomCount = RoomBOImpl.loadRoomCount();
+            //Refactor
+            int roomCount = dashBordBO.getAllRoomCount();
             btnRoomCount.setText(String.valueOf(roomCount));
         } catch (Exception exception) {
             System.out.println(exception);
@@ -58,8 +63,8 @@ public class DashBordFormController {
 
     private void loadEmployeeCount(){
         try {
-            //
-            int empCount = EmployeeBOImpl.loadAllEmployee();
+            //Refactor
+            int empCount = dashBordBO.getAllEmployeeCount();
             btnEmployeeCount.setText(String.valueOf(empCount));
         } catch (Exception exception) {
             System.out.println(exception);

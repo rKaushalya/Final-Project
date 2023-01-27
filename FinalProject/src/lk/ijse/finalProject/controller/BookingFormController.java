@@ -362,21 +362,14 @@ public class BookingFormController {
     }
 
     private void printBill() {
-        String oId = txtOrderId.getText();
-        String name = txtCusName.getText();
-        double total = Double.parseDouble(txtTotal.getText());
-        double cash = Double.parseDouble(txtCash.getText());
-        double balance = Double.parseDouble(txtBalance.getText());
-        int day = Integer.parseInt(txtRoomDayCount.getText());
-
         HashMap bill = new HashMap();
 
-        bill.put("cusName", name);
-        bill.put("total", total);
-        bill.put("cash", cash);
-        bill.put("balance", balance);
-        bill.put("amount", total);
-        bill.put("dayCount", day);
+        bill.put("cusName", txtCusName.getText());
+        bill.put("total", Double.parseDouble(txtTotal.getText()));
+        bill.put("cash", Double.parseDouble(txtCash.getText()));
+        bill.put("balance", Double.parseDouble(txtBalance.getText()));
+        bill.put("amount", Double.parseDouble(txtTotal.getText()));
+        bill.put("dayCount", Integer.parseInt(txtRoomDayCount.getText()));
         try {
             InputStream resource = this.getClass().getResourceAsStream("/lk/ijse/finalProject/report/Bill.jrxml");
 
@@ -391,30 +384,19 @@ public class BookingFormController {
     }
 
     private void printFullBill() {
-        String oId = txtOrderId.getText();
-        String cusId = txtCusId.getText();
-        String name = txtCusName.getText();
-        String address = txtAddress.getText();
-        String contact = txtCusContact.getText();
-        double total = Double.parseDouble(txtTotal.getText());
-        double cash = Double.parseDouble(txtCash.getText());
-        double balance = Double.parseDouble(txtBalance.getText());
-        String rId = String.valueOf(cmbRoomId.getValue());
-        String pkgId = String.valueOf(cmbPkgId.getValue());
-        String regNo = String.valueOf(cmbBikeId.getValue());
 
         HashMap bill = new HashMap();
-        bill.put("oId", oId);
-        bill.put("cId", cusId);
-        bill.put("name", name);
-        bill.put("address", address);
-        bill.put("contact", contact);
-        bill.put("roomNo", rId);
-        bill.put("pkgNo", pkgId);
-        bill.put("bikeNo", regNo);
-        bill.put("total", total);
-        bill.put("cash", cash);
-        bill.put("balance", balance);
+        bill.put("oId", txtOrderId.getText());
+        bill.put("cId", txtCusId.getText());
+        bill.put("name", txtCusName.getText());
+        bill.put("address", txtAddress.getText());
+        bill.put("contact", txtCusContact.getText());
+        bill.put("roomNo", String.valueOf(cmbRoomId.getValue()));
+        bill.put("pkgNo", String.valueOf(cmbPkgId.getValue()));
+        bill.put("bikeNo", String.valueOf(cmbBikeId.getValue()));
+        bill.put("total", Double.parseDouble(txtTotal.getText()));
+        bill.put("cash", Double.parseDouble(txtCash.getText()));
+        bill.put("balance", Double.parseDouble(txtBalance.getText()));
 
         try {
             InputStream resource = this.getClass().getResourceAsStream("/lk/ijse/finalProject/report/Blank_A4.jrxml");

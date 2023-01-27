@@ -37,7 +37,7 @@
          </font></JFXTextField>
       <ImageView fitHeight="451.0" fitWidth="515.0" layoutX="66.0" layoutY="148.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../assets/logo/istockphoto-1281150061-170667a.jpg" />
+            <Image url="@logo/istockphoto-1281150061-170667a.jpg" />
          </image>
       </ImageView>
       <JFXButton graphicTextGap="6.0" layoutX="826.0" layoutY="570.0" onAction="#registerOnAction" prefHeight="38.0" prefWidth="114.0" style="-fx-background-color: #17c0eb; -fx-background-radius: 8;" text="Register" textAlignment="CENTER">

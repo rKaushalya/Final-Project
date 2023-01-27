@@ -8,6 +8,6 @@ import java.sql.SQLException;
 public class RentBikeDetailDAOImpl implements RentBikeDetailDAO {
     @Override
     public boolean add(String cusId, String regNo) throws SQLException, ClassNotFoundException {
-        return CrudUtil.execute("INSERT INTO rentbikedetail VALUES (?,?)",regNo,cusId);
+        return CrudUtil.execute("INSERT INTO rentbikedetail VALUES (?,?)", regNo, cusId);
     }
 }

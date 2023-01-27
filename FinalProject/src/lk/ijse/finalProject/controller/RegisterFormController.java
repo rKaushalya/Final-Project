@@ -11,9 +11,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Paint;
 import lk.ijse.finalProject.bo.BOFactory;
-import lk.ijse.finalProject.bo.SuperBO;
 import lk.ijse.finalProject.bo.custom.RegisterBO;
-import lk.ijse.finalProject.bo.custom.impl.RegisterBOImpl;
 import lk.ijse.finalProject.dto.UserDTO;
 import lk.ijse.finalProject.utill.Navigation;
 import lk.ijse.finalProject.utill.Routes;
@@ -39,14 +37,14 @@ public class RegisterFormController {
 
     private final RegisterBO rBO = (RegisterBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.REGISTER);
 
-    public void initialize(){
+    public void initialize() {
         txtPwShow.setVisible(false);
         loadRole();
     }
 
-    private void loadRole(){
+    private void loadRole() {
         ObservableList<String> list = FXCollections.observableArrayList();
-        list.addAll("Admin","Reception");
+        list.addAll("Admin", "Reception");
         cmbRole.setItems(list);
     }
 
@@ -55,11 +53,11 @@ public class RegisterFormController {
             //Refactor
             boolean isRegister = rBO.registerUser(new UserDTO(txtUserId.getText(), txtName.getText(), txtPassword.getText(),
                     txtEmail.getText(), String.valueOf(cmbRole.getValue())));
-            if (isRegister){
+            if (isRegister) {
                 clearText();
-                new Alert(Alert.AlertType.CONFIRMATION,"added Success.!").show();
-            }else{
-                new Alert(Alert.AlertType.ERROR,"something wrong").show();
+                new Alert(Alert.AlertType.CONFIRMATION, "added Success.!").show();
+            } else {
+                new Alert(Alert.AlertType.ERROR, "something wrong").show();
             }
         } catch (Exception exception) {
             System.out.println(exception);
@@ -67,10 +65,10 @@ public class RegisterFormController {
     }
 
     public void loadUserFormOnAction(ActionEvent actionEvent) throws IOException {
-        Navigation.navigate(Routes.USER,pane);
+        Navigation.navigate(Routes.USER, pane);
     }
 
-    private void clearText(){
+    private void clearText() {
         txtUserId.clear();
         txtName.clear();
         txtPassword.clear();
@@ -79,7 +77,7 @@ public class RegisterFormController {
     }
 
     public void cbxPasswordOnAction(ActionEvent actionEvent) {
-        if (cbxShow.isSelected()){
+        if (cbxShow.isSelected()) {
             txtPwShow.setText(txtPassword.getText());
             txtPassword.setVisible(false);
             txtPwShow.setVisible(true);
@@ -94,7 +92,7 @@ public class RegisterFormController {
         setPatten();
         if (!userIdMatcher.matches()) {
             txtUserId.setFocusColor(Paint.valueOf("Red"));
-        }else{
+        } else {
             txtName.requestFocus();
         }
     }
@@ -103,7 +101,7 @@ public class RegisterFormController {
         setPatten();
         if (userNameMatcher.matches()) {
             txtPassword.requestFocus();
-        }else {
+        } else {
             txtName.setFocusColor(Paint.valueOf("Red"));
         }
     }
@@ -112,7 +110,7 @@ public class RegisterFormController {
         setPatten();
         if (emailMatcher.matches()) {
             cmbRole.requestFocus();
-        }else{
+        } else {
             txtEmail.setFocusColor(Paint.valueOf("Red"));
         }
     }
@@ -121,12 +119,12 @@ public class RegisterFormController {
         setPatten();
         if (pwMatcher.matches()) {
             txtEmail.requestFocus();
-        }else{
+        } else {
             txtPassword.setFocusColor(Paint.valueOf("Red"));
         }
     }
 
-    private void setPatten(){
+    private void setPatten() {
 
         Pattern userIdPattern = Pattern.compile("^(U0)([0-9]{1,})([1-9]{0,})$");
         userIdMatcher = userIdPattern.matcher(txtUserId.getText());
@@ -147,7 +145,7 @@ public class RegisterFormController {
         pwMatcher = passwordPattern.matcher(txtPwShow.getText());
         if (pwMatcher.matches()) {
             txtEmail.requestFocus();
-        }else{
+        } else {
             txtPwShow.setFocusColor(Paint.valueOf("Red"));
         }
     }

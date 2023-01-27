@@ -6,10 +6,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import lk.ijse.finalProject.bo.BOFactory;
-import lk.ijse.finalProject.bo.SuperBO;
 import lk.ijse.finalProject.bo.custom.EmployeeBO;
 import lk.ijse.finalProject.dto.EmployeeDTO;
-import lk.ijse.finalProject.bo.custom.impl.EmployeeBOImpl;
 
 import java.time.LocalDate;
 
@@ -31,7 +29,7 @@ public class EmployeeManageFormController {
 
     public void addOnAction(ActionEvent actionEvent) {
         try {
-           //Refactor
+            //Refactor
             boolean isAdded = empBO.addEmployee(new EmployeeDTO(txtId.getText(), txtName.getText(), txtAddress.getText(),
                     txtContact.getText(), txtNic.getText()));
             if (isAdded) {

@@ -6,15 +6,15 @@ public class MealDTO {
     private String availableTime;
     private Double price;
 
-    public MealDTO(){
+    public MealDTO() {
 
     }
 
-    public MealDTO(String id, String name, String availableTime, Double price){
-        this.id=id;
-        this.name=name;
-        this.availableTime=availableTime;
-        this.price=price;
+    public MealDTO(String id, String name, String availableTime, Double price) {
+        this.id = id;
+        this.name = name;
+        this.availableTime = availableTime;
+        this.price = price;
     }
 
     public String getId() {

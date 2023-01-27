@@ -8,6 +8,6 @@ import java.sql.SQLException;
 public class OrderDetailDAOImpl implements OrderDetailDAO {
     @Override
     public boolean addOrderDetails(String cId, String orderId) throws SQLException, ClassNotFoundException {
-        return CrudUtil.execute("INSERT INTO orderdetail VALUES (?,?)",cId,orderId);
+        return CrudUtil.execute("INSERT INTO orderdetail VALUES (?,?)", cId, orderId);
     }
 }

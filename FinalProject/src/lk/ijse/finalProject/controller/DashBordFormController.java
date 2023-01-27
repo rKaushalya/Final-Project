@@ -8,11 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import lk.ijse.finalProject.bo.BOFactory;
-import lk.ijse.finalProject.bo.SuperBO;
 import lk.ijse.finalProject.bo.custom.DashBordBO;
-import lk.ijse.finalProject.bo.custom.impl.RentBikeBOImpl;
-import lk.ijse.finalProject.bo.custom.impl.EmployeeBOImpl;
-import lk.ijse.finalProject.bo.custom.impl.RoomBOImpl;
 import lk.ijse.finalProject.utill.Navigation;
 import lk.ijse.finalProject.utill.Routes;
 
@@ -33,7 +29,7 @@ public class DashBordFormController {
 
     private final DashBordBO dashBordBO = (DashBordBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.DASHBORD);
 
-    public void initialize(){
+    public void initialize() {
         setDate();
         setTime();
         loadAllRoom();
@@ -41,7 +37,7 @@ public class DashBordFormController {
         loadEmployeeCount();
     }
 
-    private void LoadBikeCount(){
+    private void LoadBikeCount() {
         try {
             //Refactor
             int count = dashBordBO.LoadBikeCount();
@@ -51,7 +47,7 @@ public class DashBordFormController {
         }
     }
 
-    private void loadAllRoom(){
+    private void loadAllRoom() {
         try {
             //Refactor
             int roomCount = dashBordBO.getAllRoomCount();
@@ -61,7 +57,7 @@ public class DashBordFormController {
         }
     }
 
-    private void loadEmployeeCount(){
+    private void loadEmployeeCount() {
         try {
             //Refactor
             int empCount = dashBordBO.getAllEmployeeCount();
@@ -71,7 +67,7 @@ public class DashBordFormController {
         }
     }
 
-    private void setTime(){
+    private void setTime() {
         Thread clock = new Thread() {
             public void run() {
                 while (true) {
@@ -100,7 +96,7 @@ public class DashBordFormController {
     }
 
     public void logoutOnAction(ActionEvent actionEvent) throws IOException {
-        Navigation.navigate(Routes.USER,pane);
+        Navigation.navigate(Routes.USER, pane);
     }
 
     public void loadBookingFormOnAction(ActionEvent actionEvent) throws IOException {
@@ -116,6 +112,6 @@ public class DashBordFormController {
     }
 
     public void loadDashbordOnAction(ActionEvent actionEvent) throws IOException {
-        Navigation.navigate(Routes.RECEPTION,pane);
+        Navigation.navigate(Routes.RECEPTION, pane);
     }
 }

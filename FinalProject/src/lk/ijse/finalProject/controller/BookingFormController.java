@@ -16,9 +16,6 @@ import javafx.scene.text.Text;
 import lk.ijse.finalProject.bo.BOFactory;
 import lk.ijse.finalProject.bo.custom.BookingBO;
 import lk.ijse.finalProject.bo.custom.RoomBo;
-import lk.ijse.finalProject.bo.custom.impl.BookingBOImpl;
-import lk.ijse.finalProject.bo.custom.impl.MealBOImpl;
-import lk.ijse.finalProject.bo.custom.impl.RoomBOImpl;
 import lk.ijse.finalProject.dto.*;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.view.JasperViewer;
@@ -80,7 +77,7 @@ public class BookingFormController {
 
     private double price = 0;
 
-    public void initialize(){
+    public void initialize() {
         LocalDate date = LocalDate.now();
         txtDate.setText(String.valueOf(date));
         txtCusName.requestFocus();
@@ -94,7 +91,7 @@ public class BookingFormController {
         loadNextCusId();
     }
 
-    private void loadOrderId(){
+    private void loadOrderId() {
         try {
             //Refactor
             String orderId = bookingBO.generateNextOrderId();
@@ -104,7 +101,7 @@ public class BookingFormController {
         }
     }
 
-    private void loadNextCusId(){
+    private void loadNextCusId() {
         try {
             //Refactor
             String customerId = bookingBO.generateNextCusID();
@@ -118,28 +115,28 @@ public class BookingFormController {
     public void orderPlaceOnAction(ActionEvent actionEvent) {
         if (btnPlaceOrder.getText().equals("Rent A Room")) {
             try {
-                CustomerDTO customerDTO = new CustomerDTO(txtCusId.getText(),txtCusName.getText(),txtAddress.getText(),
-                        txtCusContact.getText(),txtEmail.getText());
+                CustomerDTO customerDTO = new CustomerDTO(txtCusId.getText(), txtCusName.getText(), txtAddress.getText(),
+                        txtCusContact.getText(), txtEmail.getText());
 
-                OrderDetailDTO orderDetailDTO = new OrderDetailDTO(txtOrderId.getText(),txtDate.getText(),
-                        Integer.parseInt(txtRoomDayCount.getText()),String.valueOf(cmbRoomId.getValue()),
-                        Double.valueOf(txtTotal.getText()),Double.valueOf(txtCash.getText()),Double.valueOf(txtBalance.getText()));
+                OrderDetailDTO orderDetailDTO = new OrderDetailDTO(txtOrderId.getText(), txtDate.getText(),
+                        Integer.parseInt(txtRoomDayCount.getText()), String.valueOf(cmbRoomId.getValue()),
+                        Double.valueOf(txtTotal.getText()), Double.valueOf(txtCash.getText()), Double.valueOf(txtBalance.getText()));
                 //Refactor
-                if (bookingBO.rentRoom(customerDTO, orderDetailDTO)){
-                        new Alert(Alert.AlertType.CONFIRMATION,"Room Rent Success").show();
-                        printBill();
-                        clearPane();
-                    }else{
-                        new Alert(Alert.AlertType.ERROR,"Something Wrong.!").show();
-                    }
+                if (bookingBO.rentRoom(customerDTO, orderDetailDTO)) {
+                    new Alert(Alert.AlertType.CONFIRMATION, "Room Rent Success").show();
+                    printBill();
+                    clearPane();
+                } else {
+                    new Alert(Alert.AlertType.ERROR, "Something Wrong.!").show();
+                }
             } catch (Exception exception) {
                 System.out.println(exception);
             }
 
-        }else {
+        } else {
             try {
-                CustomerDTO customerDTO = new CustomerDTO(txtCusId.getText(),txtCusName.getText(),txtAddress.getText(),
-                        txtCusContact.getText(),txtEmail.getText());
+                CustomerDTO customerDTO = new CustomerDTO(txtCusId.getText(), txtCusName.getText(), txtAddress.getText(),
+                        txtCusContact.getText(), txtEmail.getText());
 
                 OrderDetailDTO orderDetailDTO = new OrderDetailDTO(txtOrderId.getText(), txtDate.getText(),
                         Integer.parseInt(txtRoomDayCount.getText()), String.valueOf(cmbRoomId.getValue()),
@@ -160,12 +157,12 @@ public class BookingFormController {
         }
     }
 
-    private void loadRegNo(){
+    private void loadRegNo() {
         try {
             ObservableList<String> observableList = FXCollections.observableArrayList();
             //Refactor
             ArrayList<String> arrayList = bookingBO.loadAllRegNo();
-            for (String regNo : arrayList){
+            for (String regNo : arrayList) {
                 observableList.add(regNo);
             }
             cmbBikeId.setItems(observableList);
@@ -174,12 +171,13 @@ public class BookingFormController {
         }
     }
 
-    private void loadRoomId(){
+    private void loadRoomId() {
         ObservableList<String> observableList = FXCollections.observableArrayList();
         try {
-            ArrayList<String> arrayList = RoomBOImpl.loadRoomId();
+            //Refactor
+            ArrayList<String> allRoomIDS = bookingBO.getAllRoomIDS();
 
-            for (String id : arrayList){
+            for (String id : allRoomIDS) {
                 observableList.add(id);
             }
             cmbRoomId.setItems(observableList);
@@ -188,12 +186,12 @@ public class BookingFormController {
         }
     }
 
-    private void loadPkgId(){
+    private void loadPkgId() {
         ObservableList<String> observableList = FXCollections.observableArrayList();
         try {
             //Refactor
             ArrayList<String> arrayList = bookingBO.loadAllPackagesIDS();
-            for (String id : arrayList){
+            for (String id : arrayList) {
                 observableList.add(id);
             }
             cmbPkgId.setItems(observableList);
@@ -237,7 +235,7 @@ public class BookingFormController {
         try {
             //Refactor
             BikeDTO bikeDTO = bookingBO.searchAllBikes(String.valueOf(cmbBikeId.getValue()));
-            price= bikeDTO.getPricePerDay();
+            price = bikeDTO.getPricePerDay();
             load.add(bikeDTO);
             tblBike.setItems(load);
             txtDayCount.requestFocus();
@@ -257,18 +255,19 @@ public class BookingFormController {
         } catch (Exception exception) {
             System.out.println(exception);
         }
-        showTotal+=price;
+        showTotal += price;
         txtTotal.setText(String.valueOf(showTotal));
 
         cmbBikeId.requestFocus();
-        if (cmbPkgId.getValue() != null){
+        if (cmbPkgId.getValue() != null) {
             btnPlaceOrder.setText("Place Order");
         }
     }
 
-    private void searchMeal(){
+    private void searchMeal() {
         try {
-            ObservableList<MealDTO> mealDTOS = MealBOImpl.searchAllMeal();
+            //Refactor
+            ObservableList<MealDTO> mealDTOS = bookingBO.GetAllMeals();
             tblMeal.setItems(mealDTOS);
         } catch (Exception exception) {
             System.out.println(exception);
@@ -279,7 +278,7 @@ public class BookingFormController {
         setPatten();
         if (userNameMatcher.matches()) {
             txtCusContact.requestFocus();
-        }else{
+        } else {
             txtCusName.setFocusColor(Paint.valueOf("Red"));
         }
     }
@@ -288,7 +287,7 @@ public class BookingFormController {
         setPatten();
         if (address.matches()) {
             txtEmail.requestFocus();
-        }else{
+        } else {
             txtAddress.setFocusColor(Paint.valueOf("Red"));
         }
     }
@@ -297,7 +296,7 @@ public class BookingFormController {
         setPatten();
         if (telMatcher.matches()) {
             txtAddress.requestFocus();
-        }else{
+        } else {
             txtCusContact.setFocusColor(Paint.valueOf("Red"));
         }
     }
@@ -306,13 +305,13 @@ public class BookingFormController {
         setPatten();
         if (emailMatcher.matches()) {
             cmbRoomId.requestFocus();
-        }else {
+        } else {
             txtEmail.setFocusColor(Paint.valueOf("Red"));
         }
     }
 
     public void slipToCmbPkg(ActionEvent actionEvent) {
-        if (cmbPkgId.getValue() == null){
+        if (cmbPkgId.getValue() == null) {
             btnPlaceOrder.setText("Rent A Room");
 
         }
@@ -344,7 +343,7 @@ public class BookingFormController {
         txtBalance.setText(String.valueOf(balance));
     }
 
-    private void setPatten(){
+    private void setPatten() {
 
         Pattern userNamePatten = Pattern.compile("^[a-zA-Z0-9]{4,}$");
         userNameMatcher = userNamePatten.matcher(txtCusName.getText());
@@ -359,7 +358,7 @@ public class BookingFormController {
         address = userAddress.matcher(txtAddress.getText());
     }
 
-    private void printBill(){
+    private void printBill() {
         String oId = txtOrderId.getText();
         String name = txtCusName.getText();
         double total = Double.parseDouble(txtTotal.getText());
@@ -369,12 +368,12 @@ public class BookingFormController {
 
         HashMap bill = new HashMap();
 
-        bill.put("cusName",name);
-        bill.put("total",total);
-        bill.put("cash",cash);
-        bill.put("balance",balance);
-        bill.put("amount",total);
-        bill.put("dayCount",day);
+        bill.put("cusName", name);
+        bill.put("total", total);
+        bill.put("cash", cash);
+        bill.put("balance", balance);
+        bill.put("amount", total);
+        bill.put("dayCount", day);
         try {
             InputStream resource = this.getClass().getResourceAsStream("/lk/ijse/finalProject/report/Bill.jrxml");
 
@@ -382,13 +381,13 @@ public class BookingFormController {
 
             JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, bill, new JREmptyDataSource(1));
 
-            JasperViewer.viewReport(jasperPrint,false);
+            JasperViewer.viewReport(jasperPrint, false);
         } catch (Exception e) {
             System.out.println(e);
         }
     }
 
-    private void printFullBill(){
+    private void printFullBill() {
         String oId = txtOrderId.getText();
         String cusId = txtCusId.getText();
         String name = txtCusName.getText();
@@ -402,17 +401,17 @@ public class BookingFormController {
         String regNo = String.valueOf(cmbBikeId.getValue());
 
         HashMap bill = new HashMap();
-        bill.put("oId",oId);
-        bill.put("cId",cusId);
-        bill.put("name",name);
-        bill.put("address",address);
-        bill.put("contact",contact);
-        bill.put("roomNo",rId);
-        bill.put("pkgNo",pkgId);
-        bill.put("bikeNo",regNo);
-        bill.put("total",total);
-        bill.put("cash",cash);
-        bill.put("balance",balance);
+        bill.put("oId", oId);
+        bill.put("cId", cusId);
+        bill.put("name", name);
+        bill.put("address", address);
+        bill.put("contact", contact);
+        bill.put("roomNo", rId);
+        bill.put("pkgNo", pkgId);
+        bill.put("bikeNo", regNo);
+        bill.put("total", total);
+        bill.put("cash", cash);
+        bill.put("balance", balance);
 
         try {
             InputStream resource = this.getClass().getResourceAsStream("/lk/ijse/finalProject/report/Blank_A4.jrxml");
@@ -421,7 +420,7 @@ public class BookingFormController {
 
             JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, bill, new JREmptyDataSource(1));
 
-            JasperViewer.viewReport(jasperPrint,false);
+            JasperViewer.viewReport(jasperPrint, false);
         } catch (Exception e) {
             System.out.println(e);
         }

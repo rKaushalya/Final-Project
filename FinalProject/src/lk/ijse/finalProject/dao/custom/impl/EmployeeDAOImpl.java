@@ -1,7 +1,6 @@
 package lk.ijse.finalProject.dao.custom.impl;
 
 import lk.ijse.finalProject.dao.custom.EmployeeDAO;
-import lk.ijse.finalProject.dto.EmployeeDTO;
 import lk.ijse.finalProject.entity.EmployeeEntity;
 import lk.ijse.finalProject.utill.CrudUtil;
 
@@ -22,13 +21,13 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 
     @Override
     public boolean delete(String id) throws SQLException, ClassNotFoundException {
-        return CrudUtil.execute("DELETE FROM employee WHERE eId=?",id);
+        return CrudUtil.execute("DELETE FROM employee WHERE eId=?", id);
     }
 
     @Override
     public EmployeeEntity search(String id) throws SQLException, ClassNotFoundException {
         ResultSet execute = CrudUtil.execute("SELECT * FROM employee WHERE eId=?", id);
-        if (execute.next()){
+        if (execute.next()) {
             return new EmployeeEntity(
                     execute.getString(1),
                     execute.getString(2),
@@ -42,11 +41,11 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 
     @Override
     public int loadAllEmployee() throws SQLException, ClassNotFoundException {
-            ResultSet execute = CrudUtil.execute("SELECT COUNT(*) FROM employee");
-            int empCount = 0;
-            if (execute.next()){
-                empCount = execute.getInt(1);
-            }
-            return empCount;
+        ResultSet execute = CrudUtil.execute("SELECT COUNT(*) FROM employee");
+        int empCount = 0;
+        if (execute.next()) {
+            empCount = execute.getInt(1);
+        }
+        return empCount;
     }
 }

@@ -7,16 +7,16 @@ public class EmployeeDTO {
     private String contact;
     private String nic;
 
-    public EmployeeDTO(){
+    public EmployeeDTO() {
 
     }
 
-    public EmployeeDTO(String id, String name, String address, String contact, String nic){
-        this.id=id;
-        this.name=name;
-        this.address=address;
-        this.contact=contact;
-        this.nic=nic;
+    public EmployeeDTO(String id, String name, String address, String contact, String nic) {
+        this.id = id;
+        this.name = name;
+        this.address = address;
+        this.contact = contact;
+        this.nic = nic;
     }
 
     public String getId() {

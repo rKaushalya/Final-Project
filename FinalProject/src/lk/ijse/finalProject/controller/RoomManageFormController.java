@@ -12,7 +12,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import lk.ijse.finalProject.bo.BOFactory;
 import lk.ijse.finalProject.bo.custom.RoomBo;
-import lk.ijse.finalProject.bo.custom.impl.RoomBOImpl;
 import lk.ijse.finalProject.dto.RoomDTO;
 
 import java.time.LocalDate;
@@ -35,7 +34,7 @@ public class RoomManageFormController {
 
     private final RoomBo roomBo = (RoomBo) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.ROOM);
 
-    public void initialize(){
+    public void initialize() {
         LocalDate date = LocalDate.now();
         txtDate.setText(String.valueOf(date));
 
@@ -48,14 +47,14 @@ public class RoomManageFormController {
             //Refactor
             boolean isAdded = roomBo.addRoom(new RoomDTO(txtRId.getText(), txtType.getText(), txtAc.getText(),
                     Double.valueOf(txtPrice.getText()), txtAvailability.getText()));
-            if (isAdded){
+            if (isAdded) {
                 searchAllRoom();
                 setCellValueFactory();
                 clearText();
-                new Alert(Alert.AlertType.CONFIRMATION,"Added Success").show();
+                new Alert(Alert.AlertType.CONFIRMATION, "Added Success").show();
                 tblTable.refresh();
-            }else{
-                new Alert(Alert.AlertType.ERROR,"Something Wrong").show();
+            } else {
+                new Alert(Alert.AlertType.ERROR, "Something Wrong").show();
             }
         } catch (Exception exception) {
             System.out.println(exception);
@@ -82,14 +81,14 @@ public class RoomManageFormController {
             //Refactor
             boolean isUpdate = roomBo.updateRoom(new RoomDTO(txtRId.getText(), txtType.getText(), txtAc.getText(),
                     Double.valueOf(txtPrice.getText()), txtAvailability.getText()));
-            if (isUpdate){
-                new Alert(Alert.AlertType.CONFIRMATION,"Update Success.!").show();
+            if (isUpdate) {
+                new Alert(Alert.AlertType.CONFIRMATION, "Update Success.!").show();
                 searchAllRoom();
                 setCellValueFactory();
                 clearText();
                 tblTable.refresh();
-            }else {
-                new Alert(Alert.AlertType.ERROR,"Somthing Wrong.!").show();
+            } else {
+                new Alert(Alert.AlertType.ERROR, "Somthing Wrong.!").show();
             }
         } catch (Exception exception) {
             System.out.println(exception);
@@ -100,21 +99,21 @@ public class RoomManageFormController {
         try {
             //Refactor
             boolean isDelete = roomBo.deleteRoom(txtRId.getText());
-            if (isDelete){
-                new Alert(Alert.AlertType.CONFIRMATION,"Delete Success").show();
+            if (isDelete) {
+                new Alert(Alert.AlertType.CONFIRMATION, "Delete Success").show();
                 searchAllRoom();
                 setCellValueFactory();
                 clearText();
                 tblTable.refresh();
-            }else {
-                new Alert(Alert.AlertType.ERROR,"Something Wrong").show();
+            } else {
+                new Alert(Alert.AlertType.ERROR, "Something Wrong").show();
             }
         } catch (Exception exception) {
             System.out.println(exception);
         }
     }
 
-    public void clearText(){
+    public void clearText() {
         txtRId.clear();
         txtType.clear();
         txtAc.clear();
@@ -122,7 +121,7 @@ public class RoomManageFormController {
         txtAvailability.clear();
     }
 
-    public void searchAllRoom(){
+    public void searchAllRoom() {
         try {
             //Refactor
             ObservableList<RoomDTO> allRooms = roomBo.getAllRooms();

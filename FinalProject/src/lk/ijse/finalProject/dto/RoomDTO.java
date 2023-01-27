@@ -7,16 +7,16 @@ public class RoomDTO {
     private Double price;
     private String availability;
 
-    public RoomDTO(){
+    public RoomDTO() {
 
     }
 
-    public RoomDTO(String id, String type, String ac, Double price, String availability){
-        this.id=id;
-        this.type=type;
-        this.ac=ac;
-        this.price=price;
-        this.availability=availability;
+    public RoomDTO(String id, String type, String ac, Double price, String availability) {
+        this.id = id;
+        this.type = type;
+        this.ac = ac;
+        this.price = price;
+        this.availability = availability;
     }
 
     public String getId() {

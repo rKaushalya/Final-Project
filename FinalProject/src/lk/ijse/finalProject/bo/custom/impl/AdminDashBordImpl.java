@@ -2,7 +2,6 @@ package lk.ijse.finalProject.bo.custom.impl;
 
 import lk.ijse.finalProject.bo.custom.AdminDashBordBO;
 import lk.ijse.finalProject.dao.DAOFactory;
-import lk.ijse.finalProject.dao.SuperDAO;
 import lk.ijse.finalProject.dao.custom.EmployeeDAO;
 import lk.ijse.finalProject.dao.custom.RentBikeDAO;
 import lk.ijse.finalProject.dao.custom.RoomDAO;

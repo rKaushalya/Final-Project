@@ -32,6 +32,6 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public ResultSet checkUser(String name, String password) throws SQLException, ClassNotFoundException {
-        return CrudUtil.execute("SELECT * FROM user WHERE userName = ? AND password = ?",name,password);
+        return CrudUtil.execute("SELECT * FROM user WHERE userName = ? AND password = ?", name, password);
     }
 }

@@ -1,16 +1,13 @@
 package lk.ijse.finalProject.bo.custom.impl;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import lk.ijse.finalProject.bo.custom.BookingBO;
 import lk.ijse.finalProject.dao.DAOFactory;
-import lk.ijse.finalProject.dao.SuperDAO;
 import lk.ijse.finalProject.dao.custom.*;
 import lk.ijse.finalProject.db.DBConnection;
-import lk.ijse.finalProject.dto.BikeDTO;
-import lk.ijse.finalProject.dto.CustomerDTO;
-import lk.ijse.finalProject.dto.OrderDetailDTO;
-import lk.ijse.finalProject.dto.PackagesDTO;
+import lk.ijse.finalProject.dto.*;
 import lk.ijse.finalProject.entity.*;
-import lk.ijse.finalProject.utill.CrudUtil;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -26,20 +23,41 @@ public class BookingBOImpl implements BookingBO {
     private final RentBikeDAO rentBikeDAO = (RentBikeDAO) DAOFactory.getDAOFactory().getDAO(DAOFactory.DAOTypes.RENTBIKE);
     private final RoomDetailDAO roomDetailDAO = (RoomDetailDAO) DAOFactory.getDAOFactory().getDAO(DAOFactory.DAOTypes.ROOMDETAIL);
     private final PackageDAO packageDAO = (PackageDAO) DAOFactory.getDAOFactory().getDAO(DAOFactory.DAOTypes.PACKAGE);
+    private final MealDAO mealDAO = (MealDAO) DAOFactory.getDAOFactory().getDAO(DAOFactory.DAOTypes.MEAL);
+    private final RoomDAO roomDAO = (RoomDAO) DAOFactory.getDAOFactory().getDAO(DAOFactory.DAOTypes.ROOM);
 
+    @Override
     public ArrayList<String> loadAllRegNo() throws SQLException, ClassNotFoundException {
         return rentBikeDAO.loadRegNo();
     }
 
+    @Override
     public ArrayList<String> loadAllPackagesIDS() throws SQLException, ClassNotFoundException {
         return packageDAO.loadPkgId();
     }
 
+    @Override
     public PackagesDTO searchAllPackages(String id) throws SQLException, ClassNotFoundException {
         PackageEntity packageEntity = packageDAO.searchPkg(id);
-        return new PackagesDTO(packageEntity.getPkgId(),packageEntity.getPkgName(),packageEntity.getPrice(),packageEntity.getInclude());
+        return new PackagesDTO(packageEntity.getPkgId(), packageEntity.getPkgName(), packageEntity.getPrice(), packageEntity.getInclude());
     }
 
+    @Override
+    public ObservableList<MealDTO> GetAllMeals() throws SQLException, ClassNotFoundException {
+        ObservableList<MealDTO> meals = FXCollections.observableArrayList();
+        ObservableList<MealEntity> mealEntities = mealDAO.searchAllMeal();
+        for (MealEntity mealEntity : mealEntities) {
+            meals.add(new MealDTO(mealEntity.getmId(), mealEntity.getName(), mealEntity.getAvailableTime(), mealEntity.getPrice()));
+        }
+        return meals;
+    }
+
+    @Override
+    public ArrayList<String> getAllRoomIDS() throws SQLException, ClassNotFoundException {
+        return roomDAO.loadRoomId();
+    }
+
+    @Override
     public String generateNextOrderId() throws SQLException, ClassNotFoundException {
         //Refactor
         ResultSet resultSet = orderDAO.generateNextOrderId();
@@ -49,6 +67,7 @@ public class BookingBOImpl implements BookingBO {
         return newOrderID(resultSet.getString(null));
     }
 
+    @Override
     public String newOrderID(String currentOrderId) {
         if (currentOrderId != null) {
             String[] split = currentOrderId.split("D0");
@@ -62,6 +81,7 @@ public class BookingBOImpl implements BookingBO {
         return "D001";
     }
 
+    @Override
     public String generateNextCusID() throws SQLException, ClassNotFoundException {
         //Refactor
         ResultSet resultSet = orderDAO.generateNextCusID();
@@ -71,6 +91,7 @@ public class BookingBOImpl implements BookingBO {
         return nextCusID(resultSet.getString(null));
     }
 
+    @Override
     public String nextCusID(String currentCusId) {
         if (currentCusId != null) {
             String[] split = currentCusId.split("C0");
@@ -84,6 +105,7 @@ public class BookingBOImpl implements BookingBO {
         return "C001";
     }
 
+    @Override
     public boolean placeOrder(CustomerDTO customerDTO, OrderDetailDTO orderDetailDTO) throws SQLException, ClassNotFoundException {
         try {
             DBConnection.getDbConnection().getConnection().setAutoCommit(false);
@@ -96,7 +118,7 @@ public class BookingBOImpl implements BookingBO {
                         orderDetailDTO.getDate(), orderDetailDTO.getRoomDayCount(), orderDetailDTO.getrId(),
                         orderDetailDTO.getPkgId(), orderDetailDTO.getRegNo(), orderDetailDTO.getBikeDayCount()));
                 if (isOrderAdded) {
-//                    boolean isPaymentDetailAdded = OrderBOImpl.addPayment(orderDetailDTO);
+                    //Refactor
                     boolean isPaymentDetailAdded = paymentDAO.addPayment(new PaymentDetailEntity(orderDetailDTO.getOrderId(),
                             orderDetailDTO.getDate(), orderDetailDTO.getReceverdAmount(), orderDetailDTO.getBalance(), orderDetailDTO.getTotal()));
                     if (isPaymentDetailAdded) {
@@ -106,7 +128,8 @@ public class BookingBOImpl implements BookingBO {
                             //Refactor
                             boolean isOrderDetailAdded = orderDetailDAO.addOrderDetails(customerDTO.getId(), orderDetailDTO.getOrderId());
                             if (isOrderDetailAdded) {
-                                boolean isRoomUpdate = RoomBOImpl.updateRoomAvailability(orderDetailDTO.getrId());
+                                //Refactor
+                                boolean isRoomUpdate = roomDAO.updateRoomAvailability(orderDetailDTO.getrId());
                                 if (isRoomUpdate) {
                                     //Refactor
                                     boolean isUpdateBikeAvailability = rentBikeDAO.updateAvailability(orderDetailDTO.getRegNo());
@@ -127,6 +150,7 @@ public class BookingBOImpl implements BookingBO {
         }
     }
 
+    @Override
     public boolean rentRoom(CustomerDTO customerDTO, OrderDetailDTO orderDetailDTO) throws SQLException, ClassNotFoundException {
         try {
             DBConnection.getDbConnection().getConnection().setAutoCommit(false);
@@ -138,7 +162,8 @@ public class BookingBOImpl implements BookingBO {
                 boolean isRoomDetailAdded = roomDetailDAO.addRoomDetails(new RoomDetailEntity(customerDTO.getId(), orderDetailDTO.getrId(),
                         orderDetailDTO.getDate(), orderDetailDTO.getRoomDayCount()));
                 if (isRoomDetailAdded) {
-                    boolean isAvailabilityUpdated = RoomBOImpl.updateRoomAvailability(orderDetailDTO.getrId());
+                    //Refactor
+                    boolean isAvailabilityUpdated = roomDAO.updateRoomAvailability(orderDetailDTO.getrId());
                     if (isAvailabilityUpdated) {
                         DBConnection.getDbConnection().getConnection().commit();
                         return true;

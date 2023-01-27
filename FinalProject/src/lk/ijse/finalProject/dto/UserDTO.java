@@ -7,15 +7,15 @@ public class UserDTO {
     private String email;
     private String role;
 
-    public UserDTO(){
+    public UserDTO() {
 
     }
 
-    public UserDTO(String userId, String userName, String password, String email){
-        this.userId=userId;
-        this.userName=userName;
-        this.password=password;
-        this.email=email;
+    public UserDTO(String userId, String userName, String password, String email) {
+        this.userId = userId;
+        this.userName = userName;
+        this.password = password;
+        this.email = email;
     }
 
     public UserDTO(String userId, String userName, String password, String email, String role) {

@@ -9,10 +9,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Paint;
 import lk.ijse.finalProject.bo.BOFactory;
-import lk.ijse.finalProject.bo.SuperBO;
 import lk.ijse.finalProject.bo.custom.ForgetPasswordBO;
-import lk.ijse.finalProject.bo.custom.UserBO;
-import lk.ijse.finalProject.bo.custom.impl.ForgotPasswordBOImpl;
 import lk.ijse.finalProject.dto.UserDTO;
 import lk.ijse.finalProject.utill.Navigation;
 import lk.ijse.finalProject.utill.Routes;
@@ -40,7 +37,7 @@ public class FogetPasswordController {
 
     private final ForgetPasswordBO fBO = (ForgetPasswordBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.FORGETPASSWORD);
 
-    public void initialize(){
+    public void initialize() {
         txtPwShow.setVisible(false);
         txtCmPwShow.setVisible(false);
 
@@ -48,34 +45,34 @@ public class FogetPasswordController {
     }
 
     public void resetOnAction(ActionEvent actionEvent) throws IOException {
-        if (txtNewPw.getText().equals(txtConformPw.getText())){
+        if (txtNewPw.getText().equals(txtConformPw.getText())) {
             try {
                 //Refactor
                 boolean isUpdate = fBO.resetPassword(new UserDTO(txtUserId.getText(), txtName.getText(),
                         txtNewPw.getText(), txtEmail.getText()));
-                if (isUpdate){
-                    Navigation.navigate(Routes.FORGOT,pane);
-                    new Alert(Alert.AlertType.CONFIRMATION,"Update success.!").show();
-                }else{
+                if (isUpdate) {
+                    Navigation.navigate(Routes.FORGOT, pane);
+                    new Alert(Alert.AlertType.CONFIRMATION, "Update success.!").show();
+                } else {
                     clearText();
-                    new Alert(Alert.AlertType.ERROR,"something wrong.!").show();
+                    new Alert(Alert.AlertType.ERROR, "something wrong.!").show();
                 }
             } catch (Exception exception) {
                 System.out.println(exception);
             }
-        }else {
+        } else {
             lblShowError.setText("Password didnt match");
             txtConformPw.setFocusColor(Paint.valueOf("Red"));
-            new Alert(Alert.AlertType.ERROR,"Password didnt match").show();
+            new Alert(Alert.AlertType.ERROR, "Password didnt match").show();
         }
         //Navigation.navigate(Routes.USER,pane);
     }
 
     public void backOnAction(ActionEvent actionEvent) throws IOException {
-        Navigation.navigate(Routes.USER,pane);
+        Navigation.navigate(Routes.USER, pane);
     }
 
-    private void clearText(){
+    private void clearText() {
         txtUserId.clear();
         txtName.clear();
         txtEmail.clear();
@@ -84,7 +81,7 @@ public class FogetPasswordController {
     }
 
     public void cbxOnAction(ActionEvent actionEvent) {
-        if (cbxShowpw.isSelected()){
+        if (cbxShowpw.isSelected()) {
 
             txtPwShow.setText(txtNewPw.getText());
             txtCmPwShow.setText(txtConformPw.getText());
@@ -110,7 +107,7 @@ public class FogetPasswordController {
         setPatten();
         if (!userIdMatcher.matches()) {
             txtUserId.setFocusColor(Paint.valueOf("Red"));
-        }else{
+        } else {
             txtName.requestFocus();
         }
     }
@@ -119,7 +116,7 @@ public class FogetPasswordController {
         setPatten();
         if (userNameMatcher.matches()) {
             txtEmail.requestFocus();
-        }else {
+        } else {
             txtName.setFocusColor(Paint.valueOf("Red"));
         }
     }
@@ -128,7 +125,7 @@ public class FogetPasswordController {
         setPatten();
         if (emailMatcher.matches()) {
             txtNewPw.requestFocus();
-        }else{
+        } else {
             txtEmail.setFocusColor(Paint.valueOf("Red"));
         }
     }
@@ -137,7 +134,7 @@ public class FogetPasswordController {
         setPatten();
         if (pwMatcher.matches()) {
             txtConformPw.requestFocus();
-        }else {
+        } else {
             txtNewPw.setFocusColor(Paint.valueOf("Red"));
             txtPwShow.setFocusColor(Paint.valueOf("Red"));
         }
@@ -147,7 +144,7 @@ public class FogetPasswordController {
         resetOnAction(actionEvent);
     }
 
-    private void setPatten(){
+    private void setPatten() {
 
         Pattern userIdPattern = Pattern.compile("^(U0)([0-9]{1,})([1-9]{0,})$");
         userIdMatcher = userIdPattern.matcher(txtUserId.getText());
@@ -168,32 +165,32 @@ public class FogetPasswordController {
         pwMatcher = passwordPattern.matcher(txtPwShow.getText());
         if (pwMatcher.matches()) {
             txtCmPwShow.requestFocus();
-        }else {
+        } else {
             txtNewPw.setFocusColor(Paint.valueOf("Red"));
             txtPwShow.setFocusColor(Paint.valueOf("Red"));
         }
     }
 
     public void duplicateOnAction(ActionEvent actionEvent) {
-        if (txtNewPw.getText().equals(txtConformPw.getText())){
+        if (txtNewPw.getText().equals(txtConformPw.getText())) {
             try {
                 //Refactor
                 boolean isUpdate = fBO.resetPassword(new UserDTO(txtUserId.getText(), txtName.getText(),
                         txtNewPw.getText(), txtEmail.getText()));
-                if (isUpdate){
-                    Navigation.navigate(Routes.FORGOT,pane);
-                    new Alert(Alert.AlertType.CONFIRMATION,"Update success.!").show();
-                }else{
+                if (isUpdate) {
+                    Navigation.navigate(Routes.FORGOT, pane);
+                    new Alert(Alert.AlertType.CONFIRMATION, "Update success.!").show();
+                } else {
                     clearText();
-                    new Alert(Alert.AlertType.ERROR,"something wrong.!").show();
+                    new Alert(Alert.AlertType.ERROR, "something wrong.!").show();
                 }
             } catch (Exception exception) {
                 System.out.println(exception);
             }
-        }else {
+        } else {
             lblShowError.setText("Password didnt match");
             txtConformPw.setFocusColor(Paint.valueOf("Red"));
-            new Alert(Alert.AlertType.ERROR,"Password didnt match").show();
+            new Alert(Alert.AlertType.ERROR, "Password didnt match").show();
         }
     }
 }

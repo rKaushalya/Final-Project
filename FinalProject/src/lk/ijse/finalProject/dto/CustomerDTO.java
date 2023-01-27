@@ -7,16 +7,16 @@ public class CustomerDTO {
     private String contact;
     private String email;
 
-    public CustomerDTO(){
+    public CustomerDTO() {
 
     }
 
     public CustomerDTO(String id, String name, String address, String contact, String email) {
-        this.id=id;
-        this.name=name;
-        this.address=address;
-        this.contact=contact;
-        this.email=email;
+        this.id = id;
+        this.name = name;
+        this.address = address;
+        this.contact = contact;
+        this.email = email;
     }
 
     public String getId() {

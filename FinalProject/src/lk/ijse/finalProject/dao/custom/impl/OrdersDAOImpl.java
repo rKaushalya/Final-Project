@@ -1,7 +1,6 @@
 package lk.ijse.finalProject.dao.custom.impl;
 
 import lk.ijse.finalProject.dao.custom.OrdersDAO;
-import lk.ijse.finalProject.dto.OrderDetailDTO;
 import lk.ijse.finalProject.entity.OrdersEntity;
 import lk.ijse.finalProject.utill.CrudUtil;
 
@@ -16,7 +15,7 @@ public class OrdersDAOImpl implements OrdersDAO {
 
     @Override
     public ResultSet generateNextCusID() throws SQLException, ClassNotFoundException {
-       return CrudUtil.execute("SELECT cId FROM customer ORDER BY cId DESC LIMIT 1");
+        return CrudUtil.execute("SELECT cId FROM customer ORDER BY cId DESC LIMIT 1");
     }
 
     @Override

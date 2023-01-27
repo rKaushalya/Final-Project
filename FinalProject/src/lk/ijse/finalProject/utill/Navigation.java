@@ -11,12 +11,12 @@ import java.io.IOException;
 public class Navigation {
     private static AnchorPane pane;
 
-    public static void navigate(Routes routes,AnchorPane pane) throws IOException {
+    public static void navigate(Routes routes, AnchorPane pane) throws IOException {
         Navigation.pane = pane;
         Navigation.pane.getChildren().clear();
         Stage window = (Stage) Navigation.pane.getScene().getWindow();
 
-        switch(routes){
+        switch (routes) {
             case CUSTOMER:
                 window.setTitle("customer Form");
                 initUi("customerForm.fxml");
@@ -54,7 +54,7 @@ public class Navigation {
 
     private static void initUi(String location) throws IOException {
         Navigation.pane.getChildren().add(FXMLLoader.load(Navigation.
-                class.getResource("/lk/ijse/finalProject/view/"+location)));
+                class.getResource("/lk/ijse/finalProject/view/" + location)));
     }
 
 }

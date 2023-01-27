@@ -13,7 +13,6 @@ import javafx.scene.layout.AnchorPane;
 import lk.ijse.finalProject.bo.BOFactory;
 import lk.ijse.finalProject.bo.custom.CustomerBO;
 import lk.ijse.finalProject.dto.CustomerDTO;
-import lk.ijse.finalProject.bo.custom.impl.CustomerBOImpl;
 
 import java.time.LocalDate;
 

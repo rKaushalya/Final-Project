@@ -6,9 +6,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import lk.ijse.finalProject.bo.BOFactory;
-import lk.ijse.finalProject.bo.SuperBO;
 import lk.ijse.finalProject.bo.custom.MealBO;
-import lk.ijse.finalProject.bo.custom.impl.MealBOImpl;
 import lk.ijse.finalProject.dto.MealDTO;
 
 import java.time.LocalDate;
@@ -23,7 +21,7 @@ public class MeailManageController {
 
     private final MealBO mealBO = (MealBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.MEAL);
 
-    public void initialize(){
+    public void initialize() {
         LocalDate date = LocalDate.now();
         txtDate.setText(String.valueOf(date));
     }
@@ -37,11 +35,11 @@ public class MeailManageController {
         try {
             //Refactor
             boolean isAdded = mealBO.addMeal(new MealDTO(id, name, availableTime, price));
-            if (isAdded){
-                new Alert(Alert.AlertType.CONFIRMATION,"Added Success").show();
+            if (isAdded) {
+                new Alert(Alert.AlertType.CONFIRMATION, "Added Success").show();
                 clearText();
-            }else {
-                new Alert(Alert.AlertType.ERROR,"Something Wrong").show();
+            } else {
+                new Alert(Alert.AlertType.ERROR, "Something Wrong").show();
             }
         } catch (Exception exception) {
             System.out.println(exception);
@@ -70,11 +68,11 @@ public class MeailManageController {
         try {
             //Refactor
             boolean isUpdate = mealBO.updateMeal(new MealDTO(id, name, availableTime, price));
-            if (isUpdate){
-                new Alert(Alert.AlertType.CONFIRMATION,"Update Success").show();
+            if (isUpdate) {
+                new Alert(Alert.AlertType.CONFIRMATION, "Update Success").show();
                 clearText();
-            }else {
-                new Alert(Alert.AlertType.ERROR,"Something Wrong").show();
+            } else {
+                new Alert(Alert.AlertType.ERROR, "Something Wrong").show();
             }
         } catch (Exception exception) {
             System.out.println(exception);
@@ -85,18 +83,18 @@ public class MeailManageController {
         try {
             //Refactor
             boolean isDelete = mealBO.deleteMeal(txtId.getText());
-            if (isDelete){
-                new Alert(Alert.AlertType.CONFIRMATION,"Delete Success").show();
+            if (isDelete) {
+                new Alert(Alert.AlertType.CONFIRMATION, "Delete Success").show();
                 clearText();
-            }else{
-                new Alert(Alert.AlertType.ERROR,"Something Wrong.!").show();
+            } else {
+                new Alert(Alert.AlertType.ERROR, "Something Wrong.!").show();
             }
         } catch (Exception exception) {
             System.out.println(exception);
         }
     }
 
-    public void clearText(){
+    public void clearText() {
         txtId.clear();
         txtName.clear();
         txtTime.clear();

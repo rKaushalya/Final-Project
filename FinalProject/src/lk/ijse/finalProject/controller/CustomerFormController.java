@@ -10,11 +10,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import lk.ijse.finalProject.bo.BOFactory;
-import lk.ijse.finalProject.bo.SuperBO;
 import lk.ijse.finalProject.bo.custom.AdminDashBordBO;
-import lk.ijse.finalProject.bo.custom.impl.RentBikeBOImpl;
-import lk.ijse.finalProject.bo.custom.impl.EmployeeBOImpl;
-import lk.ijse.finalProject.bo.custom.impl.RoomBOImpl;
 import lk.ijse.finalProject.utill.Navigation;
 import lk.ijse.finalProject.utill.Routes;
 
@@ -37,7 +33,7 @@ public class CustomerFormController {
 
     private final AdminDashBordBO adminBO = (AdminDashBordBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.ADMINDASHBORD);
 
-    public void initialize(){
+    public void initialize() {
         setDate();
         setTime();
         loadRoomCount();
@@ -59,7 +55,7 @@ public class CustomerFormController {
         piechart.setData(pieChartData);
     }
 
-    private void loadRoomCount(){
+    private void loadRoomCount() {
         try {
             //Refactor
             int count = adminBO.LoadBikeCount();
@@ -69,7 +65,7 @@ public class CustomerFormController {
         }
     }
 
-    private void loadAllRoom(){
+    private void loadAllRoom() {
         try {
             //Refactor
             roomCount = adminBO.getAllRoomCount();
@@ -79,7 +75,7 @@ public class CustomerFormController {
         }
     }
 
-    private void notAvailableRoom(){
+    private void notAvailableRoom() {
         try {
             //Refactor
             notAvailableRoomCount = adminBO.getNotAvailableRoomCount();
@@ -88,7 +84,7 @@ public class CustomerFormController {
         }
     }
 
-    private void loadEmployeeCount(){
+    private void loadEmployeeCount() {
         try {
             //Refactor
             int empCount = adminBO.getAllEmployeeCount();
@@ -103,7 +99,7 @@ public class CustomerFormController {
         txtDate.setText(dateFormat.format(new Date()));
     }
 
-    private void setTime(){
+    private void setTime() {
         Thread clock = new Thread() {
             public void run() {
                 while (true) {
@@ -121,7 +117,7 @@ public class CustomerFormController {
     }
 
     public void logoutOnAction(ActionEvent actionEvent) throws IOException {
-        Navigation.navigate(Routes.USER,pane);
+        Navigation.navigate(Routes.USER, pane);
     }
 
     public void setUi(String ui) throws IOException {
@@ -159,6 +155,6 @@ public class CustomerFormController {
     }
 
     public void loadDashbordOnAction(ActionEvent actionEvent) throws IOException {
-        Navigation.navigate(Routes.CUSTOMER,pane);
+        Navigation.navigate(Routes.CUSTOMER, pane);
     }
 }

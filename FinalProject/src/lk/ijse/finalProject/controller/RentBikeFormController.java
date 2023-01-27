@@ -16,7 +16,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Paint;
 import lk.ijse.finalProject.bo.BOFactory;
 import lk.ijse.finalProject.bo.custom.RentBikeBO;
-import lk.ijse.finalProject.bo.custom.impl.BookingBOImpl;
 import lk.ijse.finalProject.dto.BikeDTO;
 import lk.ijse.finalProject.dto.CustomerDTO;
 
@@ -51,7 +50,7 @@ public class RentBikeFormController {
 
     private final RentBikeBO bikeBO = (RentBikeBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.RENTBIKE);
 
-    public void initialize(){
+    public void initialize() {
         LocalDate date = LocalDate.now();
         txtDate.setText(String.valueOf(date));
 
@@ -60,7 +59,7 @@ public class RentBikeFormController {
         loadNextCusId();
     }
 
-    private void loadNextCusId(){
+    private void loadNextCusId() {
         try {
             //Refactor
             String customerId = bikeBO.generateNextCusID();
@@ -75,11 +74,11 @@ public class RentBikeFormController {
             //Refactor
             boolean isRentBike = bikeBO.rentBike(new CustomerDTO(txtCusId.getText(), txtCusName.getText(),
                     txtAddress.getText(), txtContact.getText(), txtEmail.getText()), String.valueOf(cmbRegNo.getValue()));
-            if (isRentBike){
+            if (isRentBike) {
                 clearPane();
-                new Alert(Alert.AlertType.CONFIRMATION,"Bike rent Success.").show();
-            }else {
-                new Alert(Alert.AlertType.ERROR,"Something Wrong").show();
+                new Alert(Alert.AlertType.CONFIRMATION, "Bike rent Success.").show();
+            } else {
+                new Alert(Alert.AlertType.ERROR, "Something Wrong").show();
             }
         } catch (Exception exception) {
             System.out.println(exception);
@@ -89,14 +88,14 @@ public class RentBikeFormController {
     public void addOnAction(ActionEvent actionEvent) {
         try {
             //Refactor
-            boolean isAdded = bikeBO.addBike(new BikeDTO(txtRegNo.getText(),txtModel.getText(),txtAvailability.getText(),
+            boolean isAdded = bikeBO.addBike(new BikeDTO(txtRegNo.getText(), txtModel.getText(), txtAvailability.getText(),
                     Double.valueOf(txtPrice.getText())));
-            if (isAdded){
-                new Alert(Alert.AlertType.CONFIRMATION,"added Success").show();
+            if (isAdded) {
+                new Alert(Alert.AlertType.CONFIRMATION, "added Success").show();
                 clearText();
                 loadRegNo();
-            }else {
-                new Alert(Alert.AlertType.ERROR,"Something Wromg").show();
+            } else {
+                new Alert(Alert.AlertType.ERROR, "Something Wromg").show();
             }
         } catch (Exception exception) {
             System.out.println(exception);
@@ -108,12 +107,12 @@ public class RentBikeFormController {
             //Refactor
             boolean isUpdate = bikeBO.updateBike(new BikeDTO(txtRegNo.getText(), txtModel.getText(), txtAvailability.getText(),
                     Double.valueOf(txtPrice.getText())));
-            if (isUpdate){
-                new Alert(Alert.AlertType.CONFIRMATION,"Update Success").show();
+            if (isUpdate) {
+                new Alert(Alert.AlertType.CONFIRMATION, "Update Success").show();
                 loadRegNo();
                 clearText();
-            }else {
-                new Alert(Alert.AlertType.ERROR,"Something Wromg").show();
+            } else {
+                new Alert(Alert.AlertType.ERROR, "Something Wromg").show();
             }
         } catch (Exception exception) {
             System.out.println(exception);
@@ -123,24 +122,24 @@ public class RentBikeFormController {
     public void deleteOnAction(ActionEvent actionEvent) {
         try {
             //Refactor
-            if (bikeBO.deleteBike(txtRegNo.getText())){
-                new Alert(Alert.AlertType.CONFIRMATION,"Delete Success").show();
+            if (bikeBO.deleteBike(txtRegNo.getText())) {
+                new Alert(Alert.AlertType.CONFIRMATION, "Delete Success").show();
                 clearText();
                 loadRegNo();
-            }else {
-                new Alert(Alert.AlertType.ERROR,"Something Wrong").show();
+            } else {
+                new Alert(Alert.AlertType.ERROR, "Something Wrong").show();
             }
         } catch (Exception exception) {
             System.out.println(exception);
         }
     }
 
-    private void loadRegNo(){
+    private void loadRegNo() {
         ObservableList<String> observableList = FXCollections.observableArrayList();
         try {
             //Refactor
             ArrayList<String> arrayList = bikeBO.loadBikeId();
-            for (String regNo : arrayList){
+            for (String regNo : arrayList) {
                 observableList.add(regNo);
             }
             cmbRegNo.setItems(observableList);
@@ -149,7 +148,7 @@ public class RentBikeFormController {
         }
     }
 
-    public void clearText(){
+    public void clearText() {
         txtRegNo.clear();
         txtModel.clear();
         txtAvailability.clear();
@@ -169,14 +168,14 @@ public class RentBikeFormController {
         }
     }
 
-    private void fillText(BikeDTO bikeDTO){
+    private void fillText(BikeDTO bikeDTO) {
         txtRegNo.setText(bikeDTO.getRegNo());
         txtModel.setText(bikeDTO.getModel());
         txtPrice.setText(String.valueOf(bikeDTO.getPricePerDay()));
         txtAvailability.setText(bikeDTO.getAvailability());
     }
 
-    private void setCellValueFactory(){
+    private void setCellValueFactory() {
         clmModel.setCellValueFactory(new PropertyValueFactory("model"));
         clmPrice.setCellValueFactory(new PropertyValueFactory("pricePerDay"));
         clmAvailability.setCellValueFactory(new PropertyValueFactory("availability"));
@@ -192,7 +191,7 @@ public class RentBikeFormController {
         setPatten();
         if (userNameMatcher.matches()) {
             txtAddress.requestFocus();
-        }else{
+        } else {
             txtCusName.setFocusColor(Paint.valueOf("Red"));
         }
     }
@@ -201,7 +200,7 @@ public class RentBikeFormController {
         setPatten();
         if (address.matches()) {
             txtContact.requestFocus();
-        }else{
+        } else {
             txtAddress.setFocusColor(Paint.valueOf("Red"));
         }
     }
@@ -210,7 +209,7 @@ public class RentBikeFormController {
         setPatten();
         if (telMatcher.matches()) {
             txtEmail.requestFocus();
-        }else{
+        } else {
             txtContact.setFocusColor(Paint.valueOf("Red"));
         }
     }
@@ -219,7 +218,7 @@ public class RentBikeFormController {
         setPatten();
         if (emailMatcher.matches()) {
             cmbRegNo.requestFocus();
-        }else {
+        } else {
             txtEmail.setFocusColor(Paint.valueOf("Red"));
         }
     }
@@ -236,7 +235,7 @@ public class RentBikeFormController {
         txtAvailability.requestFocus();
     }
 
-    private void setPatten(){
+    private void setPatten() {
 
         Pattern userNamePatten = Pattern.compile("^[a-zA-Z0-9]{4,}$");
         userNameMatcher = userNamePatten.matcher(txtCusName.getText());

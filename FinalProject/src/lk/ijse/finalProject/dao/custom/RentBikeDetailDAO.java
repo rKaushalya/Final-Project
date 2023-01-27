@@ -6,5 +6,5 @@ import java.sql.SQLException;
 
 public interface RentBikeDetailDAO extends SuperDAO {
 
-    boolean add(String cusId,String regNo) throws SQLException, ClassNotFoundException;
+    boolean add(String cusId, String regNo) throws SQLException, ClassNotFoundException;
 }

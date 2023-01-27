@@ -1,5 +1,7 @@
 package lk.ijse.finalProject.dao.custom.impl;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import lk.ijse.finalProject.dao.custom.MealDAO;
 import lk.ijse.finalProject.entity.MealEntity;
 import lk.ijse.finalProject.utill.CrudUtil;
@@ -22,7 +24,7 @@ public class MealDAOImpl implements MealDAO {
 
     @Override
     public boolean delete(String id) throws SQLException, ClassNotFoundException {
-        return CrudUtil.execute("DELETE FROM meal WHERE mId=?",id);
+        return CrudUtil.execute("DELETE FROM meal WHERE mId=?", id);
     }
 
     @Override
@@ -30,7 +32,7 @@ public class MealDAOImpl implements MealDAO {
         String sql = "SELECT * FROM meal WHERE mId=?";
         ResultSet execute = CrudUtil.execute(sql, id);
 
-        if (execute.next()){
+        if (execute.next()) {
             return new MealEntity(
                     execute.getString(1),
                     execute.getString(2),
@@ -39,5 +41,16 @@ public class MealDAOImpl implements MealDAO {
             );
         }
         return null;
+    }
+
+    @Override
+    public ObservableList<MealEntity> searchAllMeal() throws SQLException, ClassNotFoundException {
+        ObservableList<MealEntity> tmlist = FXCollections.observableArrayList();
+        ResultSet execute = CrudUtil.execute("SELECT * FROM meal");
+        while (execute.next()) {
+            MealEntity mealEntity = new MealEntity(execute.getString(1), execute.getString(2), execute.getString(3), execute.getDouble(4));
+            tmlist.add(mealEntity);
+        }
+        return tmlist;
     }
 }

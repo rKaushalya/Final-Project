@@ -7,9 +7,7 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
 import javafx.scene.layout.AnchorPane;
 import lk.ijse.finalProject.bo.BOFactory;
-import lk.ijse.finalProject.bo.SuperBO;
 import lk.ijse.finalProject.bo.custom.UserBO;
-import lk.ijse.finalProject.bo.custom.impl.UserBOImpl;
 import lk.ijse.finalProject.utill.Navigation;
 import lk.ijse.finalProject.utill.Routes;
 
@@ -25,24 +23,22 @@ public class UserFormController {
 
     private final UserBO userBO = (UserBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.USER);
 
-    public void initialize(){
+    public void initialize() {
         txtPwShow.setVisible(false);
     }
 
     public void loadCustomerForm(ActionEvent actionEvent) throws IOException {
-
-       // Navigation.navigate(Routes.CUSTOMER, pane);
         try {
             //Refactor
             ResultSet resultSet = userBO.checkUser(txtUserName.getText(), txtPassword.getText());
-            if(resultSet.next()){
+            if (resultSet.next()) {
                 if (resultSet.getString(5).equals("Admin")) {
                     Navigation.navigate(Routes.CUSTOMER, pane);
-                }else {
+                } else {
                     Navigation.navigate(Routes.RECEPTION, pane);
                 }
-            }else{
-                new Alert(Alert.AlertType.ERROR,"Please Enter Right UserName and Password.").show();
+            } else {
+                new Alert(Alert.AlertType.ERROR, "Please Enter Right UserName and Password.").show();
             }
         } catch (Exception exception) {
             System.out.println(exception);
@@ -50,20 +46,20 @@ public class UserFormController {
     }
 
     public void loadRegisterOnAction(ActionEvent actionEvent) throws IOException {
-        Navigation.navigate(Routes.REGISTER,pane);
+        Navigation.navigate(Routes.REGISTER, pane);
     }
 
     public void loadFogetPasswordOnAction(ActionEvent actionEvent) throws IOException {
-        Navigation.navigate(Routes.FORGOT,pane);
+        Navigation.navigate(Routes.FORGOT, pane);
     }
 
     public void showPasswordOnAction(ActionEvent actionEvent) {
-        if (cbxShow.isSelected()){
+        if (cbxShow.isSelected()) {
             txtPwShow.setText(txtPassword.getText());
             txtPwShow.setVisible(true);
             txtPassword.setVisible(false);
             return;
-        }else{
+        } else {
             txtPassword.setText(txtPwShow.getText());
             txtPassword.setVisible(true);
             txtPwShow.setVisible(false);

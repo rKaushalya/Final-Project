@@ -9,6 +9,7 @@ import lk.ijse.finalProject.utill.CrudUtil;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class RoomDAOImpl implements RoomDAO {
     @Override
@@ -74,5 +75,21 @@ public class RoomDAOImpl implements RoomDAO {
                 roomCount = execute.getInt(1);
             }
             return roomCount;
+    }
+
+    @Override
+    public ArrayList<String> loadRoomId() throws SQLException, ClassNotFoundException {
+        ResultSet execute = CrudUtil.execute("SELECT rId FROM room WHERE availability='YES' || 'yes'");
+        ArrayList<String> addRoom = new ArrayList<>();
+
+        while (execute.next()) {
+            addRoom.add(execute.getString(1));
+        }
+        return addRoom;
+    }
+
+    @Override
+    public boolean updateRoomAvailability(String rId) throws SQLException, ClassNotFoundException {
+        return CrudUtil.execute("UPDATE room SET availability = 'no' WHERE rId = ?", rId);
     }
 }

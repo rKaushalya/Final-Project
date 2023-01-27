@@ -6,5 +6,5 @@ import java.sql.SQLException;
 
 public interface OrderDetailDAO extends SuperDAO {
 
-    boolean addOrderDetails(String cId,String orderId) throws SQLException, ClassNotFoundException;
+    boolean addOrderDetails(String cId, String orderId) throws SQLException, ClassNotFoundException;
 }

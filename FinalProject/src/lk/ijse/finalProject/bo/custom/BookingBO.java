@@ -1,10 +1,8 @@
 package lk.ijse.finalProject.bo.custom;
 
+import javafx.collections.ObservableList;
 import lk.ijse.finalProject.bo.SuperBO;
-import lk.ijse.finalProject.dto.BikeDTO;
-import lk.ijse.finalProject.dto.CustomerDTO;
-import lk.ijse.finalProject.dto.OrderDetailDTO;
-import lk.ijse.finalProject.dto.PackagesDTO;
+import lk.ijse.finalProject.dto.*;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -30,4 +28,9 @@ public interface BookingBO extends SuperBO {
     ArrayList<String> loadAllPackagesIDS() throws SQLException, ClassNotFoundException;
 
     PackagesDTO searchAllPackages(String id) throws SQLException, ClassNotFoundException;
+
+    ObservableList<MealDTO> GetAllMeals() throws SQLException, ClassNotFoundException;
+
+    ArrayList<String> getAllRoomIDS() throws SQLException, ClassNotFoundException;
+
 }

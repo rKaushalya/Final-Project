@@ -4,32 +4,32 @@
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Red octopus villa"/>
 	<queryString language="SQL">
-		<![CDATA[SELECT * FROM customerDTO]]>
+		<![CDATA[SELECT * FROM customer]]>
 	</queryString>
 	<field name="cId" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.name" value="cId"/>
 		<property name="com.jaspersoft.studio.field.label" value="cId"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="customerDTO"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="customer"/>
 	</field>
 	<field name="name" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.name" value="name"/>
 		<property name="com.jaspersoft.studio.field.label" value="name"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="customerDTO"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="customer"/>
 	</field>
 	<field name="address" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.name" value="address"/>
 		<property name="com.jaspersoft.studio.field.label" value="address"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="customerDTO"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="customer"/>
 	</field>
 	<field name="contact" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.name" value="contact"/>
 		<property name="com.jaspersoft.studio.field.label" value="contact"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="customerDTO"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="customer"/>
 	</field>
 	<field name="email" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.name" value="email"/>
 		<property name="com.jaspersoft.studio.field.label" value="email"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="customerDTO"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="customer"/>
 	</field>
 	<group name="cId">
 		<groupExpression><![CDATA[$F{cId}]]></groupExpression>

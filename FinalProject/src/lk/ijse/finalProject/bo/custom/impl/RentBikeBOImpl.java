@@ -11,6 +11,7 @@ import lk.ijse.finalProject.dto.BikeDTO;
 import lk.ijse.finalProject.dto.CustomerDTO;
 import lk.ijse.finalProject.entity.CustomerEntity;
 import lk.ijse.finalProject.entity.RentBikeEntity;
+import lk.ijse.finalProject.view.tdm.BikeTDM;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -40,9 +41,9 @@ public class RentBikeBOImpl implements RentBikeBO {
     }
 
     @Override
-    public BikeDTO searchBike(String id) throws SQLException, ClassNotFoundException {
+    public BikeTDM searchBike(String id) throws SQLException, ClassNotFoundException {
         RentBikeEntity search = bikeDAO.search(id);
-        return new BikeDTO(search.getRegNo(), search.getModel(), search.getAvailability(), search.getPricePerDay());
+        return new BikeTDM(search.getRegNo(), search.getModel(), search.getAvailability(), search.getPricePerDay());
     }
 
     @Override

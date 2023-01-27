@@ -8,6 +8,9 @@ import lk.ijse.finalProject.dao.custom.*;
 import lk.ijse.finalProject.db.DBConnection;
 import lk.ijse.finalProject.dto.*;
 import lk.ijse.finalProject.entity.*;
+import lk.ijse.finalProject.view.tdm.BikeTDM;
+import lk.ijse.finalProject.view.tdm.MealTDM;
+import lk.ijse.finalProject.view.tdm.PackageTDM;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -37,17 +40,17 @@ public class BookingBOImpl implements BookingBO {
     }
 
     @Override
-    public PackagesDTO searchAllPackages(String id) throws SQLException, ClassNotFoundException {
+    public PackageTDM searchAllPackages(String id) throws SQLException, ClassNotFoundException {
         PackageEntity packageEntity = packageDAO.searchPkg(id);
-        return new PackagesDTO(packageEntity.getPkgId(), packageEntity.getPkgName(), packageEntity.getPrice(), packageEntity.getInclude());
+        return new PackageTDM(packageEntity.getPkgId(), packageEntity.getPkgName(), packageEntity.getPrice(), packageEntity.getInclude());
     }
 
     @Override
-    public ObservableList<MealDTO> GetAllMeals() throws SQLException, ClassNotFoundException {
-        ObservableList<MealDTO> meals = FXCollections.observableArrayList();
+    public ObservableList<MealTDM> GetAllMeals() throws SQLException, ClassNotFoundException {
+        ObservableList<MealTDM> meals = FXCollections.observableArrayList();
         ObservableList<MealEntity> mealEntities = mealDAO.searchAllMeal();
         for (MealEntity mealEntity : mealEntities) {
-            meals.add(new MealDTO(mealEntity.getmId(), mealEntity.getName(), mealEntity.getAvailableTime(), mealEntity.getPrice()));
+            meals.add(new MealTDM(mealEntity.getmId(), mealEntity.getName(), mealEntity.getAvailableTime(), mealEntity.getPrice()));
         }
         return meals;
     }
@@ -178,8 +181,8 @@ public class BookingBOImpl implements BookingBO {
     }
 
     @Override
-    public BikeDTO searchAllBikes(String regNo) throws SQLException, ClassNotFoundException {
+    public BikeTDM searchAllBikes(String regNo) throws SQLException, ClassNotFoundException {
         RentBikeEntity search = rentBikeDAO.search(regNo);
-        return new BikeDTO(search.getRegNo(), search.getModel(), search.getAvailability(), search.getPricePerDay());
+        return new BikeTDM(search.getRegNo(), search.getModel(), search.getAvailability(), search.getPricePerDay());
     }
 }

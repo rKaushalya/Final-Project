@@ -13,6 +13,7 @@ import javafx.scene.layout.AnchorPane;
 import lk.ijse.finalProject.bo.BOFactory;
 import lk.ijse.finalProject.bo.custom.CustomerBO;
 import lk.ijse.finalProject.dto.CustomerDTO;
+import lk.ijse.finalProject.view.tdm.CustomerTDM;
 
 import java.time.LocalDate;
 
@@ -99,7 +100,7 @@ public class ViewCustomerFormController {
     public void loadCusData() {
         try {
             //Refactor
-            ObservableList<CustomerDTO> allCustomers = cusBO.getAllCustomers();
+            ObservableList<CustomerTDM> allCustomers = cusBO.getAllCustomers();
             tblCusDetail.setItems(allCustomers);
         } catch (Exception exception) {
             System.out.println(exception);

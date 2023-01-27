@@ -13,6 +13,7 @@ import javafx.scene.layout.AnchorPane;
 import lk.ijse.finalProject.bo.BOFactory;
 import lk.ijse.finalProject.bo.custom.RoomBo;
 import lk.ijse.finalProject.dto.RoomDTO;
+import lk.ijse.finalProject.view.tdm.RoomTDM;
 
 import java.time.LocalDate;
 
@@ -64,12 +65,12 @@ public class RoomManageFormController {
     public void searchOnAction(ActionEvent actionEvent) {
         try {
             //Refactor
-            RoomDTO roomDTO = roomBo.searchRoom(txtRId.getText());
-            txtRId.setText(roomDTO.getId());
-            txtType.setText(roomDTO.getType());
-            txtAc.setText(roomDTO.getAc());
-            txtPrice.setText(String.valueOf(roomDTO.getPrice()));
-            txtAvailability.setText(roomDTO.getAvailability());
+            RoomTDM roomTDM = roomBo.searchRoom(txtRId.getText());
+            txtRId.setText(roomTDM.getId());
+            txtType.setText(roomTDM.getType());
+            txtAc.setText(roomTDM.getAc());
+            txtPrice.setText(String.valueOf(roomTDM.getPrice()));
+            txtAvailability.setText(roomTDM.getAvailability());
 
         } catch (Exception exception) {
             System.out.println(exception);
@@ -124,7 +125,7 @@ public class RoomManageFormController {
     public void searchAllRoom() {
         try {
             //Refactor
-            ObservableList<RoomDTO> allRooms = roomBo.getAllRooms();
+            ObservableList<RoomTDM> allRooms = roomBo.getAllRooms();
             tblTable.setItems(allRooms);
         } catch (Exception exception) {
             exception.printStackTrace();

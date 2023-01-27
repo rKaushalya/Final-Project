@@ -17,6 +17,10 @@ import lk.ijse.finalProject.bo.BOFactory;
 import lk.ijse.finalProject.bo.custom.BookingBO;
 import lk.ijse.finalProject.bo.custom.RoomBo;
 import lk.ijse.finalProject.dto.*;
+import lk.ijse.finalProject.view.tdm.BikeTDM;
+import lk.ijse.finalProject.view.tdm.MealTDM;
+import lk.ijse.finalProject.view.tdm.PackageTDM;
+import lk.ijse.finalProject.view.tdm.RoomTDM;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.view.JasperViewer;
 
@@ -201,13 +205,12 @@ public class BookingFormController {
     }
 
     public void roomIdOnAction(ActionEvent actionEvent) {
-        String id = String.valueOf(cmbRoomId.getValue());
-        ObservableList<RoomDTO> tmlist = FXCollections.observableArrayList();
+        ObservableList<RoomTDM> tmlist = FXCollections.observableArrayList();
         try {
             //Refactor
-            RoomDTO roomDTO = roomBO.searchRoom(String.valueOf(cmbRoomId.getValue()));
-            price = roomDTO.getPrice();
-            tmlist.add(roomDTO);
+            RoomTDM roomTDM = roomBO.searchRoom(String.valueOf(cmbRoomId.getValue()));
+            price = roomTDM.getPrice();
+            tmlist.add(roomTDM);
             tblRoom.setItems(tmlist);
             txtRoomDayCount.requestFocus();
         } catch (Exception exception) {
@@ -231,12 +234,12 @@ public class BookingFormController {
     }
 
     public void loadRegNoOnAction(ActionEvent actionEvent) {
-        ObservableList<BikeDTO> load = FXCollections.observableArrayList();
+        ObservableList<BikeTDM> load = FXCollections.observableArrayList();
         try {
             //Refactor
-            BikeDTO bikeDTO = bookingBO.searchAllBikes(String.valueOf(cmbBikeId.getValue()));
-            price = bikeDTO.getPricePerDay();
-            load.add(bikeDTO);
+            BikeTDM bikeTDM = bookingBO.searchAllBikes(String.valueOf(cmbBikeId.getValue()));
+            price = bikeTDM.getPricePerDay();
+            load.add(bikeTDM);
             tblBike.setItems(load);
             txtDayCount.requestFocus();
         } catch (Exception exception) {
@@ -245,12 +248,12 @@ public class BookingFormController {
     }
 
     public void loadPkgOnAction(ActionEvent actionEvent) {
-        ObservableList<PackagesDTO> tmlist = FXCollections.observableArrayList();
+        ObservableList<PackageTDM> tmlist = FXCollections.observableArrayList();
         try {
             //Refactor
-            PackagesDTO packagesDTO = bookingBO.searchAllPackages(String.valueOf(cmbPkgId.getValue()));
-            price = packagesDTO.getPrice();
-            tmlist.add(packagesDTO);
+            PackageTDM packageTDM = bookingBO.searchAllPackages(String.valueOf(cmbPkgId.getValue()));
+            price = packageTDM.getPrice();
+            tmlist.add(packageTDM);
             tblPkg.setItems(tmlist);
         } catch (Exception exception) {
             System.out.println(exception);
@@ -267,8 +270,8 @@ public class BookingFormController {
     private void searchMeal() {
         try {
             //Refactor
-            ObservableList<MealDTO> mealDTOS = bookingBO.GetAllMeals();
-            tblMeal.setItems(mealDTOS);
+            ObservableList<MealTDM> mealTDMS = bookingBO.GetAllMeals();
+            tblMeal.setItems(mealTDMS);
         } catch (Exception exception) {
             System.out.println(exception);
         }

@@ -7,6 +7,7 @@ import lk.ijse.finalProject.dao.DAOFactory;
 import lk.ijse.finalProject.dao.custom.CustomerDAO;
 import lk.ijse.finalProject.dto.CustomerDTO;
 import lk.ijse.finalProject.entity.CustomerEntity;
+import lk.ijse.finalProject.view.tdm.CustomerTDM;
 
 import java.sql.SQLException;
 
@@ -32,11 +33,11 @@ public class CustomerBOImpl implements CustomerBO {
     }
 
     @Override
-    public ObservableList<CustomerDTO> getAllCustomers() throws SQLException, ClassNotFoundException {
-        ObservableList<CustomerDTO> list = FXCollections.observableArrayList();
+    public ObservableList<CustomerTDM> getAllCustomers() throws SQLException, ClassNotFoundException {
+        ObservableList<CustomerTDM> list = FXCollections.observableArrayList();
         ObservableList<CustomerEntity> customerEntities = cusDAO.searchAllCustomer();
         for (CustomerEntity customerEntity : customerEntities) {
-            list.add(new CustomerDTO(customerEntity.getId(), customerEntity.getName(), customerEntity.getAddress(),
+            list.add(new CustomerTDM(customerEntity.getId(), customerEntity.getName(), customerEntity.getAddress(),
                     customerEntity.getContact(), customerEntity.getEmail()));
         }
         return list;

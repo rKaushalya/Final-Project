@@ -18,6 +18,7 @@ import lk.ijse.finalProject.bo.BOFactory;
 import lk.ijse.finalProject.bo.custom.RentBikeBO;
 import lk.ijse.finalProject.dto.BikeDTO;
 import lk.ijse.finalProject.dto.CustomerDTO;
+import lk.ijse.finalProject.view.tdm.BikeTDM;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -156,23 +157,23 @@ public class RentBikeFormController {
     }
 
     public void bikeDetailOnAction(ActionEvent actionEvent) {
-        ObservableList<BikeDTO> tmlist = FXCollections.observableArrayList();
+        ObservableList<BikeTDM> tmlist = FXCollections.observableArrayList();
         try {
             //Refactor
-            BikeDTO bikeDTO = bikeBO.searchBike(String.valueOf(cmbRegNo.getValue()));
-            fillText(bikeDTO);
-            tmlist.add(bikeDTO);
+            BikeTDM bikeTDM = bikeBO.searchBike(String.valueOf(cmbRegNo.getValue()));
+            fillText(bikeTDM);
+            tmlist.add(bikeTDM);
             tblBike.setItems(tmlist);
         } catch (Exception exception) {
             System.out.println(exception);
         }
     }
 
-    private void fillText(BikeDTO bikeDTO) {
-        txtRegNo.setText(bikeDTO.getRegNo());
-        txtModel.setText(bikeDTO.getModel());
-        txtPrice.setText(String.valueOf(bikeDTO.getPricePerDay()));
-        txtAvailability.setText(bikeDTO.getAvailability());
+    private void fillText(BikeTDM bikeTDM) {
+        txtRegNo.setText(bikeTDM.getRegNo());
+        txtModel.setText(bikeTDM.getModel());
+        txtPrice.setText(String.valueOf(bikeTDM.getPricePerDay()));
+        txtAvailability.setText(bikeTDM.getAvailability());
     }
 
     private void setCellValueFactory() {

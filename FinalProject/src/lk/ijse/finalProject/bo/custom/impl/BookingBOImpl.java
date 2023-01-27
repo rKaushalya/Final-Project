@@ -162,7 +162,7 @@ public class BookingBOImpl implements BookingBO {
                     customerDTO.getAddress(), customerDTO.getContact(), customerDTO.getEmail()));
             if (isCustomerAdded) {
                 //Refactor
-                boolean isRoomDetailAdded = roomDetailDAO.addRoomDetails(new RoomDetailEntity(customerDTO.getId(), orderDetailDTO.getrId(),
+                boolean isRoomDetailAdded = roomDetailDAO.addRoomDetails(new RoomDetailEntity(orderDetailDTO.getrId(),customerDTO.getId(),
                         orderDetailDTO.getDate(), orderDetailDTO.getRoomDayCount()));
                 if (isRoomDetailAdded) {
                     //Refactor

@@ -9,8 +9,7 @@ import java.sql.SQLException;
 public class RoomDetailDAOImpl implements RoomDetailDAO {
     @Override
     public boolean addRoomDetails(RoomDetailEntity roomDetailEntity) throws SQLException, ClassNotFoundException {
-        String sql = "INSERT INTO roomorderdetail VALUES (?,?,?,?)";
-        return CrudUtil.execute(sql, roomDetailEntity.getrId(), roomDetailEntity.getcId(), roomDetailEntity.getDate(),
+        return CrudUtil.execute("INSERT INTO roomorderdetail VALUES (?,?,?,?)", roomDetailEntity.getrId(), roomDetailEntity.getcId(), roomDetailEntity.getDate(),
                 roomDetailEntity.getDayCount());
     }
 }

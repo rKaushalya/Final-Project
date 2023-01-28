@@ -7,7 +7,6 @@ import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.view.JasperViewer;
 
 import java.io.InputStream;
-import java.sql.SQLException;
 
 public class ReportFormController {
 
@@ -15,7 +14,7 @@ public class ReportFormController {
 
     public void getReport(ActionEvent actionEvent) {
         try {
-        InputStream resource = this.getClass().getResourceAsStream("/lk/ijse/finalProject/report/CustomerDetail.jrxml");
+        InputStream resource = this.getClass().getResourceAsStream("/lk/ijse/finalProject/view/report/CustomerDetail.jrxml");
 
         /*HashMap is something like key-value pairing data storing mechanism*/
         /*HashMap<String, Object> hm = new HashMap<>();
@@ -38,7 +37,7 @@ public class ReportFormController {
 
     public void loadEmployeeDetails(ActionEvent actionEvent) {
         try {
-            InputStream resource = this.getClass().getResourceAsStream("/lk/ijse/finalProject/report/orders.jrxml");
+            InputStream resource = this.getClass().getResourceAsStream("/lk/ijse/finalProject/view/report/orders.jrxml");
 
             JasperReport jasperReport = JasperCompileManager.compileReport(resource);
 

@@ -371,7 +371,7 @@ public class BookingFormController {
         bill.put("amount", Double.parseDouble(txtTotal.getText()));
         bill.put("dayCount", Integer.parseInt(txtRoomDayCount.getText()));
         try {
-            InputStream resource = this.getClass().getResourceAsStream("/lk/ijse/finalProject/report/Bill.jrxml");
+            InputStream resource = this.getClass().getResourceAsStream("/lk/ijse/finalProject/view/report/Bill.jrxml");
 
             JasperReport jasperReport = JasperCompileManager.compileReport(resource);
 
@@ -399,7 +399,7 @@ public class BookingFormController {
         bill.put("balance", Double.parseDouble(txtBalance.getText()));
 
         try {
-            InputStream resource = this.getClass().getResourceAsStream("/lk/ijse/finalProject/report/Blank_A4.jrxml");
+            InputStream resource = this.getClass().getResourceAsStream("/lk/ijse/finalProject/view/report/Blank_A4.jrxml");
 
             JasperReport jasperReport = JasperCompileManager.compileReport(resource);
 

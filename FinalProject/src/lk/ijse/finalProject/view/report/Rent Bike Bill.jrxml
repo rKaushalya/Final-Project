@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.20.0.final using JasperReports Library version 6.20.0-2bc7ab61c56f459e8176eb05c7705e145cd400ad  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Rent Bike Bill" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="0f913a44-417f-4e23-9271-fc8548d3c2bb">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<parameter name="cusName" class="java.lang.String"/>
+	<parameter name="address" class="java.lang.String"/>
+	<parameter name="contact" class="java.lang.String"/>
+	<parameter name="id" class="java.lang.String"/>
+	<parameter name="regNo" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="115" splitType="Stretch">
+			<staticText>
+				<reportElement x="92" y="0" width="370" height="30" uuid="d8008141-7739-4847-b1e4-26c4edc6cfcc"/>
+				<textElement textAlignment="Center">
+					<font size="20" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Red octopus Diving & Villa Center]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="164" y="35" width="226" height="25" uuid="db2db396-8fc4-42f5-b383-2b44d5b6f509"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[No 25 / A Galle Road Unavatuna]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="190" y="80" width="178" height="20" uuid="7a263b13-314d-4237-88b1-9c307fab8672"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[0765320187 / 0788730420]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="206" y="60" width="142" height="18" uuid="3608ba54-9204-4dac-bb40-49541c00d61f"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ravinduk56@gmail.com]]></text>
+			</staticText>
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="10" y="50" width="100" height="30" uuid="fd4499fa-6dca-4168-ad8f-0fd7afb39f93"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField pattern="HH:mm">
+				<reportElement x="475" y="50" width="100" height="30" uuid="c4e69c5f-3a10-4f49-8aa1-2eabe7b6cf61"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="60" splitType="Stretch">
+			<staticText>
+				<reportElement x="196" y="20" width="172" height="25" uuid="2b77a90d-15dd-4884-99bd-96b87b6f2825"/>
+				<textElement>
+					<font size="14" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Bill For Rental Bike...!]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="136" splitType="Stretch">
+			<staticText>
+				<reportElement x="63" y="80" width="74" height="20" uuid="32c168f1-6ec5-483d-8033-f5deca0fd83d"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Contact :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="63" y="50" width="74" height="20" uuid="202ac42c-f704-4c6c-affe-ab4ef6703333"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Address :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="40" y="20" width="120" height="20" uuid="23449ccf-53ff-4191-a040-691c22238ffe"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Customer Name :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="348" y="20" width="90" height="25" uuid="0ae6815c-ade2-4f27-85b3-ab33a5b2771c"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Customer Id :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="348" y="70" width="90" height="20" uuid="7afd8450-027c-43d2-8b4d-1b55d767607f"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Bike Reg No:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="460" y="15" width="100" height="30" uuid="6caef717-40cb-4e62-bb00-d049851aa57b"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="460" y="68" width="100" height="25" uuid="91fa19db-fb04-45bc-8d90-3bfb195932b7"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{regNo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="180" y="19" width="100" height="23" uuid="20999c7e-a6d8-4571-9bf7-4ccc2fdb02cb"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{cusName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="180" y="48" width="100" height="25" uuid="0b39faab-9550-4a56-93b4-61e53ba494c5"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{address}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="180" y="80" width="100" height="20" uuid="12dc5f1d-8304-43a6-b58e-d82631f5f065"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{contact}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<summary>
+		<band height="42" splitType="Stretch">
+			<staticText>
+				<reportElement x="223" y="10" width="113" height="30" uuid="ba96ea3f-050c-467e-a50e-734716b929b4"/>
+				<textElement>
+					<font size="16" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Thank You . !]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>

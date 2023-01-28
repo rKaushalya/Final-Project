@@ -19,10 +19,14 @@ import lk.ijse.finalProject.bo.custom.RentBikeBO;
 import lk.ijse.finalProject.dto.BikeDTO;
 import lk.ijse.finalProject.dto.CustomerDTO;
 import lk.ijse.finalProject.view.tdm.BikeTDM;
+import net.sf.jasperreports.engine.*;
+import net.sf.jasperreports.view.JasperViewer;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -78,6 +82,7 @@ public class RentBikeFormController {
             if (isRentBike) {
                 clearPane();
                 new Alert(Alert.AlertType.CONFIRMATION, "Bike rent Success.").show();
+                printBill();
             } else {
                 new Alert(Alert.AlertType.ERROR, "Something Wrong").show();
             }
@@ -249,5 +254,27 @@ public class RentBikeFormController {
 
         Pattern userAddress = Pattern.compile("^[a-zA-Z0-9]{3,}$");
         address = userAddress.matcher(txtAddress.getText());
+    }
+
+    private void printBill() {
+        HashMap bill = new HashMap();
+
+        bill.put("cusName", txtCusName.getText());
+        bill.put("id",txtCusId.getText());
+        bill.put("regNo", String.valueOf(cmbRegNo.getValue()));
+        bill.put("address", txtAddress.getText());
+        bill.put("contact", txtContact.getText());
+
+        try {
+            InputStream resource = this.getClass().getResourceAsStream("/lk/ijse/finalProject/view/report/Rent Bike Bill.jrxml");
+
+            JasperReport jasperReport = JasperCompileManager.compileReport(resource);
+
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, bill, new JREmptyDataSource(1));
+
+            JasperViewer.viewReport(jasperPrint, false);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }
 }

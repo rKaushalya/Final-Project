@@ -48,4 +48,18 @@ public class ReportFormController {
             System.out.println(e);
         }
     }
+
+    public void loadAllOrders(ActionEvent actionEvent) {
+        try {
+            InputStream resource = this.getClass().getResourceAsStream("/lk/ijse/finalProject/view/report/landscape.jrxml");
+
+            JasperReport jasperReport = JasperCompileManager.compileReport(resource);
+
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, DBConnection.getDbConnection().getConnection());
+
+            JasperViewer.viewReport(jasperPrint,false);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
 }

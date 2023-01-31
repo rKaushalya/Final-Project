@@ -27,5 +27,13 @@
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></JFXButton>
+      <JFXButton layoutX="341.0" layoutY="385.0" onAction="#loadAllOrders" prefHeight="67.0" prefWidth="184.0" style="-fx-background-color: grey; -fx-background-radius: 15;" text="Get All Order Details" textFill="WHITE">
+         <font>
+            <Font name="HoloLens MDL2 Assets" size="16.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
    </children>
 </AnchorPane>

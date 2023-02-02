@@ -18,7 +18,6 @@ public class AppInitializer extends Application {
         primaryStage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/lk/ijse/finalProject/view/userForm.fxml"))));
         primaryStage.setTitle("User Form");
         primaryStage.centerOnScreen();
-        //primaryStage.setFullScreen(true);
         primaryStage.show();
     }
 }

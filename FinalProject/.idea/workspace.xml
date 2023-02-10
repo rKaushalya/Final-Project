@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="e72dc91c-603b-4a51-8bc5-32a23cb48bdd" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/FinalProject/lk/ijse/finalProject/AppInitializer.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/FinalProject/lk/ijse/finalProject/AppInitializer.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,7 +24,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/lk/ijse/finalProject/view/report" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Documents/WorkingZone/MyPortfolio" />
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="RecentsManager">
@@ -63,6 +64,9 @@
       <workItem from="1674890092298" duration="3817000" />
       <workItem from="1675155535745" duration="1142000" />
       <workItem from="1675241829081" duration="1351000" />
+      <workItem from="1675307432544" duration="1934000" />
+      <workItem from="1675519658970" duration="123000" />
+      <workItem from="1675778367951" duration="658000" />
     </task>
     <servers />
   </component>

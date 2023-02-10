@@ -1,6 +1,7 @@
 package lk.ijse.finalProject.dao.custom.impl;
 
 import lk.ijse.finalProject.dao.custom.UserDAO;
+import lk.ijse.finalProject.dto.UserDTO;
 import lk.ijse.finalProject.entity.UserEntity;
 import lk.ijse.finalProject.utill.CrudUtil;
 
@@ -31,7 +32,12 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public ResultSet checkUser(String name, String password) throws SQLException, ClassNotFoundException {
-        return CrudUtil.execute("SELECT * FROM user WHERE userName = ? AND password = ?", name, password);
+    public UserEntity checkUser(String name, String password) throws SQLException, ClassNotFoundException {
+        ResultSet execute = CrudUtil.execute("SELECT * FROM user WHERE userName = ? AND password = ?", name, password);
+        if (execute.next()){
+            return new UserEntity(execute.getString(1),execute.getString(2),execute.getString(3),
+                    execute.getString(4),execute.getString(5));
+        }
+        return null;
     }
 }

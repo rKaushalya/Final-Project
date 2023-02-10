@@ -8,6 +8,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.layout.AnchorPane;
 import lk.ijse.finalProject.bo.BOFactory;
 import lk.ijse.finalProject.bo.custom.UserBO;
+import lk.ijse.finalProject.dto.UserDTO;
 import lk.ijse.finalProject.utill.Navigation;
 import lk.ijse.finalProject.utill.Routes;
 
@@ -30,9 +31,9 @@ public class UserFormController {
     public void loadCustomerForm(ActionEvent actionEvent) throws IOException {
         try {
             //Refactor
-            ResultSet resultSet = userBO.checkUser(txtUserName.getText(), txtPassword.getText());
-            if (resultSet.next()) {
-                if (resultSet.getString(5).equals("Admin")) {
+            UserDTO userDTO = userBO.checkUser(txtUserName.getText(), txtPassword.getText());
+            if (userDTO != null) {
+                if (userDTO.getRole().equals("Admin")) {
                     Navigation.navigate(Routes.CUSTOMER, pane);
                 } else {
                     Navigation.navigate(Routes.RECEPTION, pane);
